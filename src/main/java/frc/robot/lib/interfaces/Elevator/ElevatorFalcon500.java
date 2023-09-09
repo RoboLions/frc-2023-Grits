@@ -4,7 +4,7 @@
 
 package frc.robot.lib.interfaces.Elevator;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 /** Add your docs here. */
@@ -16,10 +16,14 @@ public class ElevatorFalcon500 implements ElevatorIO {
     }
 
     public void setMotorPercentOutput(double output){
-        elevatorMotor.set(ControlMode.PercentOutput, output);
+        elevatorMotor.set(TalonFXControlMode.PercentOutput, output);
     }
     public void setMotorPositionOutput(double position){
-        elevatorMotor.set(ControlMode.Position, position);
+        elevatorMotor.set(TalonFXControlMode.Position, position);
+    }
+
+    public void resetEncoder(){
+        elevatorMotor.setSelectedSensorPosition(0);
     }
     
     public void updateInputs(ElevatorIOInputs inputs) {

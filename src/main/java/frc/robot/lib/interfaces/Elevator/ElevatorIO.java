@@ -15,6 +15,7 @@ public interface ElevatorIO {
         double elevetorPercentOutput;
     }
     public default void setMotorPositionOutput(double position){}
+    public default void resetEncoder(){}
     public default void setMotorPercentOutput(double output){}
     public default void updateInputs(ElevatorIOInputs inputs){}
 }

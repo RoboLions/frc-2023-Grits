@@ -18,19 +18,7 @@ public class ManualMoveState extends State {
     State prevState;
 
     @Override
-    public void build() {
-        // idle if idle button
-        transitions.add(new Transition(() -> {
-            return prevState == ArmStateMachine.idleState && RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON);
-        }, ArmStateMachine.idleState));
-
-        transitions.add(new Transition(() -> {
-            return prevState == ArmStateMachine.substationIntakeState && RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON);
-        }, ArmStateMachine.idleState));
-
-        transitions.add(new Transition(() -> {
-            return prevState != ArmStateMachine.idleState && RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON);
-        }, ArmStateMachine.elbowIdleState));
+    public void build(){
 
         transitions.add(new Transition(() -> {
             return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.HIGH_SCORE_BUTTON);

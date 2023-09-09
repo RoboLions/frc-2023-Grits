@@ -72,8 +72,8 @@ public class RobotMap {
         switch(Constants.currentMode){
             case REAL:
                 elevator = new Elevator(
-                    new ElevatorFalcon500(Constants.Elevator.elevatorNormalMotor),
-                    new ElevatorFalcon500(Constants.Elevator.elevatorRerverseMotor)
+                    new ElevatorFalcon500(Constants.Elevator.elevatorFirstStageMotorID),
+                    new ElevatorFalcon500(Constants.Elevator.elevatorSecondStageMotorID)
                 );
 
                 swerve = new Swerve(

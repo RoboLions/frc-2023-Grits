@@ -33,17 +33,27 @@ public final class Constants {
         public static final int CANdle = 34;
     }
     public static final class Elevator{
-        public static final int elevatorNormalMotor = 0;
-        public static final int elevatorRerverseMotor = 0;
+        public static final int elevatorFirstStageMotorID = 50;
+        public static final int elevatorSecondStageMotorID = 51;
 
         public static final int kP = 0;
         public static final int kI = 0;
         public static final int kD = 0;
         public static final TrapezoidProfile.Constraints constraints = 
         new TrapezoidProfile.Constraints(0.0, 0.0);
+
+        public static final double ScoreHighCone = 0.0;
+        public static final double ScoreHighCube = 0.0;
+
+        public static final double ScoreMidCone = 0.0;
+        public static final double ScoreMidCube= 0.0;
+        
+        public static final double ScoreLow = 0.0;
+
+        public static final double IdleState = 0.0;
     }
     public static final class Wrist{
-        public static final int wristMotorID = 0;
+        public static final int wristMotorID = 52;
     }
     public static final class PORTS {
         public static final I2C.Port COLOR_SENSOR = I2C.Port.kOnboard;

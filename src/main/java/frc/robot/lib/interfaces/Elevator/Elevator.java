@@ -4,7 +4,6 @@
 
 package frc.robot.lib.interfaces.Elevator;
 
-import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import frc.robot.Constants;
 
@@ -14,30 +13,38 @@ public class Elevator {
     private TrapezoidProfile.Constraints constraints = Constants.Elevator.constraints;
   
 
-    public ElevatorModule normalElevatorMotor;
-    public ElevatorModule reverseElevatorMotor;
+    public ElevatorModule firstStageElevatorMotor;
+    public ElevatorModule secondStageElevatorMotor;
 
 
-    public Elevator(ElevatorIO normalElevatorIO, ElevatorIO reverseElevatorIO){
-        normalElevatorMotor = new ElevatorModule(normalElevatorIO, "Normal");
-        reverseElevatorMotor = new ElevatorModule(reverseElevatorIO, "Reverse");
+    public Elevator(ElevatorIO firstStage, ElevatorIO secondStage){
+        firstStageElevatorMotor = new ElevatorModule(firstStage, "first");
+        secondStageElevatorMotor = new ElevatorModule(secondStage, "second");
     }
-    public void setPointDrive(double goal){
+    public void setPointDrive(double Goal){
         profile = new TrapezoidProfile(constraints, 
-        new TrapezoidProfile.State(goal, 0), 
-        new TrapezoidProfile.State(normalElevatorMotor.inputs.elevatorSensorPosition, normalElevatorMotor.inputs.elevatorSensorvelocity));
+        new TrapezoidProfile.State(Goal, 0), 
+        new TrapezoidProfile.State(firstStageElevatorMotor.inputs.elevatorSensorPosition, firstStageElevatorMotor.inputs.elevatorSensorvelocity));
         var setpoint = profile.calculate(0.02);
-        normalElevatorMotor.io.setMotorPositionOutput(setpoint.position);
+
+        firstStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
+        secondStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
+
     }
     public void manualDrive(double translationVal){
         profile = new TrapezoidProfile(constraints, 
         new TrapezoidProfile.State(translationVal, 0));
         var setpoint = profile.calculate(0.02);
-        normalElevatorMotor.io.setMotorPercentOutput(setpoint.position);
+        firstStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
+        secondStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
+    }
 
+    public void resetEncoder(){
+        firstStageElevatorMotor.io.resetEncoder();
+        secondStageElevatorMotor.io.resetEncoder();
     }
     public void periodic(){
-        normalElevatorMotor.periodic();
-        reverseElevatorMotor.periodic();
+        firstStageElevatorMotor.periodic();
+        secondStageElevatorMotor.periodic();
     }
 }
