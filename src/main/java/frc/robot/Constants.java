@@ -41,6 +41,8 @@ public final class Constants {
         public static final TrapezoidProfile.Constraints constraints = 
         new TrapezoidProfile.Constraints(0.0, 0.0);
 
+        public static final double STICK_DEADBAND = 0.25;
+
         public static final double ScoreHighCone = 0.0;
         public static final double ScoreHighCube = 0.0;
 
@@ -60,6 +62,8 @@ public final class Constants {
     public static final class Wrist{
         public static final int wristMotorID = 52;
 
+        public static final double STICK_DEADBAND = 0.25;
+        
         public static final int kP = 0;
         public static final int kI = 0;
         public static final int kD = 0;

@@ -43,6 +43,14 @@ public class Elevator {
         firstStageElevatorMotor.io.resetEncoder();
         secondStageElevatorMotor.io.resetEncoder();
     }
+
+    public double applyDeadband(double armManualInput) {
+        if (armManualInput > Constants.Elevator.STICK_DEADBAND || armManualInput < -Constants.Elevator.STICK_DEADBAND) {
+            return armManualInput;
+        }
+        return 0.0;
+    }
+
     public void periodic(){
         firstStageElevatorMotor.periodic();
         secondStageElevatorMotor.periodic();

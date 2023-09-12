@@ -4,6 +4,7 @@
 
 package frc.robot.lib.interfaces.Wrist;
 
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 /** Add your docs here. */
@@ -11,6 +12,17 @@ public class WristFalcon500 implements WristIO{
     public TalonFX wristMotor;
     public WristFalcon500(int WristMotorID){
         wristMotor = new TalonFX(WristMotorID);
+    }
+
+    public void setMotorPercentOutput(double output){
+        wristMotor.set(TalonFXControlMode.PercentOutput, output);
+    }
+    public void setMotorPositionOutput(double position){
+        wristMotor.set(TalonFXControlMode.Position, position);
+    }
+
+    public void resetEncoder(){
+        wristMotor.setSelectedSensorPosition(0);
     }
 
     public void updateInputs(WristIOInputs input){

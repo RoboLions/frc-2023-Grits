@@ -18,6 +18,7 @@ import frc.robot.lib.interfaces.Swerve.Swerve;
 import frc.robot.lib.interfaces.Swerve.SwerveModuleFalcon500;
 import frc.robot.lib.interfaces.Swerve.SwerveModuleIO;
 import frc.robot.lib.interfaces.Wrist.Wrist;
+import frc.robot.lib.interfaces.Wrist.WristFalcon500;
 import frc.robot.subsystems.Elevator.ElevatorStateMachine;
 import frc.robot.subsystems.LED.LEDStateMachine;
 import frc.robot.subsystems.Wrist.WristStateMachine;
@@ -80,6 +81,10 @@ public class RobotMap {
                 elevator = new Elevator(
                     new ElevatorFalcon500(Constants.Elevator.elevatorFirstStageMotorID),
                     new ElevatorFalcon500(Constants.Elevator.elevatorSecondStageMotorID)
+                );
+
+                wrist = new Wrist(
+                    new WristFalcon500(Constants.Wrist.wristMotorID)
                 );
 
                 swerve = new Swerve(

@@ -4,12 +4,14 @@
 
 package frc.robot.lib.interfaces.Wrist;
 
+import frc.robot.Constants;
+
 /** Add your docs here. */
 public class Wrist {
     public WristIO io;
     public WristIOInputsAutoLogged inputs = new WristIOInputsAutoLogged();
     public WristModule wirstMotor;
-    public Wrist(WristIO io, WristIO wrist){
+    public Wrist(WristIO wrist){
         this.io = io;
         wirstMotor = new WristModule(wrist, "wrist");
     }
@@ -24,6 +26,13 @@ public class Wrist {
 
     public void resetEncoder(){
         wirstMotor.io.resetEncoder();
+    }
+
+    public double applyDeadband(double armManualInput) {
+        if (armManualInput > Constants.Wrist.STICK_DEADBAND || armManualInput < -Constants.Wrist.STICK_DEADBAND) {
+            return armManualInput;
+        }
+        return 0.0;
     }
     public void periodic(){
         io.updateInputs(inputs);
