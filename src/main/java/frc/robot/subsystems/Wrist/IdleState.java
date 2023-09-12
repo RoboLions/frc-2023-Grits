@@ -41,7 +41,7 @@ public class IdleState extends State{
     
     @Override
     public void init(State prevState) {
-        RobotMap.elevator.setPointDrive(Constants.Wrist.IdleState);
+        RobotMap.wrist.setPointDrive(Constants.Wrist.IdleState);
     }
 
     @Override

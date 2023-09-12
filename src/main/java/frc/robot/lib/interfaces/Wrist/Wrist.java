@@ -5,27 +5,27 @@
 package frc.robot.lib.interfaces.Wrist;
 
 import frc.robot.Constants;
+import org.littletonrobotics.junction.Logger;
 
 /** Add your docs here. */
 public class Wrist {
     public WristIO io;
     public WristIOInputsAutoLogged inputs = new WristIOInputsAutoLogged();
-    public WristModule wirstMotor;
-    public Wrist(WristIO wrist){
+
+    public Wrist(WristIO io){
         this.io = io;
-        wirstMotor = new WristModule(wrist, "wrist");
     }
 
     public void setPointDrive(double wristTarget) {
-        wirstMotor.io.setMotorPositionOutput(wristTarget);
+        io.setMotorPositionOutput(wristTarget);
     }
 
     public void manualDrive(double rotationVal) {
-        wirstMotor.io.setMotorPositionOutput(rotationVal);
+       io.setMotorPercentOutput(rotationVal);
     }
 
     public void resetEncoder(){
-        wirstMotor.io.resetEncoder();
+        io.resetEncoder();
     }
 
     public double applyDeadband(double armManualInput) {
@@ -36,7 +36,6 @@ public class Wrist {
     }
     public void periodic(){
         io.updateInputs(inputs);
-        wirstMotor.periodic();
-
+        Logger.getInstance().processInputs( "Wrist Motor", inputs);
     }
 }

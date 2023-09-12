@@ -93,6 +93,8 @@ public class RobotMap {
                 new SwerveModuleFalcon500(Constants.SWERVE.Mod1.constants),
                 new SwerveModuleFalcon500(Constants.SWERVE.Mod2.constants),
                 new SwerveModuleFalcon500(Constants.SWERVE.Mod3.constants));
+
+                wrist = new Wrist(new WristFalcon500(Constants.Wrist.wristMotorID));
                 break;
             case REPLAY:
                 elevator = new Elevator(
