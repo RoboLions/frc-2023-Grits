@@ -46,6 +46,5 @@ public class ManualState extends State{
     
         @Override
         public void exit(State nextState) {
-            RobotMap.arm.manualEncoderFix(this.prevState);
         }
     }   
