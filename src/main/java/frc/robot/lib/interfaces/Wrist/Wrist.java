@@ -15,10 +15,19 @@ public class Wrist {
     }
 
     public void setPointDrive(double wristTarget) {
-        wirstMotor.setMotorPositionOutput(wristTarget);
+        wirstMotor.io.setMotorPositionOutput(wristTarget);
     }
 
+    public void manualDrive(double rotationVal) {
+        wirstMotor.io.setMotorPositionOutput(rotationVal);
+    }
+
+    public void resetEncoder(){
+        wirstMotor.io.resetEncoder();
+    }
     public void periodic(){
         io.updateInputs(inputs);
+        wirstMotor.periodic();
+
     }
 }

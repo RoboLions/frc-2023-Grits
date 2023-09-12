@@ -4,5 +4,60 @@
 
 package frc.robot.subsystems.Wrist;
 
+import frc.robot.lib.statemachine.State;
+import frc.robot.Constants;
+import frc.robot.RobotMap;
+import frc.robot.lib.statemachine.Transition;
+import frc.robot.subsystems.LED.LEDStateMachine;
+
 /** Add your docs here. */
-public class ScoreHighState {}
+public class ScoreHighState extends State {
+
+    @Override
+    public void build() {
+        //Transitions
+        transitions.add(new Transition(() -> {
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON);
+        }, WristStateMachine.idleState));
+
+        transitions.add(new Transition(() -> {
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.LOW_SCORE_BUTTON);
+        }, WristStateMachine.scoreLowState));
+        
+        transitions.add(new Transition(() -> {
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.MID_SCORE_BUTTON);
+        }, WristStateMachine.scoreMidState));
+
+        transitions.add(new Transition(() -> {
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.MANUAL_MODE_BUTTON);
+        }, WristStateMachine.manualState));
+
+        transitions.add(new Transition(() -> {
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.SUBSTATION_INTAKE_BUTTON);
+        }, WristStateMachine.substationIntakeState));
+
+        transitions.add(new Transition(() -> {
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.GROUND_INTAKE_FRONT);
+        }, WristStateMachine.groundIntakeState));
+    }
+    
+    @Override
+    public void init(State prevState) {
+        if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
+            RobotMap.wrist.setPointDrive(Constants.Wrist.ScoreHighCone);
+            ;
+        } else {
+            RobotMap.wrist.setPointDrive(Constants.Wrist.ScoreHighCube);
+        }
+    }
+
+    @Override
+    public void execute() {
+    }
+
+    @Override
+    public void exit(State nextState) {
+        
+    }
+
+}

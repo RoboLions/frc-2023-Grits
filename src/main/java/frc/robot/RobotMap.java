@@ -17,7 +17,10 @@ import frc.robot.lib.interfaces.Swerve.GyroPigeon2;
 import frc.robot.lib.interfaces.Swerve.Swerve;
 import frc.robot.lib.interfaces.Swerve.SwerveModuleFalcon500;
 import frc.robot.lib.interfaces.Swerve.SwerveModuleIO;
+import frc.robot.lib.interfaces.Wrist.Wrist;
+import frc.robot.subsystems.Elevator.ElevatorStateMachine;
 import frc.robot.subsystems.LED.LEDStateMachine;
+import frc.robot.subsystems.Wrist.WristStateMachine;
 import frc.robot.subsystems.arm.ArmStateMachine;
 import frc.robot.subsystems.drive.DrivetrainStateMachine;
 import frc.robot.subsystems.intake.IntakeStateMachine;
@@ -30,6 +33,8 @@ public class RobotMap {
     public static ArmStateMachine armStateMachine;
     public static IntakeStateMachine intakeStateMachine;
     public static LEDStateMachine ledStateMachine;
+    public static ElevatorStateMachine elevatorStateMachine;
+    public static WristStateMachine wristStateMachine;
 
     /* Motor instances */
     public static WPI_Pigeon2 gyro;
@@ -44,6 +49,7 @@ public class RobotMap {
 
     /* Interface instances */
     public static Elevator elevator;
+    public static Wrist wrist;
     public static Swerve swerve; 
     public static Arm arm;
     public static Intake intake;

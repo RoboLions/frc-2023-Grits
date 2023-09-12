@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
@@ -60,6 +59,27 @@ public final class Constants {
     }
     public static final class Wrist{
         public static final int wristMotorID = 52;
+
+        public static final int kP = 0;
+        public static final int kI = 0;
+        public static final int kD = 0;
+
+        public static final double ScoreHighCone = 0.0;
+        public static final double ScoreHighCube = 0.0;
+
+        public static final double ScoreMidCone = 0.0;
+        public static final double ScoreMidCube= 0.0;
+        
+        public static final double ScoreLow = 0.0;
+
+        public static final double IdleState = 0.0;
+
+        public static final double SubstationIntakeCone = 0.0;
+        public static final double SubstationIntakeCube = 0.0;
+
+        public static final double GroundIntakeCone = 0.0;
+        public static final double GroundIntakeCube = 0.0;
+
     }
     public static final class PORTS {
         public static final I2C.Port COLOR_SENSOR = I2C.Port.kOnboard;

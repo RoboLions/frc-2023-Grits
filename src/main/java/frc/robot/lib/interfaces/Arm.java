@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.lib.statemachine.State;
-import frc.robot.lib.statemachine.StateMachine;
 import frc.robot.subsystems.LED.LEDStateMachine;
 import frc.robot.subsystems.arm.ArmStateMachine;
 

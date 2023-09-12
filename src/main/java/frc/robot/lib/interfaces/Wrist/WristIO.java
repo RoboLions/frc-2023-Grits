@@ -15,4 +15,6 @@ public interface WristIO  {
         public double WristOutput;
     }
     public default void updateInputs(WristIOInputs inputs){}
+    public default void setMotorPositionOutput(double position){}
+    public default void resetEncoder(){}
 }
