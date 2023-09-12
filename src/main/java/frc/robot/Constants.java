@@ -51,6 +51,12 @@ public final class Constants {
         public static final double ScoreLow = 0.0;
 
         public static final double IdleState = 0.0;
+
+        public static final double SubstationIntakeCone = 0.0;
+        public static final double SubstationIntakeCube = 0.0;
+
+        public static final double GroundIntakeCone = 0.0;
+        public static final double GroundIntakeCube = 0.0;
     }
     public static final class Wrist{
         public static final int wristMotorID = 52;

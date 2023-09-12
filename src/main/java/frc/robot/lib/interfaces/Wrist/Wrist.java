@@ -8,9 +8,16 @@ package frc.robot.lib.interfaces.Wrist;
 public class Wrist {
     public WristIO io;
     public WristIOInputsAutoLogged inputs = new WristIOInputsAutoLogged();
-    public Wrist(WristIO io){
+    public WristModule wirstMotor;
+    public Wrist(WristIO io, WristIO wrist){
         this.io = io;
+        wirstMotor = new WristModule(wrist, "wrist");
     }
+
+    public void setPointDrive(double wristTarget) {
+        wirstMotor.setMotorPositionOutput(wristTarget);
+    }
+
     public void periodic(){
         io.updateInputs(inputs);
     }

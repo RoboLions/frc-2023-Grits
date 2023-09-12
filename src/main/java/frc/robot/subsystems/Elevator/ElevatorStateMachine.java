@@ -13,6 +13,8 @@ public class ElevatorStateMachine extends StateMachine{
     public static ScoreHighState scoreHighState = new ScoreHighState();
     public static ScoreMidState scoreMidState = new ScoreMidState();
     public static ScoreLowState scoreLowState = new ScoreLowState();
+    public static SubstationIntakeState substationIntakeState = new SubstationIntakeState();
+    public static GroundIntakeState groundIntakeState = new GroundIntakeState();
 
     public ElevatorStateMachine(){
         manualState.build();
@@ -20,6 +22,8 @@ public class ElevatorStateMachine extends StateMachine{
         scoreHighState.build();
         scoreMidState.build();
         scoreLowState.build();
+        groundIntakeState.build();
+        substationIntakeState.build();
 
         setCurrentState(idleState);
     }
