@@ -28,7 +28,7 @@ import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.lib.interfaces.Intake;
 import frc.robot.lib.interfaces.LED;
 import frc.robot.lib.interfaces.Swerve.Swerve;
-import frc.robot.subsystems.arm.ArmStateMachine;
+// import frc.robot.subsystems.arm.ArmStateMachine;
 import frc.robot.subsystems.drive.DrivetrainStateMachine;
 
 /**
@@ -110,7 +110,7 @@ public class Robot extends LoggedRobot{
     RobotMap.init();
     Swerve.zeroPitch();
     Swerve.zeroRoll();
-    RobotMap.arm.resetEncoders();
+    // RobotMap.arm.resetEncoders();
     SmartDashboard.putData("Field", RobotMap.Field2d);
     RobotMap.intakeMotor.setNeutralMode(NeutralMode.Brake);
   }
@@ -127,7 +127,7 @@ public class Robot extends LoggedRobot{
     /* state machines always execute current state and check for next state */
     RobotMap.drivetrainStateMachine.setNextState();
     RobotMap.intakeStateMachine.setNextState();
-    RobotMap.armStateMachine.setNextState();
+    // RobotMap.armStateMachine.setNextState();
     RobotMap.ledStateMachine.setNextState();
 
     // update swerve pose estimator

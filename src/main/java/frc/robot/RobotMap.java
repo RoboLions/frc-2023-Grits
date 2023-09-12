@@ -6,7 +6,6 @@ import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.lib.interfaces.Arm;
 import frc.robot.lib.interfaces.Intake;
 import frc.robot.lib.interfaces.LED;
 import frc.robot.lib.interfaces.Elevator.Elevator;
@@ -22,7 +21,7 @@ import frc.robot.lib.interfaces.Wrist.WristFalcon500;
 import frc.robot.subsystems.Elevator.ElevatorStateMachine;
 import frc.robot.subsystems.LED.LEDStateMachine;
 import frc.robot.subsystems.Wrist.WristStateMachine;
-import frc.robot.subsystems.arm.ArmStateMachine;
+
 import frc.robot.subsystems.drive.DrivetrainStateMachine;
 import frc.robot.subsystems.intake.IntakeStateMachine;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
@@ -31,7 +30,7 @@ public class RobotMap {
 
     /* state machine instances */
     public static DrivetrainStateMachine drivetrainStateMachine;
-    public static ArmStateMachine armStateMachine;
+    
     public static IntakeStateMachine intakeStateMachine;
     public static LEDStateMachine ledStateMachine;
     public static ElevatorStateMachine elevatorStateMachine;
@@ -52,7 +51,7 @@ public class RobotMap {
     public static Elevator elevator;
     public static Wrist wrist;
     public static Swerve swerve; 
-    public static Arm arm;
+    // public static Arm arm;
     public static Intake intake;
     public static LED led;
 
@@ -93,8 +92,6 @@ public class RobotMap {
                 new SwerveModuleFalcon500(Constants.SWERVE.Mod1.constants),
                 new SwerveModuleFalcon500(Constants.SWERVE.Mod2.constants),
                 new SwerveModuleFalcon500(Constants.SWERVE.Mod3.constants));
-
-                wrist = new Wrist(new WristFalcon500(Constants.Wrist.wristMotorID));
                 break;
             case REPLAY:
                 elevator = new Elevator(
@@ -120,13 +117,13 @@ public class RobotMap {
         manipulatorController = new XboxController(1);
         driverController = new XboxController(0);
         
-        arm = new Arm();
+        // arm = new Arm();
         intake = new Intake();
         Field2d = new Field2d();
         led = new LED();
 
         drivetrainStateMachine = new DrivetrainStateMachine();
-        armStateMachine = new ArmStateMachine();
+        // armStateMachine = new ArmStateMachine();
         intakeStateMachine = new IntakeStateMachine();
         ledStateMachine = new LEDStateMachine();
     }
