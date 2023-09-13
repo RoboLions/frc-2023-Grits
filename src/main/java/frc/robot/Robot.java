@@ -25,7 +25,6 @@ import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 
-import frc.robot.lib.interfaces.Intake;
 import frc.robot.lib.interfaces.LED;
 import frc.robot.lib.interfaces.Swerve.Swerve;
 // import frc.robot.subsystems.arm.ArmStateMachine;

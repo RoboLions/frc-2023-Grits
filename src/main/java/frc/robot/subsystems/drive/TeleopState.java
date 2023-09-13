@@ -13,7 +13,6 @@ import frc.robot.RobotMap;
 import frc.robot.lib.interfaces.Swerve.Swerve;
 import frc.robot.lib.statemachine.State;
 import frc.robot.lib.statemachine.Transition;
-import frc.robot.subsystems.arm.ArmStateMachine;
 
 public class TeleopState extends State {
     
@@ -105,17 +104,17 @@ public class TeleopState extends State {
             }
         }
 
-        if (RobotMap.armStateMachine.getCurrentState() == ArmStateMachine.groundPickupState) {
-            translationValScalar = 2.0;
-            rotationVal = rotationVal * Constants.SWERVE.MAX_ANGULAR_VELOCITY * 0.6;
-        } else if (RobotMap.armStateMachine.getCurrentState() == ArmStateMachine.scoreHighState || 
-                   RobotMap.armStateMachine.getCurrentState() == ArmStateMachine.scoreMidState) {
-            translationValScalar = 2.0;
-            rotationVal = rotationVal * Constants.SWERVE.MAX_ANGULAR_VELOCITY * 0.3;
-        } else {
-            translationValScalar = Constants.SWERVE.MAX_SPEED;
-            rotationVal = rotationVal * Constants.SWERVE.MAX_ANGULAR_VELOCITY;
-        }
+        // if (RobotMap.armStateMachine.getCurrentState() == ArmStateMachine.groundPickupState) {
+        //     translationValScalar = 2.0;
+        //     rotationVal = rotationVal * Constants.SWERVE.MAX_ANGULAR_VELOCITY * 0.6;
+        // } else if (RobotMap.armStateMachine.getCurrentState() == ArmStateMachine.scoreHighState || 
+        //            RobotMap.armStateMachine.getCurrentState() == ArmStateMachine.scoreMidState) {
+        //     translationValScalar = 2.0;
+        //     rotationVal = rotationVal * Constants.SWERVE.MAX_ANGULAR_VELOCITY * 0.3;
+        // } else {
+        //     translationValScalar = Constants.SWERVE.MAX_SPEED;
+        //     rotationVal = rotationVal * Constants.SWERVE.MAX_ANGULAR_VELOCITY;
+        // }
 
         // toggle whether the accel/decel on is enabled
         if (Swerve.bButton) {

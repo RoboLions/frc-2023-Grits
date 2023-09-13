@@ -8,7 +8,7 @@ import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.lib.statemachine.State;
 import frc.robot.lib.statemachine.Transition;
-import frc.robot.subsystems.arm.ArmStateMachine;
+
 
 /** Add your docs here. */
 public class IntakingState extends State {
@@ -19,9 +19,6 @@ public class IntakingState extends State {
             return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.INTAKE_AXIS) < 0.25;
         }, IntakeStateMachine.idleState));
 
-        transitions.add(new Transition(() -> {
-            return RobotMap.armStateMachine.getCurrentState() == ArmStateMachine.elbowIdleState;
-        }, IntakeStateMachine.idleState));
     }
 
     @Override

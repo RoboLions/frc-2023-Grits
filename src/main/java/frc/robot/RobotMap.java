@@ -6,11 +6,12 @@ import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.lib.interfaces.Intake;
 import frc.robot.lib.interfaces.LED;
 import frc.robot.lib.interfaces.Elevator.Elevator;
 import frc.robot.lib.interfaces.Elevator.ElevatorFalcon500;
 import frc.robot.lib.interfaces.Elevator.ElevatorIO;
+import frc.robot.lib.interfaces.Intake.Intake;
+import frc.robot.lib.interfaces.Intake.IntakeFalcon500;
 import frc.robot.lib.interfaces.Swerve.GyroIO;
 import frc.robot.lib.interfaces.Swerve.GyroPigeon2;
 import frc.robot.lib.interfaces.Swerve.Swerve;
@@ -82,6 +83,10 @@ public class RobotMap {
                     new ElevatorFalcon500(Constants.Elevator.elevatorSecondStageMotorID)
                 );
 
+                intake = new Intake(
+                    new IntakeFalcon500(Constants.CAN_IDS.INTAKE_MOTOR)
+                );
+
                 wrist = new Wrist(
                     new WristFalcon500(Constants.Wrist.wristMotorID)
                 );
@@ -118,7 +123,6 @@ public class RobotMap {
         driverController = new XboxController(0);
         
         // arm = new Arm();
-        intake = new Intake();
         Field2d = new Field2d();
         led = new LED();
 
