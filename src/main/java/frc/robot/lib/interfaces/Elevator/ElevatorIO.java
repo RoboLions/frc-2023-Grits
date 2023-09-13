@@ -6,6 +6,8 @@ package frc.robot.lib.interfaces.Elevator;
 
 import org.littletonrobotics.junction.AutoLog;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 /** Add your docs here. */
 public interface ElevatorIO {
     @AutoLog
@@ -14,6 +16,7 @@ public interface ElevatorIO {
         double elevatorSensorvelocity;
         double elevetorPercentOutput;
     }
+    public default void setNeutralMode(NeutralMode mode){}
     public default void setMotorPositionOutput(double position){}
     public default void resetEncoder(){}
     public default void setMotorPercentOutput(double output){}

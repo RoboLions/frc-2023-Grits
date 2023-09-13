@@ -25,5 +25,7 @@ public class WristStateMachine extends StateMachine{
         scoreLowState.build();
         groundIntakeState.build();
         substationIntakeState.build();
+
+        setCurrentState(idleState);
     }
 }
