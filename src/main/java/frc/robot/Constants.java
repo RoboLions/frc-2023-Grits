@@ -43,11 +43,11 @@ public final class Constants {
 
         public static final double STICK_DEADBAND = 0.25;
 
-        public static final double ScoreHighCone = 0.0;
-        public static final double ScoreHighCube = 0.0;
+        public static final double ScoreHighCone = -75157;
+        public static final double ScoreHighCube = -75157;
 
-        public static final double ScoreMidCone = 0.0;
-        public static final double ScoreMidCube= 0.0;
+        public static final double ScoreMidCone = -53325;
+        public static final double ScoreMidCube= -53325;
         
         public static final double ScoreLow = 0.0;
 
@@ -63,26 +63,26 @@ public final class Constants {
         public static final int wristMotorID = 52;
 
         public static final double STICK_DEADBAND = 0.25;
-        
+
         public static final int kP = 0;
         public static final int kI = 0;
         public static final int kD = 0;
 
-        public static final double ScoreHighCone = 0.0;
-        public static final double ScoreHighCube = 0.0;
+        public static final double ScoreHighCone = 40277;
+        public static final double ScoreHighCube = 40277;
 
-        public static final double ScoreMidCone = 0.0;
-        public static final double ScoreMidCube= 0.0;
+        public static final double ScoreMidCone = 41256;
+        public static final double ScoreMidCube= 41256;
         
-        public static final double ScoreLow = 0.0;
+        public static final double ScoreLow = 20354;
 
         public static final double IdleState = 0.0;
 
         public static final double SubstationIntakeCone = 0.0;
         public static final double SubstationIntakeCube = 0.0;
 
-        public static final double GroundIntakeCone = 0.0;
-        public static final double GroundIntakeCube = 0.0;
+        public static final double GroundIntakeCone = 40524;
+        public static final double GroundIntakeCube = 40524;
 
     }
     public static final class PORTS {

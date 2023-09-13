@@ -9,7 +9,6 @@ import frc.robot.RobotMap;
 import frc.robot.lib.statemachine.State;
 import frc.robot.lib.statemachine.Transition;
 
-
 /** Add your docs here. */
 public class IntakingState extends State {
     

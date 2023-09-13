@@ -23,6 +23,7 @@ public class Elevator {
         firstStageElevatorMotor = new ElevatorModule(firstStage, "first");
         secondStageElevatorMotor = new ElevatorModule(secondStage, "second");
     }
+
     public void setPointDrive(double Goal){
         profile = new TrapezoidProfile(constraints, 
         new TrapezoidProfile.State(Goal, 0), 
