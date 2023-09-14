@@ -65,11 +65,12 @@ public class RobotMap {
     public static void init() {
         
         gyro = new WPI_Pigeon2(Constants.CAN_IDS.PIDGEON, "Swerve");
-        leftShoulderMotor = new WPI_TalonFX(Constants.CAN_IDS.LEFT_SHOULDER_MOTOR);
-        rightShoulderMotor = new WPI_TalonFX(Constants.CAN_IDS.RIGHT_SHOULDER_MOTOR);
-        leftElbowMotor = new WPI_TalonFX(Constants.CAN_IDS.LEFT_ELBOW_MOTOR);
-        rightElbowMotor = new WPI_TalonFX(Constants.CAN_IDS.RIGHT_ELBOW_MOTOR);
-        intakeMotor = new VictorSPX(Constants.CAN_IDS.INTAKE_MOTOR);
+        
+        // leftShoulderMotor = new WPI_TalonFX(Constants.CAN_IDS.LEFT_SHOULDER_MOTOR);
+        // rightShoulderMotor = new WPI_TalonFX(Constants.CAN_IDS.RIGHT_SHOULDER_MOTOR);
+        // leftElbowMotor = new WPI_TalonFX(Constants.CAN_IDS.LEFT_ELBOW_MOTOR);
+        // rightElbowMotor = new WPI_TalonFX(Constants.CAN_IDS.RIGHT_ELBOW_MOTOR);
+        // intakeMotor = new VictorSPX(Constants.CAN_IDS.INTAKE_MOTOR);
 
         gyro.configFactoryDefault();
         leftShoulderMotor.configFactoryDefault();

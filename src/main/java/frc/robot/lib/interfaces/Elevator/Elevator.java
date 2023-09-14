@@ -4,6 +4,9 @@
 
 package frc.robot.lib.interfaces.Elevator;
 
+import org.littletonrobotics.junction.Logger;
+import org.littletonrobotics.junction.networktables.LoggedDashboardString;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -31,22 +34,23 @@ public class Elevator {
         profile = new TrapezoidProfile(constraints, 
         new TrapezoidProfile.State(Goal, 0), 
         new TrapezoidProfile.State(firstStageElevatorMotor.inputs.elevatorSensorPosition, firstStageElevatorMotor.inputs.elevatorSensorvelocity));
-        var setpoint = profile.calculate(0.02);
+        var setpoint = profile.calculate(0.25);
 
-        firstStageElevatorMotor.io.setMotorPositionOutput(Goal);
-        secondStageElevatorMotor.io.setMotorPositionOutput(Goal);
+        firstStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
+        secondStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
 
     }
     public void manualDrive(double translationVal){
         profile = new TrapezoidProfile(constraints, 
         new TrapezoidProfile.State(translationVal, 0));
-        var setpoint = profile.calculate(0.02);
+        var setpoint = profile.calculate(0.25);
         firstStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
         secondStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
+        Logger.getInstance().recordOutput("ElevatorOutput", setpoint.position);
     }
-    public void setNeutralMode(NeutralMode mode){
-        firstStageElevatorMotor.io.setNeutralMode(mode);
-        secondStageElevatorMotor.io.setNeutralMode(mode);
+    public void setNeutralMode(NeutralMode Brake){
+        firstStageElevatorMotor.io.setNeutralMode(Brake);
+        secondStageElevatorMotor.io.setNeutralMode(Brake);
     }
 
     public void resetEncoder(){
