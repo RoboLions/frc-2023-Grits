@@ -1,9 +1,11 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
+import edu.wpi.first.networktables.NetworkTableInstance.NetworkMode;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.lib.interfaces.LED;
@@ -84,6 +86,10 @@ public class RobotMap {
                     new ElevatorFalcon500(Constants.Elevator.elevatorSecondStageMotorID)
                 );
 
+                intake = new Intake(
+                    new IntakeFalcon500(Constants.CAN_IDS.INTAKE_MOTOR)
+                );
+
                 wrist = new Wrist(
                     new WristFalcon500(Constants.Wrist.wristMotorID)
                 );
@@ -116,6 +122,8 @@ public class RobotMap {
         swerve.zeroGyro();
         elevator.resetEncoder();
         wrist.resetEncoder();
+        elevator.setNeutralMode(NeutralMode.Brake);
+
         manipulatorController = new XboxController(1);
         driverController = new XboxController(0);
         
@@ -124,6 +132,8 @@ public class RobotMap {
         led = new LED();
 
         drivetrainStateMachine = new DrivetrainStateMachine();
+        elevatorStateMachine = new ElevatorStateMachine();
+        wristStateMachine = new WristStateMachine();
         // armStateMachine = new ArmStateMachine();
         intakeStateMachine = new IntakeStateMachine();
         elevatorStateMachine = new ElevatorStateMachine();
@@ -131,3 +141,4 @@ public class RobotMap {
         ledStateMachine = new LEDStateMachine();
     }
 }
+// initiate bomb sequence

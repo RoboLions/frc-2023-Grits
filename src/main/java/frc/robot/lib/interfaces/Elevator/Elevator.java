@@ -4,6 +4,8 @@
 
 package frc.robot.lib.interfaces.Elevator;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import frc.robot.Constants;
 
@@ -41,6 +43,10 @@ public class Elevator {
         var setpoint = profile.calculate(0.02);
         firstStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
         secondStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
+    }
+    public void setNeutralMode(NeutralMode mode){
+        firstStageElevatorMotor.io.setNeutralMode(mode);
+        secondStageElevatorMotor.io.setNeutralMode(mode);
     }
 
     public void resetEncoder(){

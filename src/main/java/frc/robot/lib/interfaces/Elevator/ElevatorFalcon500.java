@@ -28,6 +28,7 @@ public class ElevatorFalcon500 implements ElevatorIO {
     public void resetEncoder(){
         elevatorMotor.setSelectedSensorPosition(0);
     }
+
     
     public void updateInputs(ElevatorIOInputs inputs) {
         inputs.elevatorSensorPosition = elevatorMotor.getSelectedSensorPosition();
