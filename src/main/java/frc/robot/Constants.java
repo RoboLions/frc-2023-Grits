@@ -32,8 +32,8 @@ public final class Constants {
         public static final int CANdle = 34;
     }
     public static final class Elevator{
-        public static final int elevatorFirstStageMotorID = 50;
-        public static final int elevatorSecondStageMotorID = 51;
+        public static final int elevatorFirstStageMotorID = 53;
+        public static final int elevatorSecondStageMotorID = 54;
 
         public static final int kP = 0;
         public static final int kI = 0;
@@ -60,7 +60,7 @@ public final class Constants {
         public static final double GroundIntakeCube = 0.0;
     }
     public static final class Wrist{
-        public static final int wristMotorID = 52;
+        public static final int wristMotorID = 51;
 
         public static final double STICK_DEADBAND = 0.25;
         
@@ -282,6 +282,8 @@ public final class Constants {
 
         public static final double OUTTAKE_TIME = 0.2;
 
+        public static final double INTAKE_MOTOR = 50;
+        
         public static final Color CUBE_COLOR = new Color(0.21, 0.33, 0.46);
         public static final Color CONE_COLOR = new Color(0.37, 0.57, 0.00); // grayson cone: new Color(141, 93, 20);
     }
@@ -490,7 +492,7 @@ public final class Constants {
          */
         public static final int INTAKE_AXIS = XboxController.Axis.kLeftTrigger.value;
     }
-    public static final Mode currentMode = Mode.SIM;
+    public static final Mode currentMode = Mode.REAL;
 
     public static enum Mode {
       /** Running on a real robot. */

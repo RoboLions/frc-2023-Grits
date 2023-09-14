@@ -8,7 +8,6 @@ import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.lib.statemachine.State;
 import frc.robot.lib.statemachine.Transition;
-import frc.robot.subsystems.arm.ArmStateMachine;
 
 /** Add your docs here. */
 public class OuttakingState extends State {
@@ -19,9 +18,9 @@ public class OuttakingState extends State {
             return !RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.OUTTAKE_BUTTON);
         }, IntakeStateMachine.idleState));
 
-        transitions.add(new Transition(() -> {
-            return RobotMap.armStateMachine.getCurrentState() == ArmStateMachine.elbowIdleState;
-        }, IntakeStateMachine.idleState));
+        // transitions.add(new Transition(() -> {
+        //     return RobotMap.armStateMachine.getCurrentState() == ArmStateMachine.elbowIdleState;
+        // }, IntakeStateMachine.idleState));
 
         transitions.add(new Transition(() -> {
             return RobotMap.driverController.getRawAxis(Constants.DriverControls.SCORING_AXIS) < 0.25;
@@ -30,7 +29,7 @@ public class OuttakingState extends State {
 
     @Override
     public void init(State prevState) {
-        RobotMap.intake.runOuttake();
+        // RobotMap.intake.runOuttake();
     }
 
     @Override

@@ -21,14 +21,18 @@ public class Elevator {
         firstStageElevatorMotor = new ElevatorModule(firstStage, "first");
         secondStageElevatorMotor = new ElevatorModule(secondStage, "second");
     }
+    public void setBrakeMode(){
+        firstStageElevatorMotor.io.setBrakeMode();
+        secondStageElevatorMotor.io.setBrakeMode();
+    }
     public void setPointDrive(double Goal){
         profile = new TrapezoidProfile(constraints, 
         new TrapezoidProfile.State(Goal, 0), 
         new TrapezoidProfile.State(firstStageElevatorMotor.inputs.elevatorSensorPosition, firstStageElevatorMotor.inputs.elevatorSensorvelocity));
         var setpoint = profile.calculate(0.02);
 
-        firstStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
-        secondStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
+        firstStageElevatorMotor.io.setMotorPositionOutput(Goal);
+        secondStageElevatorMotor.io.setMotorPositionOutput(Goal);
 
     }
     public void manualDrive(double translationVal){

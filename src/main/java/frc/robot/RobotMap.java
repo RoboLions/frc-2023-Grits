@@ -6,11 +6,12 @@ import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.lib.interfaces.Intake;
 import frc.robot.lib.interfaces.LED;
 import frc.robot.lib.interfaces.Elevator.Elevator;
 import frc.robot.lib.interfaces.Elevator.ElevatorFalcon500;
 import frc.robot.lib.interfaces.Elevator.ElevatorIO;
+import frc.robot.lib.interfaces.Intake.Intake;
+import frc.robot.lib.interfaces.Intake.IntakeFalcon500;
 import frc.robot.lib.interfaces.Swerve.GyroIO;
 import frc.robot.lib.interfaces.Swerve.GyroPigeon2;
 import frc.robot.lib.interfaces.Swerve.Swerve;
@@ -52,8 +53,8 @@ public class RobotMap {
     public static Wrist wrist;
     public static Swerve swerve; 
     // public static Arm arm;
-    public static Intake intake;
     public static LED led;
+    public static Intake intake;
 
     /* Xbox controllers */
     public static XboxController manipulatorController;
@@ -77,6 +78,7 @@ public class RobotMap {
         
         switch(Constants.currentMode){
             case REAL:
+                // intake = new Intake(new IntakeFalcon500(Constants.INTAKE.INTAKE_MOTOR));
                 elevator = new Elevator(
                     new ElevatorFalcon500(Constants.Elevator.elevatorFirstStageMotorID),
                     new ElevatorFalcon500(Constants.Elevator.elevatorSecondStageMotorID)
@@ -85,7 +87,6 @@ public class RobotMap {
                 wrist = new Wrist(
                     new WristFalcon500(Constants.Wrist.wristMotorID)
                 );
-
                 swerve = new Swerve(
                 new GyroPigeon2(Constants.CAN_IDS.PIDGEON),
                 new SwerveModuleFalcon500(Constants.SWERVE.Mod0.constants),
@@ -113,18 +114,20 @@ public class RobotMap {
         Timer.delay(1.0);
         swerve.resetModulesToAbsolute();
         swerve.zeroGyro();
-
+        elevator.resetEncoder();
+        wrist.resetEncoder();
         manipulatorController = new XboxController(1);
         driverController = new XboxController(0);
         
         // arm = new Arm();
-        intake = new Intake();
         Field2d = new Field2d();
         led = new LED();
 
         drivetrainStateMachine = new DrivetrainStateMachine();
         // armStateMachine = new ArmStateMachine();
         intakeStateMachine = new IntakeStateMachine();
+        elevatorStateMachine = new ElevatorStateMachine();
+        wristStateMachine = new WristStateMachine();
         ledStateMachine = new LEDStateMachine();
     }
 }

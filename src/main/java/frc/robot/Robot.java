@@ -24,8 +24,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
-
-import frc.robot.lib.interfaces.Intake;
 import frc.robot.lib.interfaces.LED;
 import frc.robot.lib.interfaces.Swerve.Swerve;
 // import frc.robot.subsystems.arm.ArmStateMachine;
@@ -106,8 +104,8 @@ public class Robot extends LoggedRobot{
 
     // Start AdvantageKit logger
     logger.start();
-    
     RobotMap.init();
+    
     Swerve.zeroPitch();
     Swerve.zeroRoll();
     // RobotMap.arm.resetEncoders();
@@ -127,13 +125,19 @@ public class Robot extends LoggedRobot{
     /* state machines always execute current state and check for next state */
     RobotMap.drivetrainStateMachine.setNextState();
     RobotMap.intakeStateMachine.setNextState();
+    RobotMap.elevatorStateMachine.setNextState();
+    RobotMap.wristStateMachine.setNextState();
     // RobotMap.armStateMachine.setNextState();
     RobotMap.ledStateMachine.setNextState();
-
     // update swerve pose estimator
     RobotMap.swerve.updatePoses();
     RobotMap.swerve.periodic();
     RobotMap.elevator.periodic();
+    RobotMap.wrist.periodic();
+    if(RobotMap.driverController.getAButton()){
+      RobotMap.elevator.resetEncoder();
+      RobotMap.wrist.resetEncoder();
+    }
     LED.periodic();
 
     // see robot pose on Glass
@@ -207,10 +211,10 @@ public class Robot extends LoggedRobot{
     RobotMap.drivetrainStateMachine.setCurrentState(DrivetrainStateMachine.teleopSwerve);
     // RobotMap.armStateMachine.setCurrentState(ArmStateMachine.idleState);
     
-    RobotMap.leftShoulderMotor.setNeutralMode(NeutralMode.Brake);
-    RobotMap.rightShoulderMotor.setNeutralMode(NeutralMode.Brake);
-    RobotMap.leftElbowMotor.setNeutralMode(NeutralMode.Brake);
-    RobotMap.rightElbowMotor.setNeutralMode(NeutralMode.Brake);
+    // RobotMap.leftShoulderMotor.setNeutralMode(NeutralMode.Brake);
+    // RobotMap.rightShoulderMotor.setNeutralMode(NeutralMode.Brake);
+    // RobotMap.leftElbowMotor.setNeutralMode(NeutralMode.Brake);
+    // RobotMap.rightElbowMotor.setNeutralMode(NeutralMode.Brake);
 
     // if (autoModeExecutor != null) {
     //   autoModeExecutor.stop();
@@ -250,6 +254,7 @@ public class Robot extends LoggedRobot{
     // if (autoModeExecutor != null) {
     //   autoModeExecutor.stop();
     // }
+    
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

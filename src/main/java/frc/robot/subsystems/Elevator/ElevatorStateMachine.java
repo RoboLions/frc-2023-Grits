@@ -25,6 +25,6 @@ public class ElevatorStateMachine extends StateMachine{
         groundIntakeState.build();
         substationIntakeState.build();
 
-        setCurrentState(idleState);
+        setCurrentState(manualState);
     }
 }
