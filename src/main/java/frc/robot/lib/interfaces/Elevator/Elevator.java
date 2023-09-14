@@ -16,6 +16,8 @@ import frc.robot.Constants;
 public class Elevator {
     private TrapezoidProfile profile;
     private TrapezoidProfile.Constraints constraints = Constants.Elevator.constraints;
+    private TrapezoidProfile.State m_setpoint = new TrapezoidProfile.State();
+    private TrapezoidProfile.State pid_setpoint = new TrapezoidProfile.State();
   
 
     public ElevatorModule firstStageElevatorMotor;
@@ -31,22 +33,21 @@ public class Elevator {
         secondStageElevatorMotor.io.setBrakeMode();
     }
     public void setPointDrive(double Goal){
-        profile = new TrapezoidProfile(constraints, 
-        new TrapezoidProfile.State(Goal, 0), 
-        new TrapezoidProfile.State(firstStageElevatorMotor.inputs.elevatorSensorPosition, firstStageElevatorMotor.inputs.elevatorSensorvelocity));
-        var setpoint = profile.calculate(0.25);
-
-        firstStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
-        secondStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
+        profile = new TrapezoidProfile(constraints, new TrapezoidProfile.State(Goal, 0), pid_setpoint);
+        pid_setpoint = profile.calculate(0.25);
+        Logger.getInstance().recordOutput("ElevatorOutput", pid_setpoint.position);
+        // firstStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
+        // secondStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
 
     }
+
     public void manualDrive(double translationVal){
         profile = new TrapezoidProfile(constraints, 
-        new TrapezoidProfile.State(translationVal, 0));
-        var setpoint = profile.calculate(0.25);
-        firstStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
-        secondStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
-        Logger.getInstance().recordOutput("ElevatorOutput", setpoint.position);
+        new TrapezoidProfile.State(translationVal, 0), m_setpoint);
+        m_setpoint = profile.calculate(0.25);
+        // firstStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
+        // secondStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
+        Logger.getInstance().recordOutput("ElevatorOutput", m_setpoint.position);
     }
     public void setNeutralMode(NeutralMode Brake){
         firstStageElevatorMotor.io.setNeutralMode(Brake);

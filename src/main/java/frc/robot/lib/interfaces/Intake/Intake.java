@@ -7,7 +7,7 @@ import frc.robot.subsystems.LED.LEDStateMachine;
 
 public class Intake {
     public IntakeIO io;
-    public IntakeAutoLogInputsAutoLogged inputs = new IntakeAutoLogInputsAutoLogged();
+    public IntakeIOInputsAutoLogged inputs = new IntakeIOInputsAutoLogged();
 
     public Intake(IntakeIO io){
         this.io = io;

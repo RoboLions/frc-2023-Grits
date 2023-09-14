@@ -33,7 +33,7 @@ public class IdleState extends State {
 
     @Override
     public void init(State prevState) {
-        RobotMap.intakeMotor.set(ControlMode.PercentOutput, 0.0);
+        // RobotMap.intakeMotor.set(ControlMode.PercentOutput, 0.0);
     }
 
     @Override

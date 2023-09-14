@@ -39,7 +39,7 @@ public final class Constants {
         public static final int kI = 0;
         public static final int kD = 0;
         public static final TrapezoidProfile.Constraints constraints = 
-        new TrapezoidProfile.Constraints(0.0, 0.0);
+        new TrapezoidProfile.Constraints(10.0, 1.0);
 
         public static final double STICK_DEADBAND = 0.25;
 

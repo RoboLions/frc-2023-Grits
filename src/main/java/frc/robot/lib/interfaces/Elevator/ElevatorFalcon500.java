@@ -18,7 +18,7 @@ public class ElevatorFalcon500 implements ElevatorIO {
         elevatorMotor = new TalonFX(elevatorMotorID);
     }
     public void setNeutralMode(NeutralMode mode){
-        Logger.getInstance().recordMetadata("NeutralMode", "Set ELEVATOR MOTOR neutral mode " + mode);
+        Logger.getInstance().recordOutput("NeutralMode", "Set ELEVATOR MOTOR neutral mode " + mode);
         elevatorMotor.setNeutralMode(mode);
     }
     public void setMotorPercentOutput(double output){
@@ -27,6 +27,7 @@ public class ElevatorFalcon500 implements ElevatorIO {
     public void setMotorPositionOutput(double position){
         elevatorMotor.set(TalonFXControlMode.Position, position);
     }
+
 
     public void resetEncoder(){
         elevatorMotor.setSelectedSensorPosition(0);

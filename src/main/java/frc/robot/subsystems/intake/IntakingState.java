@@ -22,6 +22,7 @@ public class IntakingState extends State {
 
     @Override
     public void init(State prevState) {
+        
     }
 
     @Override

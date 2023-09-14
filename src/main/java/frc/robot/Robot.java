@@ -110,7 +110,7 @@ public class Robot extends LoggedRobot{
     Swerve.zeroRoll();
     // RobotMap.arm.resetEncoders();
     SmartDashboard.putData("Field", RobotMap.Field2d);
-    RobotMap.intakeMotor.setNeutralMode(NeutralMode.Brake);
+    // RobotMap.intakeMotor.setNeutralMode(NeutralMode.Brake);
   }
 
   /**
@@ -261,11 +261,11 @@ public class Robot extends LoggedRobot{
   @Override
   public void disabledInit() {
     
-    RobotMap.leftShoulderMotor.setNeutralMode(NeutralMode.Coast);
-    RobotMap.rightShoulderMotor.setNeutralMode(NeutralMode.Coast);
-    RobotMap.leftElbowMotor.setNeutralMode(NeutralMode.Coast);
-    RobotMap.rightElbowMotor.setNeutralMode(NeutralMode.Coast);
-    RobotMap.intakeMotor.setNeutralMode(NeutralMode.Coast);
+    // RobotMap.leftShoulderMotor.setNeutralMode(NeutralMode.Coast);
+    // RobotMap.rightShoulderMotor.setNeutralMode(NeutralMode.Coast);
+    // RobotMap.leftElbowMotor.setNeutralMode(NeutralMode.Coast);
+    // RobotMap.rightElbowMotor.setNeutralMode(NeutralMode.Coast);
+    // RobotMap.intakeMotor.setNeutralMode(NeutralMode.Coast);
     
   //   if (autoModeExecutor != null) {
   //     autoModeExecutor.stop();

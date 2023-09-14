@@ -41,11 +41,11 @@ public class RobotMap {
 
     /* Motor instances */
     public static WPI_Pigeon2 gyro;
-    public static WPI_TalonFX leftElbowMotor;
-    public static WPI_TalonFX rightElbowMotor;
-    public static WPI_TalonFX leftShoulderMotor;
-    public static WPI_TalonFX rightShoulderMotor;
-    public static VictorSPX intakeMotor;
+    // public static WPI_TalonFX leftElbowMotor;
+    // public static WPI_TalonFX rightElbowMotor;
+    // public static WPI_TalonFX leftShoulderMotor;
+    // public static WPI_TalonFX rightShoulderMotor;
+    // public static VictorSPX intakeMotor;
 
     /* Smart Dashboard Instances */
     public static Field2d Field2d;
@@ -65,7 +65,7 @@ public class RobotMap {
     public static void init() {
         
         gyro = new WPI_Pigeon2(Constants.CAN_IDS.PIDGEON, "Swerve");
-        
+
         // leftShoulderMotor = new WPI_TalonFX(Constants.CAN_IDS.LEFT_SHOULDER_MOTOR);
         // rightShoulderMotor = new WPI_TalonFX(Constants.CAN_IDS.RIGHT_SHOULDER_MOTOR);
         // leftElbowMotor = new WPI_TalonFX(Constants.CAN_IDS.LEFT_ELBOW_MOTOR);
@@ -73,11 +73,11 @@ public class RobotMap {
         // intakeMotor = new VictorSPX(Constants.CAN_IDS.INTAKE_MOTOR);
 
         gyro.configFactoryDefault();
-        leftShoulderMotor.configFactoryDefault();
-        rightShoulderMotor.configFactoryDefault();
-        leftElbowMotor.configFactoryDefault();
-        rightElbowMotor.configFactoryDefault();
-        intakeMotor.configFactoryDefault();
+        // leftShoulderMotor.configFactoryDefault();
+        // rightShoulderMotor.configFactoryDefault();
+        // leftElbowMotor.configFactoryDefault();
+        // rightElbowMotor.configFactoryDefault();
+        // intakeMotor.configFactoryDefault();
         
         switch(Constants.currentMode){
             case REAL:
