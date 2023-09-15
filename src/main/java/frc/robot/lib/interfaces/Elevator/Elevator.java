@@ -5,7 +5,6 @@
 package frc.robot.lib.interfaces.Elevator;
 
 import org.littletonrobotics.junction.Logger;
-import org.littletonrobotics.junction.networktables.LoggedDashboardString;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 

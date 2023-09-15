@@ -15,7 +15,7 @@ public class IntakeFalcon500 implements IntakeIO{
         IntakeMotor.configPeakOutputReverse(-1.0);
         IntakeMotor.setInverted(true);
     }
-    public void updateInputs(IntakeAutoLogInputs inputs){
+    public void updateInputs(IntakeIOInputsAutoLogged inputs){
         inputs.IntakePosition = IntakeMotor.getSelectedSensorPosition();
         inputs.IntakeVelocity = IntakeMotor.getSelectedSensorVelocity();
         inputs.IntakeOutput = IntakeMotor.getMotorOutputPercent();
