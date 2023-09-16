@@ -1,5 +1,7 @@
 package frc.robot.subsystems.drive;
 
+import org.littletonrobotics.junction.Logger;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -64,6 +66,11 @@ public class TeleopState extends State {
         translationVal = -1.0 * MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.TRANSLATION_VAL), Constants.STICK_DEADBAND);
         strafeVal = -1.0 * MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.STRAFE_VAL), Constants.STICK_DEADBAND);
         rotationVal = MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.ROTATION_VAL), Constants.STICK_DEADBAND);
+
+        Logger.getInstance().recordOutput("translavtional", translationVal);
+        Logger.getInstance().recordOutput("strafe", strafeVal);
+        Logger.getInstance().recordOutput("rotate", rotationVal);
+
 
         // if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
         //     translationVal = MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.TRANSLATION_VAL), Constants.STICK_DEADBAND);
@@ -131,10 +138,11 @@ public class TeleopState extends State {
             strafeVal = strafeFilter.calculate(strafeVal);
         }
 
+
         RobotMap.swerve.drive(
-            new Translation2d(translationVal, strafeVal).times(translationValScalar), 
-            rotationVal,
-            true, 
+            new Translation2d(translationVal, strafeVal).times(Constants.SWERVE.MAX_SPEED), 
+            rotationVal * Constants.SWERVE.MAX_ANGULAR_VELOCITY, 
+            true,
             true
         );
     }

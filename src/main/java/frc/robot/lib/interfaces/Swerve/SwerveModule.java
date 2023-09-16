@@ -17,8 +17,8 @@ public class SwerveModule {
     public Rotation2d angleOffset;
 
     public int moduleNumber;
-    public final SwerveModuleIO io;
-    private final SwerveModuleIOInputsAutoLogged inputs = new SwerveModuleIOInputsAutoLogged();
+    public  SwerveModuleIO io;
+    private  SwerveModuleIOInputsAutoLogged inputs = new SwerveModuleIOInputsAutoLogged();
 
     
     public SwerveModule(SwerveModuleIO io, int moduleNumber){

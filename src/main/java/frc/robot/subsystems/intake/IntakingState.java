@@ -27,7 +27,7 @@ public class IntakingState extends State {
 
     @Override
     public void execute() {
-    
+        RobotMap.intake.runIntake();
     }
 
     @Override

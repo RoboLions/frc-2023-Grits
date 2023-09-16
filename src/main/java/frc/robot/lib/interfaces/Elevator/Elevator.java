@@ -27,14 +27,11 @@ public class Elevator {
         firstStageElevatorMotor = new ElevatorModule(firstStage, "first");
         secondStageElevatorMotor = new ElevatorModule(secondStage, "second");
     }
-    public void setBrakeMode(){
-        firstStageElevatorMotor.io.setBrakeMode();
-        secondStageElevatorMotor.io.setBrakeMode();
-    }
+
     public void setPointDrive(double Goal){
         profile = new TrapezoidProfile(constraints, new TrapezoidProfile.State(Goal, 0), pid_setpoint);
         pid_setpoint = profile.calculate(0.25);
-        Logger.getInstance().recordOutput("ElevatorOutput", pid_setpoint.position);
+        // Logger.getInstance().recordOutput("ElevatorOutput", pid_setpoint.position);
         // firstStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
         // secondStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
 
@@ -43,14 +40,14 @@ public class Elevator {
     public void manualDrive(double translationVal){
         profile = new TrapezoidProfile(constraints, 
         new TrapezoidProfile.State(translationVal, 0), m_setpoint);
-        m_setpoint = profile.calculate(0.25);
-        // firstStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
-        // secondStageElevatorMotor.io.setMotorPercentOutput(setpoint.position);
+        m_setpoint = profile.calculate(0.75);
+        firstStageElevatorMotor.io.setMotorPercentOutput(translationVal);
+        secondStageElevatorMotor.io.setMotorPercentOutput(translationVal);
         Logger.getInstance().recordOutput("ElevatorOutput", m_setpoint.position);
     }
-    public void setNeutralMode(NeutralMode Brake){
-        firstStageElevatorMotor.io.setNeutralMode(Brake);
-        secondStageElevatorMotor.io.setNeutralMode(Brake);
+    public void setNeutralMode(NeutralMode mode){
+        firstStageElevatorMotor.io.setNeutralMode(mode);
+        secondStageElevatorMotor.io.setNeutralMode(mode);
     }
 
     public void resetEncoder(){

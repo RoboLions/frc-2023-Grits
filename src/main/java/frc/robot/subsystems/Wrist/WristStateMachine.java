@@ -26,6 +26,6 @@ public class WristStateMachine extends StateMachine{
         groundIntakeState.build();
         substationIntakeState.build();
 
-        setCurrentState(idleState);
+        setCurrentState(manualState);
     }
 }

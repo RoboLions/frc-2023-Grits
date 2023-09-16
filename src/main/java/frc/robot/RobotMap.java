@@ -81,7 +81,14 @@ public class RobotMap {
         
         switch(Constants.currentMode){
             case REAL:
-                // intake = new Intake(new IntakeFalcon500(Constants.INTAKE.INTAKE_MOTOR));
+                intake = new Intake(new IntakeFalcon500(Constants.INTAKE.INTAKE_MOTOR));
+                swerve = new Swerve(
+                    new GyroPigeon2(Constants.CAN_IDS.PIDGEON),
+                    new SwerveModuleFalcon500(Constants.SWERVE.Mod0.constants),
+                    new SwerveModuleFalcon500(Constants.SWERVE.Mod1.constants),
+                    new SwerveModuleFalcon500(Constants.SWERVE.Mod2.constants),
+                    new SwerveModuleFalcon500(Constants.SWERVE.Mod3.constants));
+
                 elevator = new Elevator(
                     new ElevatorFalcon500(Constants.Elevator.elevatorFirstStageMotorID),
                     new ElevatorFalcon500(Constants.Elevator.elevatorSecondStageMotorID)
@@ -94,12 +101,7 @@ public class RobotMap {
                 wrist = new Wrist(
                     new WristFalcon500(Constants.Wrist.wristMotorID)
                 );
-                swerve = new Swerve(
-                new GyroPigeon2(Constants.CAN_IDS.PIDGEON),
-                new SwerveModuleFalcon500(Constants.SWERVE.Mod0.constants),
-                new SwerveModuleFalcon500(Constants.SWERVE.Mod1.constants),
-                new SwerveModuleFalcon500(Constants.SWERVE.Mod2.constants),
-                new SwerveModuleFalcon500(Constants.SWERVE.Mod3.constants));
+
                 break;
             case REPLAY:
                 elevator = new Elevator(
@@ -137,8 +139,6 @@ public class RobotMap {
         wristStateMachine = new WristStateMachine();
         // armStateMachine = new ArmStateMachine();
         intakeStateMachine = new IntakeStateMachine();
-        elevatorStateMachine = new ElevatorStateMachine();
-        wristStateMachine = new WristStateMachine();
         ledStateMachine = new LEDStateMachine();
     }
 }

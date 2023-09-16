@@ -21,7 +21,7 @@ public class Wrist {
     }
 
     public void manualDrive(double rotationVal) {
-    //    io.setMotorPercentOutput(rotationVal);
+       io.setMotorPercentOutput(rotationVal);
     }
 
     public void resetEncoder(){

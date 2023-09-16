@@ -31,7 +31,7 @@ public class OuttakingState extends State {
 
     @Override
     public void execute() {
-
+        RobotMap.intake.runOuttake();
     }
 
     @Override
