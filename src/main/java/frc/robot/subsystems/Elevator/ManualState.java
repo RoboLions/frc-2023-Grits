@@ -15,21 +15,21 @@ public class ManualState extends State{
         @Override
         public void build() {
        //Transitions
-    //    transitions.add(new Transition(() -> {
-    //     return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON);
-    // }, ElevatorStateMachine.idleState));
+       transitions.add(new Transition(() -> {
+        return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON);
+    }, ElevatorStateMachine.idleState));
 
-    // transitions.add(new Transition(() -> {
-    //     return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.LOW_SCORE_BUTTON);
-    // }, ElevatorStateMachine.scoreLowState));
+    transitions.add(new Transition(() -> {
+        return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.LOW_SCORE_BUTTON);
+    }, ElevatorStateMachine.scoreLowState));
     
-    // transitions.add(new Transition(() -> {
-    //     return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.MID_SCORE_BUTTON);
-    // }, ElevatorStateMachine.scoreMidState));
+    transitions.add(new Transition(() -> {
+        return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.MID_SCORE_BUTTON);
+    }, ElevatorStateMachine.scoreMidState));
 
-    // transitions.add(new Transition(() -> {
-    //     return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.HIGH_SCORE_BUTTON);
-    // }, ElevatorStateMachine.scoreHighState));
+    transitions.add(new Transition(() -> {
+        return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.HIGH_SCORE_BUTTON);
+    }, ElevatorStateMachine.scoreHighState));
         }
     
         @Override

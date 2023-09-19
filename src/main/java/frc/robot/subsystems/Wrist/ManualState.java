@@ -15,29 +15,29 @@ public class ManualState extends State{
         @Override
         public void build() {
             //Transitions
-            // transitions.add(new Transition(() -> {
-            //     return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON);
-            // }, WristStateMachine.idleState));
+            transitions.add(new Transition(() -> {
+                return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON);
+            }, WristStateMachine.idleState));
 
-            // transitions.add(new Transition(() -> {
-            //     return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.LOW_SCORE_BUTTON);
-            // }, WristStateMachine.scoreLowState));
+            transitions.add(new Transition(() -> {
+                return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.LOW_SCORE_BUTTON);
+            }, WristStateMachine.scoreLowState));
 
-            // transitions.add(new Transition(() -> {
-            //     return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.MID_SCORE_BUTTON);
-            // }, WristStateMachine.scoreMidState));
+            transitions.add(new Transition(() -> {
+                return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.MID_SCORE_BUTTON);
+            }, WristStateMachine.scoreMidState));
 
-            // transitions.add(new Transition(() -> {
-            //     return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.HIGH_SCORE_BUTTON);
-            // }, WristStateMachine.scoreHighState));
+            transitions.add(new Transition(() -> {
+                return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.HIGH_SCORE_BUTTON);
+            }, WristStateMachine.scoreHighState));
 
-            // transitions.add(new Transition(() -> {
-            //     return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.SUBSTATION_INTAKE_BUTTON);
-            // }, WristStateMachine.substationIntakeState));
+            transitions.add(new Transition(() -> {
+                return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.SUBSTATION_INTAKE_BUTTON);
+            }, WristStateMachine.substationIntakeState));
 
-            // transitions.add(new Transition(() -> {
-            //     return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.GROUND_INTAKE_FRONT);
-            // }, WristStateMachine.groundIntakeState));
+            transitions.add(new Transition(() -> {
+                return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.GROUND_INTAKE_FRONT);
+            }, WristStateMachine.groundIntakeState));
         }
     
         @Override
