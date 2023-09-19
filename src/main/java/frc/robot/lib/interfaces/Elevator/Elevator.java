@@ -31,18 +31,19 @@ public class Elevator {
     public void setPointDrive(double Goal){
         profile = new TrapezoidProfile(constraints, new TrapezoidProfile.State(Goal, 0), pid_setpoint);
         pid_setpoint = profile.calculate(0.25);
-        // Logger.getInstance().recordOutput("ElevatorOutput", pid_setpoint.position);
+        Logger.getInstance().recordOutput("ElevatorOutput", pid_setpoint.position);
         // firstStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
         // secondStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
 
     }
 
     public void manualDrive(double translationVal){
+        TrapezoidProfile.State m_goal = new TrapezoidProfile.State(translationVal, 0);
         profile = new TrapezoidProfile(constraints, 
-        new TrapezoidProfile.State(translationVal, 0), m_setpoint);
+        m_goal , m_setpoint);
         m_setpoint = profile.calculate(0.75);
-        firstStageElevatorMotor.io.setMotorPercentOutput(translationVal);
-        secondStageElevatorMotor.io.setMotorPercentOutput(translationVal);
+        // firstStageElevatorMotor.io.setMotorPercentOutput(translationVal);
+        // secondStageElevatorMotor.io.setMotorPercentOutput(translationVal);
         Logger.getInstance().recordOutput("ElevatorOutput", m_setpoint.position);
     }
     public void setNeutralMode(NeutralMode mode){
