@@ -28,6 +28,9 @@ public class ElevatorFalcon500 implements ElevatorIO {
         elevatorMotor.set(TalonFXControlMode.Position, position);
     }
 
+    // public void setInverted(Boolean inverted) {
+    //     elevatorMotor.setInverted(inverted);
+    // }
 
     public void resetEncoder(){
         elevatorMotor.setSelectedSensorPosition(0);

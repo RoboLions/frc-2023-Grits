@@ -9,10 +9,13 @@
     "transitory": {
       "AdvantageKit": {
         "Elevator": {
+          "open": false
+        },
+        "RealOutputs": {
           "open": true
         },
         "Reverse Elevator": {
-          "open": true
+          "open": false
         },
         "open": true
       }

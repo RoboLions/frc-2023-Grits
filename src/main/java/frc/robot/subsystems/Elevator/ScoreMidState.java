@@ -35,16 +35,17 @@ public class ScoreMidState extends State {
     
     @Override
     public void init(State prevState) {
+        
+    }
+
+    @Override
+    public void execute() {
         if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
             RobotMap.elevator.setPointDrive(Constants.Elevator.ScoreMidCone);
             ;
         } else {
             RobotMap.elevator.setPointDrive(Constants.Elevator.ScoreMidCube);
         }
-    }
-
-    @Override
-    public void execute() {
     }
 
     @Override

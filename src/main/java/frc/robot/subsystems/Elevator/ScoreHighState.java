@@ -5,6 +5,9 @@
 package frc.robot.subsystems.Elevator;
 
 import frc.robot.lib.statemachine.State;
+
+import org.littletonrobotics.junction.Logger;
+
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.lib.statemachine.Transition;
@@ -36,16 +39,17 @@ public class ScoreHighState extends State {
     
     @Override
     public void init(State prevState) {
+       
+    }
+
+    @Override
+    public void execute() {
         if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
             RobotMap.elevator.setPointDrive(Constants.Elevator.ScoreHighCone);
             ;
         } else {
             RobotMap.elevator.setPointDrive(Constants.Elevator.ScoreHighCube);
         }
-    }
-
-    @Override
-    public void execute() {
     }
 
     @Override

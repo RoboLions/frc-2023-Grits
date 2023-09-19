@@ -1,5 +1,7 @@
 package frc.robot.lib.interfaces.Intake;
 
+import org.littletonrobotics.junction.Logger;
+
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Elevator.ElevatorStateMachine;
@@ -18,8 +20,10 @@ public class Intake {
         } else {
             io.setPercentOutput(Constants.INTAKE.INTAKE_POWER);
         }
-        io.setPercentOutput(0.5);
     }
+        // io.setPercentOutput(0.5);
+        
+    
 
     public void runOuttake() {
         if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
@@ -29,6 +33,6 @@ public class Intake {
         } else {
             io.setPercentOutput(Constants.INTAKE.INTAKE_POWER);
         }
-        io.setPercentOutput(0.5);
+        // io.setPercentOutput(0.5);
     }
 }

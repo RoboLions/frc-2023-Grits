@@ -22,4 +22,5 @@ public interface ElevatorIO {
     public default void setMotorPercentOutput(double output){}
     public default void updateInputs(ElevatorIOInputs inputs){}
     public default void setBrakeMode(){}
+//     public default void setInverted(Boolean inverted) {}
 }

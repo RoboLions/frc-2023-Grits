@@ -32,6 +32,9 @@ public final class Constants {
         public static final int CANdle = 34;
     }
     public static final class Elevator{
+
+        //Encoders per Meter = 368383
+        //TODO: Change format to meters with equation to convert to ticks
         public static final int elevatorFirstStageMotorID = 53;
         public static final int elevatorSecondStageMotorID = 54;
 
@@ -39,7 +42,7 @@ public final class Constants {
         public static final int kI = 0;
         public static final int kD = 0;
         public static final TrapezoidProfile.Constraints constraints = 
-        new TrapezoidProfile.Constraints(10.0, 1.0);
+        new TrapezoidProfile.Constraints(10000.0, 1000.0);
 
         public static final double STICK_DEADBAND = 0.25;
 

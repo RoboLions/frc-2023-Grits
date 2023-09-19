@@ -26,25 +26,29 @@ public class Elevator {
     public Elevator(ElevatorIO firstStage, ElevatorIO secondStage){
         firstStageElevatorMotor = new ElevatorModule(firstStage, "first");
         secondStageElevatorMotor = new ElevatorModule(secondStage, "second");
+        // firstStageElevatorMotor.io.setInverted(true);
+        // secondStageElevatorMotor.io.setInverted(true);
     }
 
     public void setPointDrive(double Goal){
-        profile = new TrapezoidProfile(constraints, new TrapezoidProfile.State(Goal, 0), pid_setpoint);
-        pid_setpoint = profile.calculate(0.25);
-        Logger.getInstance().recordOutput("ElevatorOutput", pid_setpoint.position);
-        // firstStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
-        // secondStageElevatorMotor.io.setMotorPositionOutput(setpoint.position);
+        Logger.getInstance().recordOutput("ElevatorGoal", Goal);
+        TrapezoidProfile.State m_goalpoint = new TrapezoidProfile.State(Goal, 0);
+        profile = new TrapezoidProfile(constraints, m_goalpoint, pid_setpoint);
+        pid_setpoint = profile.calculate(0.2);
+        firstStageElevatorMotor.io.setMotorPositionOutput(pid_setpoint.position);
+        secondStageElevatorMotor.io.setMotorPositionOutput(pid_setpoint.position);
+        Logger.getInstance().recordOutput("ElevatorOutputPos", pid_setpoint.position);
 
     }
 
     public void manualDrive(double translationVal){
+        TrapezoidProfile.Constraints manual_constraints = new TrapezoidProfile.Constraints(10.0, 1.0);
         TrapezoidProfile.State m_goal = new TrapezoidProfile.State(translationVal, 0);
-        profile = new TrapezoidProfile(constraints, 
-        m_goal , m_setpoint);
-        m_setpoint = profile.calculate(0.75);
-        // firstStageElevatorMotor.io.setMotorPercentOutput(translationVal);
-        // secondStageElevatorMotor.io.setMotorPercentOutput(translationVal);
-        Logger.getInstance().recordOutput("ElevatorOutput", m_setpoint.position);
+        profile = new TrapezoidProfile(manual_constraints, m_goal , m_setpoint);
+        m_setpoint = profile.calculate(0.05);
+        firstStageElevatorMotor.io.setMotorPercentOutput(translationVal);
+        secondStageElevatorMotor.io.setMotorPercentOutput(translationVal);
+        Logger.getInstance().recordOutput("ElevatorOutputMan", m_setpoint.position);
     }
     public void setNeutralMode(NeutralMode mode){
         firstStageElevatorMotor.io.setNeutralMode(mode);

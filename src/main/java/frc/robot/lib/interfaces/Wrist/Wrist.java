@@ -17,7 +17,7 @@ public class Wrist {
     }
 
     public void setPointDrive(double wristTarget) {
-        // io.setMotorPositionOutput(wristTarget);
+        io.setMotorPositionOutput(wristTarget);
     }
 
     public void manualDrive(double rotationVal) {

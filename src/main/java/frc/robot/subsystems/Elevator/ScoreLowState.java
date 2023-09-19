@@ -35,16 +35,17 @@ public class ScoreLowState extends State{
     
     @Override
     public void init(State prevState) {
+        
+    }
+
+    @Override
+    public void execute() {
         if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
             RobotMap.elevator.setPointDrive(Constants.Elevator.ScoreLow);
             ;
         } else {
             RobotMap.elevator.setPointDrive(Constants.Elevator.ScoreLow);
         }
-    }
-
-    @Override
-    public void execute() {
     }
 
     @Override
