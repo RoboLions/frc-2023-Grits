@@ -94,10 +94,6 @@ public class RobotMap {
                     new ElevatorFalcon500(Constants.Elevator.elevatorSecondStageMotorID)
                 );
 
-                intake = new Intake(
-                    new IntakeFalcon500(Constants.CAN_IDS.INTAKE_MOTOR)
-                );
-
                 wrist = new Wrist(
                     new WristFalcon500(Constants.Wrist.wristMotorID)
                 );
@@ -121,10 +117,10 @@ public class RobotMap {
     }        /* By pausing init for a second before setting module offsets, we avoid a bug with inverting motors.
         * See https://github.com/Team364/BaseFalconSwerve/issues/8 for more info. */
         Timer.delay(1.0);
-        swerve.periodic();
-        elevator.periodic();
-        wrist.periodic();
-        intake.periodic();
+        // swerve.periodic();
+        // elevator.periodic();
+        // wrist.periodic();
+        // intake.periodic();
         
         swerve.resetModulesToAbsolute();
         swerve.zeroGyro();
@@ -139,12 +135,12 @@ public class RobotMap {
         Field2d = new Field2d();
         led = new LED();
 
+        ledStateMachine = new LEDStateMachine();
         drivetrainStateMachine = new DrivetrainStateMachine();
         elevatorStateMachine = new ElevatorStateMachine();
         wristStateMachine = new WristStateMachine();
         // armStateMachine = new ArmStateMachine();
         intakeStateMachine = new IntakeStateMachine();
-        ledStateMachine = new LEDStateMachine();
     }
 }
 // initiate bomb sequence
