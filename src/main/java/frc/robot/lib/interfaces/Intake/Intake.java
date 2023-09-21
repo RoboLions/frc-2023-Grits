@@ -14,6 +14,10 @@ public class Intake {
     public Intake(IntakeIO io){
         this.io = io;
     }
+    public void periodic(){
+        io.updateInputs(inputs);
+        Logger.getInstance().processInputs("Intake", inputs);
+    }
     public void runIntake() {
         if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
             io.setPercentOutput(-1 * Constants.INTAKE.INTAKE_POWER);

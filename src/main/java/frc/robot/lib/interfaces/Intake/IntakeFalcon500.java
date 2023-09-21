@@ -1,9 +1,6 @@
 package frc.robot.lib.interfaces.Intake;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 public class IntakeFalcon500 implements IntakeIO{
@@ -15,7 +12,7 @@ public class IntakeFalcon500 implements IntakeIO{
         IntakeMotor.configPeakOutputReverse(-1.0);
         IntakeMotor.setInverted(true);
     }
-    public void updateInputs(IntakeIOInputsAutoLogged inputs){
+    public void updateInputs(IntakeIOInputs inputs){
         inputs.IntakePosition = IntakeMotor.getSelectedSensorPosition();
         inputs.IntakeVelocity = IntakeMotor.getSelectedSensorVelocity();
         inputs.IntakeOutput = IntakeMotor.getMotorOutputPercent();
