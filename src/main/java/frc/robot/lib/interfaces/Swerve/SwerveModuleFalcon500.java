@@ -20,10 +20,11 @@ import com.ctre.phoenix.sensors.CANCoder;
 public class SwerveModuleFalcon500 implements SwerveModuleIO{
 
     private Rotation2d lastAngle;
-
+    public double angleoutput;
     public TalonFX mAngleMotor;
     public TalonFX mDriveMotor;
     private CANCoder angleEncoder;
+    public double absolutePosition;
 
     private static CTREConfigs ctreConfigs;
 
@@ -36,15 +37,15 @@ public class SwerveModuleFalcon500 implements SwerveModuleIO{
         ctreConfigs = new CTREConfigs();
         
         /* Angle Encoder Config */
-        angleEncoder = new CANCoder(moduleConstants.cancoderID, "Swerve");
+        angleEncoder = new CANCoder(moduleConstants.cancoderID);
         configAngleEncoder();
 
         /* Angle Motor Config */
-        mAngleMotor = new TalonFX(moduleConstants.angleMotorID, "Swerve");
+        mAngleMotor = new TalonFX(moduleConstants.angleMotorID);
         configAngleMotor();
 
         /* Drive Motor Config */
-        mDriveMotor = new TalonFX(moduleConstants.driveMotorID, "Swerve");
+        mDriveMotor = new TalonFX(moduleConstants.driveMotorID);
         configDriveMotor();
         
         lastAngle = Rotation2d.fromDegrees(Conversions.falconToDegrees(mAngleMotor.getSelectedSensorPosition(), Constants.SWERVE.ANGLE_GEAR_RATIO));
@@ -70,7 +71,7 @@ public class SwerveModuleFalcon500 implements SwerveModuleIO{
 
     public void setAngle(SwerveModuleState desiredState){
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.SWERVE.MAX_SPEED * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
-        
+        angleoutput = angle.getDegrees();
         mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.SWERVE.ANGLE_GEAR_RATIO));
         lastAngle = angle;
     }
@@ -85,6 +86,7 @@ public class SwerveModuleFalcon500 implements SwerveModuleIO{
 
     public void resetToAbsolute(double absolutePosition){
         // double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.SWERVE.ANGLE_GEAR_RATIO);
+       this.absolutePosition = absolutePosition;
         mAngleMotor.setSelectedSensorPosition(absolutePosition);
     }
 
@@ -98,7 +100,7 @@ public class SwerveModuleFalcon500 implements SwerveModuleIO{
         mAngleMotor.configAllSettings(ctreConfigs.swerveAngleFXConfig);
         mAngleMotor.setInverted(Constants.SWERVE.ANGLE_MOTOR_INVERT);
         mAngleMotor.setNeutralMode(Constants.SWERVE.ANGLE_NEUTRAL_MODE);
-        // resetToAbsolute(absolutePosition);
+        //resetToAbsolute(absolutePosition);
     }
 
     private void configDriveMotor(){        
@@ -130,17 +132,13 @@ public class SwerveModuleFalcon500 implements SwerveModuleIO{
        
         inputs.driveOutputVoltageVolts = mDriveMotor.getMotorOutputPercent() * mDriveMotor.getBusVoltage(); // Might be Incorrect
 
-
-        inputs.driveTempCelcius = new double[] {mDriveMotor.getTemperature()};
+        inputs.absolutePosition = absolutePosition;
     
         inputs.angleEncoderAbsolutePos = angleEncoder.getAbsolutePosition();
 
         inputs.angleMotorSensorPosition = mAngleMotor.getSelectedSensorPosition();
         inputs.turnVelocityMetersPerSec =Conversions.falconToMeters(mDriveMotor.getSelectedSensorVelocity(), Constants.SWERVE.WHEEL_CIRCUMFERENCE, Constants.SWERVE.DRIVE_GEAR_RATIO);
 
-        inputs.turnAppliedVolts = mAngleMotor.getMotorOutputPercent() * mAngleMotor.getBusVoltage(); // Might be Incorrect
-
-        inputs.turnTempCelcius = new double[] {mAngleMotor.getTemperature()};
-
+        inputs.angleoutput = angleoutput;
 }
 }

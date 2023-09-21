@@ -65,7 +65,7 @@ public class TeleopState extends State {
         
         translationVal = -1.0 * MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.TRANSLATION_VAL), Constants.STICK_DEADBAND);
         strafeVal = -1.0 * MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.STRAFE_VAL), Constants.STICK_DEADBAND);
-        rotationVal = MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.ROTATION_VAL), Constants.STICK_DEADBAND);
+        rotationVal = MathUtil.applyDeadband(RobotMap.driverController.getRawAxis(Constants.DriverControls.ROTATION_VAL), Constants.STICK_DEADBAND);
 
         Logger.getInstance().recordOutput("translavtional", translationVal);
         Logger.getInstance().recordOutput("strafe", strafeVal);
@@ -142,7 +142,7 @@ public class TeleopState extends State {
         RobotMap.swerve.drive(
             new Translation2d(translationVal, strafeVal).times(Constants.SWERVE.MAX_SPEED), 
             rotationVal * Constants.SWERVE.MAX_ANGULAR_VELOCITY, 
-            true,
+            false,
             true
         );
     }

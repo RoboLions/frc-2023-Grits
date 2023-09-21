@@ -105,7 +105,8 @@ public class Robot extends LoggedRobot{
     // Start AdvantageKit logger
     logger.start();
     RobotMap.init();
-    
+    RobotMap.swerve.periodic();
+    RobotMap.swerve.resetModulesToAbsolute();
     Swerve.zeroPitch();
     Swerve.zeroRoll();
     // RobotMap.arm.resetEncoders();

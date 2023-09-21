@@ -25,9 +25,8 @@ public interface SwerveModuleIO {
 
       public double angleMotorSensorPosition = 0.0;
       public double turnVelocityMetersPerSec = 0.0;
-      public double turnAppliedVolts = 0.0;
 
-      public double[] turnTempCelcius = new double[] {};
+      public double angleoutput;
     }
   
     /** Updates the set of loggable inputs. */

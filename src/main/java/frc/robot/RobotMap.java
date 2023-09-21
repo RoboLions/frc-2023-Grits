@@ -84,10 +84,10 @@ public class RobotMap {
                 intake = new Intake(new IntakeFalcon500(Constants.INTAKE.INTAKE_MOTOR));
                 swerve = new Swerve(
                     new GyroPigeon2(Constants.CAN_IDS.PIDGEON),
-                    new SwerveModuleFalcon500(Constants.SWERVE.Mod0.constants),
-                    new SwerveModuleFalcon500(Constants.SWERVE.Mod1.constants),
                     new SwerveModuleFalcon500(Constants.SWERVE.Mod2.constants),
-                    new SwerveModuleFalcon500(Constants.SWERVE.Mod3.constants));
+                    new SwerveModuleFalcon500(Constants.SWERVE.Mod0.constants),
+                    new SwerveModuleFalcon500(Constants.SWERVE.Mod3.constants),
+                    new SwerveModuleFalcon500(Constants.SWERVE.Mod1.constants));
 
                 elevator = new Elevator(
                     new ElevatorFalcon500(Constants.Elevator.elevatorFirstStageMotorID),
@@ -121,7 +121,6 @@ public class RobotMap {
     }        /* By pausing init for a second before setting module offsets, we avoid a bug with inverting motors.
         * See https://github.com/Team364/BaseFalconSwerve/issues/8 for more info. */
         Timer.delay(1.0);
-        swerve.resetModulesToAbsolute();
         swerve.zeroGyro();
         elevator.resetEncoder();
         wrist.resetEncoder();

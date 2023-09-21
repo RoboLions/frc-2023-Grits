@@ -72,10 +72,10 @@ public class Swerve {
 
         this.gyro = gyro;
         mSwerveMods = new SwerveModule[]{
-            new SwerveModule(flModuleIO, 0),
-            new SwerveModule(frModuleIO, 1),
-            new SwerveModule(blModuleIO, 2),
-            new SwerveModule(brModuleIO, 3),
+            new SwerveModule(flModuleIO, 2),
+            new SwerveModule(frModuleIO, 0),
+            new SwerveModule(blModuleIO, 3),
+            new SwerveModule(brModuleIO, 1),
         };
 
         swerveOdometry = new SwerveDrivePoseEstimator(
@@ -181,8 +181,8 @@ public class Swerve {
                                 );
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.SWERVE.MAX_SPEED);
 
-        for(SwerveModule mod : mSwerveMods){
-            mod.io.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop, mod.getState());
+        for(int i = 0; i < 4; i++){
+            mSwerveMods[i].io.setDesiredState(swerveModuleStates[i], isOpenLoop, mSwerveMods[i].getState());
         }
     }    
 
@@ -332,6 +332,7 @@ public class Swerve {
     public void resetModulesToAbsolute(){
         for(SwerveModule mod : mSwerveMods){
             double absolutePosition = Conversions.degreesToFalcon(mod.getCanCoder().getDegrees() - mod.angleOffset.getDegrees(), Constants.SWERVE.ANGLE_GEAR_RATIO);
+            Logger.getInstance().recordOutput("cancoder" +mod.moduleNumber, mod.getCanCoder().getDegrees());
             mod.io.resetToAbsolute(absolutePosition);
         }
     }
