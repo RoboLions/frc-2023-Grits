@@ -121,19 +121,21 @@ public class RobotMap {
     }        /* By pausing init for a second before setting module offsets, we avoid a bug with inverting motors.
         * See https://github.com/Team364/BaseFalconSwerve/issues/8 for more info. */
         Timer.delay(1.0);
+
+
+        manipulatorController = new XboxController(1);
+        driverController = new XboxController(0);
+
         swerve.periodic();
-        elevator.periodic();
-        wrist.periodic();
-        intake.periodic();
+        // elevator.periodic();
+        // wrist.periodic();
+        // intake.periodic();
         
         swerve.resetModulesToAbsolute();
         swerve.zeroGyro();
         elevator.resetEncoder();
         wrist.resetEncoder();
         elevator.setNeutralMode(NeutralMode.Brake);
-
-        manipulatorController = new XboxController(1);
-        driverController = new XboxController(0);
         
         // arm = new Arm();
         Field2d = new Field2d();

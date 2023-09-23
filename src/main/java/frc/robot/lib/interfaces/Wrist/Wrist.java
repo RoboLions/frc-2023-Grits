@@ -17,6 +17,7 @@ public class Wrist {
     }
 
     public void setPointDrive(double wristTarget) {
+        Logger.getInstance().recordOutput("WristGoal", wristTarget);
         io.setMotorPositionOutput(wristTarget);
     }
 

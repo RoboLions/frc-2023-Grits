@@ -42,7 +42,7 @@ public class ScoreLowState extends State{
     
     @Override
     public void init(State prevState) {
-            RobotMap.wrist.setPointDrive(Constants.Elevator.ScoreLow);
+            RobotMap.wrist.setPointDrive(Constants.Wrist.ScoreLow);
         }
 
     @Override

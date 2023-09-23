@@ -19,9 +19,9 @@ public class OuttakingState extends State {
         }, IntakeStateMachine.idleState));
 
 
-        transitions.add(new Transition(() -> {
-            return RobotMap.driverController.getRawAxis(Constants.DriverControls.SCORING_AXIS) < 0.25;
-        }, IntakeStateMachine.idleState));
+        // transitions.add(new Transition(() -> {
+        //     return RobotMap.driverController.getRawAxis(Constants.DriverControls.SCORING_AXIS) < 0.25;
+        // }, IntakeStateMachine.idleState));
     }
 
     @Override
