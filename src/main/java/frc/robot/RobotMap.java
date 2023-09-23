@@ -94,10 +94,6 @@ public class RobotMap {
                     new ElevatorFalcon500(Constants.Elevator.elevatorSecondStageMotorID)
                 );
 
-                intake = new Intake(
-                    new IntakeFalcon500(Constants.CAN_IDS.INTAKE_MOTOR)
-                );
-
                 wrist = new Wrist(
                     new WristFalcon500(Constants.Wrist.wristMotorID)
                 );
@@ -141,12 +137,12 @@ public class RobotMap {
         Field2d = new Field2d();
         led = new LED();
 
+        ledStateMachine = new LEDStateMachine();
         drivetrainStateMachine = new DrivetrainStateMachine();
         elevatorStateMachine = new ElevatorStateMachine();
         wristStateMachine = new WristStateMachine();
         // armStateMachine = new ArmStateMachine();
         intakeStateMachine = new IntakeStateMachine();
-        ledStateMachine = new LEDStateMachine();
     }
 }
 // initiate bomb sequence

@@ -8,6 +8,7 @@ import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.lib.statemachine.State;
 import frc.robot.lib.statemachine.Transition;
+import frc.robot.subsystems.LED.LEDStateMachine;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
@@ -17,28 +18,31 @@ public class IdleState extends State {
     @Override
     public void build() {
 
-        // transitions.add(new Transition(() -> {
-        //     return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.INTAKE_AXIS) > 0.25;
-        // }, IntakeStateMachine.intakingState));
+        transitions.add(new Transition(() -> {
+            return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.INTAKE_AXIS) > 0.25;
+        }, IntakeStateMachine.intakingState));
 
-        // transitions.add(new Transition(() -> {
-        //     return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.OUTTAKE_BUTTON);
-        // }, IntakeStateMachine.outtakingState));
+        transitions.add(new Transition(() -> {
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.OUTTAKE_BUTTON);
+        }, IntakeStateMachine.outtakingState));
 
-        // transitions.add(new Transition(() -> {
-        //     return RobotMap.driverController.getRawAxis(Constants.DriverControls.SCORING_AXIS) > 0.25;
-        // }, IntakeStateMachine.outtakingState));
+        transitions.add(new Transition(() -> {
+            return RobotMap.driverController.getRawAxis(Constants.DriverControls.SCORING_AXIS) > 0.25;
+        }, IntakeStateMachine.outtakingState));
         
     }
 
     @Override
     public void init(State prevState) {
-        // RobotMap.intakeMotor.set(ControlMode.PercentOutput, 0.0);
     }
 
     @Override
     public void execute() {
-        
+        if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
+            RobotMap.intake.io.setPercentOutput(-0.025);
+        } else {
+            RobotMap.intake.io.setPercentOutput(0.025);
+        }
     }
 
     @Override

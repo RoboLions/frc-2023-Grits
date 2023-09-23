@@ -1,5 +1,6 @@
 package frc.robot.lib.interfaces.Intake;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
@@ -11,6 +12,7 @@ public class IntakeFalcon500 implements IntakeIO{
         IntakeMotor.configPeakOutputForward(1.0);
         IntakeMotor.configPeakOutputReverse(-1.0);
         IntakeMotor.setInverted(true);
+        IntakeMotor.setNeutralMode(NeutralMode.Brake);
     }
     public void updateInputs(IntakeIOInputs inputs){
         inputs.IntakePosition = IntakeMotor.getSelectedSensorPosition();
