@@ -150,19 +150,19 @@ public class Swerve {
     }
 
     public static void zeroRoll() {
-        rollOffset = RobotMap.gyro.getRoll();
+        rollOffset = GyroInputs.roll;
     }
 
     public static double getRoll() {
-        return RobotMap.gyro.getRoll() - rollOffset;
+        return GyroInputs.roll - rollOffset;
     }
 
     public static void zeroPitch() {
-        pitchOffset = RobotMap.gyro.getPitch();
+        pitchOffset = GyroInputs.pitch;
     }
 
     public static double getPitch() {
-        return RobotMap.gyro.getPitch() - pitchOffset;
+        return GyroInputs.pitch - pitchOffset;
     }
     
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
@@ -322,11 +322,11 @@ public class Swerve {
     }
 
     public void zeroGyro(){
-        RobotMap.gyro.setYaw(0);
+        gyro.zeroGyro();
     }
 
     public Rotation2d getYaw() {
-        return (Constants.SWERVE.INVERT_GYRO) ? Rotation2d.fromDegrees(360 - RobotMap.gyro.getYaw()) : Rotation2d.fromDegrees(RobotMap.gyro.getYaw());
+        return (Constants.SWERVE.INVERT_GYRO) ? Rotation2d.fromDegrees(360 - GyroInputs.yaw) : Rotation2d.fromDegrees(GyroInputs.yaw);
     }
 
     public void resetModulesToAbsolute(){
@@ -339,7 +339,7 @@ public class Swerve {
     private void updateSwervePoseKinematics() {
         // Update pose estimator with drivetrain sensors
         swerveOdometry.update(
-            RobotMap.gyro.getRotation2d(),
+            Rotation2d.fromDegrees(GyroInputs.yaw),
             RobotMap.swerve.getModulePositions());
     }
 
@@ -354,7 +354,7 @@ public class Swerve {
     /** Updates the field relative position of the robot. */
     public void updateSwervePoseEstimator() {
         swerveOdometry.update(
-            RobotMap.gyro.getRotation2d(),
+            Rotation2d.fromDegrees(GyroInputs.yaw),
             getModulePositions());
     }
 

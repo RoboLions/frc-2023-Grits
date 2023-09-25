@@ -40,8 +40,11 @@ public class ManualState extends State{
         @Override
         public void execute() {
             double translationVal = RobotMap.manipulatorController.getLeftY();
-            RobotMap.elevator.manualDrive(RobotMap.elevator.applyDeadband(translationVal));
-
+            if (translationVal < 0) {
+            RobotMap.elevator.manualDrive(RobotMap.elevator.applyDeadband(translationVal) * 0.5);
+            } else {
+                RobotMap.elevator.manualDrive(RobotMap.elevator.applyDeadband(translationVal) * 0.25);
+            }
         }
     
         @Override

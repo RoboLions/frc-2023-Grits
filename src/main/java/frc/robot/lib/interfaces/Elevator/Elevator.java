@@ -31,13 +31,19 @@ public class Elevator {
     }
 
     public void setPointDrive(double Goal){
-        Logger.getInstance().recordOutput("ElevatorGoal", Goal);
+        Logger.getInstance().recordOutput("ElevatorGoal", (Goal * Constants.Elevator.Encoders_per_Meter));
         TrapezoidProfile.State m_goalpoint = new TrapezoidProfile.State(Goal, 0);
         profile = new TrapezoidProfile(constraints, m_goalpoint, pid_setpoint);
         pid_setpoint = profile.calculate(0.2);
-        firstStageElevatorMotor.io.setMotorPositionOutput(pid_setpoint.position);
-        secondStageElevatorMotor.io.setMotorPositionOutput(pid_setpoint.position);
-        Logger.getInstance().recordOutput("ElevatorOutputPos", pid_setpoint.position);
+
+        //convert Meters to Ticks
+        double target = pid_setpoint.position  * Constants.Elevator.Encoders_per_Meter;
+
+        Logger.getInstance().recordOutput("Elevator Error", pid_setpoint.position - (firstStageElevatorMotor.inputs.elevatorSensorPosition / Constants.Elevator.Encoders_per_Meter));
+
+        firstStageElevatorMotor.io.setMotorPositionOutput(target);
+        secondStageElevatorMotor.io.setMotorPositionOutput(target);
+        Logger.getInstance().recordOutput("ElevatorOutputPos", target);
 
     }
 
@@ -48,6 +54,12 @@ public class Elevator {
         m_setpoint = profile.calculate(0.05);
         firstStageElevatorMotor.io.setMotorPercentOutput(translationVal);
         secondStageElevatorMotor.io.setMotorPercentOutput(translationVal);
+         
+        // if(translationVal == 0) {
+        //     setPointDrive(firstStageElevatorMotor.inputs.elevatorSensorPosition);
+        //     setPointDrive(secondStageElevatorMotor.inputs.elevatorSensorPosition);
+        // }
+
         Logger.getInstance().recordOutput("ElevatorOutputMan", m_setpoint.position);
     }
     public void setNeutralMode(NeutralMode mode){
