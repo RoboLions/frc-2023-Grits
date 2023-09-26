@@ -38,7 +38,7 @@ public final class Constants {
         public static final int elevatorFirstStageMotorID = 53;
         public static final int elevatorSecondStageMotorID = 54;
 
-        public static final double Encoders_per_Meter = 117000;
+        public static final double Encoders_per_Meter = 117280;
 
         public static final double kP = 0.2;
         public static final double kI = 0;
