@@ -5,9 +5,12 @@
 package frc.robot.lib.interfaces.Elevator;
 
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
+import frc.robot.Constants;
 
 /** Add your docs here. */
 public class ElevatorFalcon500 implements ElevatorIO {
@@ -15,6 +18,16 @@ public class ElevatorFalcon500 implements ElevatorIO {
 
     public ElevatorFalcon500(int elevatorMotorID){
         elevatorMotor = new TalonFX(elevatorMotorID);
+        elevatorMotor.configFactoryDefault();
+
+        elevatorMotor.config_kP(0, Constants.Elevator.kP);
+        elevatorMotor.config_kI(0, Constants.Elevator.kI);
+        elevatorMotor.config_kD(0, Constants.Elevator.kD);
+
+        
+
+        elevatorMotor.setInverted(true);
+
     }
     public void setNeutralMode(NeutralMode mode){
         elevatorMotor.setNeutralMode(mode);
@@ -30,6 +43,11 @@ public class ElevatorFalcon500 implements ElevatorIO {
     public void resetEncoder(){
         elevatorMotor.setSelectedSensorPosition(0);
     }
+
+    public void set(ControlMode mode, double outputValue) {
+        elevatorMotor.set(mode, outputValue);
+    }
+    
 
     
     public void updateInputs(ElevatorIOInputs inputs) {

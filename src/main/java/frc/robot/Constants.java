@@ -38,19 +38,26 @@ public final class Constants {
         public static final int elevatorFirstStageMotorID = 53;
         public static final int elevatorSecondStageMotorID = 54;
 
-        public static final int kP = 0;
-        public static final int kI = 0;
-        public static final int kD = 0;
+        public static final double Encoders_per_Meter = 117000;
+
+        public static final double kP = 0.2;
+        public static final double kI = 0;
+        public static final double kD = 0;
         public static final TrapezoidProfile.Constraints constraints = 
-        new TrapezoidProfile.Constraints(10000.0, 1000.0);
+        new TrapezoidProfile.Constraints(0.5, 0.01);
 
         public static final double STICK_DEADBAND = 0.25;
 
-        public static final double ScoreHighCone = -75157;
-        public static final double ScoreHighCube = -75157;
+        // public static final double ScoreHighCone = -75157;
+        // public static final double ScoreHighCube = -75157;
 
-        public static final double ScoreMidCone = -53325;
-        public static final double ScoreMidCube= -53325;
+        public static final double ScoreHighCone = 75157 /Encoders_per_Meter;
+        public static final double ScoreHighCube = 75157 /Encoders_per_Meter;
+
+        public static final double ScoreMidCone = 53325/ Encoders_per_Meter;
+        public static final double ScoreMidCube= 53325/Encoders_per_Meter;
+        // public static final double ScoreMidCone = 0.1;
+        // public static final double ScoreMidCube= 0.1;
         
         public static final double ScoreLow = 0.0;
 
