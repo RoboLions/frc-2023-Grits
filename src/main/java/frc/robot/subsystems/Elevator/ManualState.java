@@ -42,7 +42,7 @@ public class ManualState extends State{
         @Override
         public void execute() {
             double joystick_input = RobotMap.elevator.applyDeadband(RobotMap.manipulatorController.getLeftY());
-            elevator_goal += joystick_input * 0.01;
+            elevator_goal += joystick_input * -0.0025;
             RobotMap.elevator.setPointDrive(elevator_goal);
         }
     
