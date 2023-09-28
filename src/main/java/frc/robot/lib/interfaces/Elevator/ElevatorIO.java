@@ -13,9 +13,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public interface ElevatorIO {
     @AutoLog
     public static class ElevatorIOInputs{
-        double elevatorSensorPosition;
-        double elevatorSensorvelocity;
-        double elevetorPercentOutput;
+        public double elevatorSensorPosition;
+        public double elevatorSensorvelocity;
+        public double elevetorPercentOutput;
     }
     public default void setNeutralMode(NeutralMode mode){}
     public default void setMotorPositionOutput(double position){}

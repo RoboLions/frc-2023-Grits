@@ -47,7 +47,7 @@ public class ManualState extends State{
     
         @Override
         public void execute() {
-            double rotationVal = RobotMap.manipulatorController.getRightX();
+            double rotationVal = RobotMap.manipulatorController.getRightY();
             RobotMap.wrist.manualDrive(RobotMap.wrist.applyDeadband(rotationVal) * 0.25);
 
         }

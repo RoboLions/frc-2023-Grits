@@ -45,7 +45,7 @@ public class GroundIntakeState extends State {
     public void init(State prevState) {
         if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
             RobotMap.wrist.setPointDrive(Constants.Wrist.GroundIntakeCone);
-            ;
+            
         } else {
             RobotMap.wrist.setPointDrive(Constants.Wrist.GroundIntakeCube);
         }
