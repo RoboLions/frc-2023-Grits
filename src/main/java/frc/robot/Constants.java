@@ -78,11 +78,11 @@ public final class Constants {
         public static final int kI = 0;
         public static final int kD = 0;
 
-        public static final double ScoreHighCone = 40277;
-        public static final double ScoreHighCube = 40277;
+        public static final double ScoreHighCone = 40400;
+        public static final double ScoreHighCube = 40400;
 
-        public static final double ScoreMidCone = 41256;
-        public static final double ScoreMidCube= 41256;
+        public static final double ScoreMidCone = 41500;
+        public static final double ScoreMidCube= 41500;
         
         public static final double ScoreLow = 20354;
 
@@ -287,7 +287,7 @@ public final class Constants {
     }
 
     public static final class INTAKE {
-        public static final double OUTTAKE_POWER = -0.55;
+        public static final double OUTTAKE_POWER = 0.3;
         public static final double INTAKE_POWER = 0.75;
 
         public static final double OUTTAKE_TIME = 0.2;

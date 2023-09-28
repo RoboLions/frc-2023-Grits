@@ -36,7 +36,7 @@ public class SubstationIntakeState extends State {
         }, ElevatorStateMachine.scoreMidState));
 
         transitions.add(new Transition(() -> {
-            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.GROUND_INTAKE_FRONT);
+            return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) > 0.1;
         }, ElevatorStateMachine.groundIntakeState));
     }
     

@@ -32,6 +32,10 @@ public class ManualState extends State{
             transitions.add(new Transition(() -> {
                 return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.HIGH_SCORE_BUTTON);
             }, ElevatorStateMachine.scoreHighState));
+
+            transitions.add(new Transition(() -> {
+                return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) > 0.1;
+            }, ElevatorStateMachine.groundIntakeState));
         }
     
         @Override
@@ -42,7 +46,7 @@ public class ManualState extends State{
         @Override
         public void execute() {
             double joystick_input = RobotMap.elevator.applyDeadband(RobotMap.manipulatorController.getLeftY());
-            elevator_goal += joystick_input * -0.0025;
+            elevator_goal += joystick_input * -0.005;
             RobotMap.elevator.setPointDrive(elevator_goal);
         }
     

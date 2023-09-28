@@ -25,9 +25,9 @@ public class OuttakingState extends State {
     @Override
     public void init(State prevState) {
         if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
-            RobotMap.intake.io.setPercentOutput(Constants.INTAKE.INTAKE_POWER);
+            RobotMap.intake.io.setPercentOutput(Constants.INTAKE.OUTTAKE_POWER);
         } else {
-            RobotMap.intake.io.setPercentOutput(-1 * Constants.INTAKE.INTAKE_POWER);
+            RobotMap.intake.io.setPercentOutput(-1 * Constants.INTAKE.OUTTAKE_POWER);
         }
     }
 

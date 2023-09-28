@@ -34,6 +34,10 @@ public class ScoreHighState extends State {
         transitions.add(new Transition(() -> {
             return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.MANUAL_MODE_BUTTON);
         }, ElevatorStateMachine.manualState));
+
+        transitions.add(new Transition(() -> {
+            return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) > 0.1;
+        }, ElevatorStateMachine.groundIntakeState));
             
     }
     

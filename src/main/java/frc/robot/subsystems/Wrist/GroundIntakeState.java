@@ -18,7 +18,7 @@ public class GroundIntakeState extends State {
     public void build() {
         //Transition
         transitions.add(new Transition(() -> {
-            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON);
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON) || RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) < 0.1;
         }, WristStateMachine.idleState));
 
         transitions.add(new Transition(() -> {
