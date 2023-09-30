@@ -12,6 +12,7 @@ public class Wrist {
     public WristIO io;
     public WristIOInputsAutoLogged inputs = new WristIOInputsAutoLogged();
 
+
     public Wrist(WristIO io){
         this.io = io;
     }
@@ -35,6 +36,9 @@ public class Wrist {
         }
         return 0.0;
     }
+
+    
+
     public void periodic(){
         io.updateInputs(inputs);
         Logger.getInstance().processInputs( "Wrist Motor", inputs);

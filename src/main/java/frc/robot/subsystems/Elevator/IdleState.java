@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems.Elevator;
 
+import org.littletonrobotics.junction.Logger;
+
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.lib.statemachine.State;

@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import frc.robot.Constants;
+import frc.robot.RobotMap;
 
 /** Add your docs here. */
 public class Elevator {
@@ -45,6 +46,7 @@ public class Elevator {
         //convert Meters to Ticks
         double target = pid_setpoint.position * Constants.Elevator.Encoders_per_Meter;
         firstStageElevatorMotor.io.setMotorPositionOutput(target);
+        
     }
 
     public void manualDrive(double translationVal){
@@ -78,6 +80,11 @@ public class Elevator {
             return armManualInput;
         }
         return 0.0;
+    }
+
+    public Boolean getArrived(double target) {
+        return pid_setpoint.position == target;
+        
     }
 
     public void periodic(){

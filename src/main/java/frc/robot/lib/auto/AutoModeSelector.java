@@ -6,35 +6,32 @@ package frc.robot.lib.auto;
 
 import java.util.Optional;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.drive.autos.BotSideLink;
-import frc.robot.subsystems.drive.autos.BotSideLoadingStation;
-import frc.robot.subsystems.drive.autos.BotSimpleScore;
+// import frc.robot.subsystems.drive.autos.BotSideLink;
+// import frc.robot.subsystems.drive.autos.BotSideLoadingStation;
+import frc.robot.subsystems.drive.autos.BotSimpleScoreCone;
 import frc.robot.subsystems.drive.autos.DoNothing;
-import frc.robot.subsystems.drive.autos.MidScoreBalance;
-import frc.robot.subsystems.drive.autos.TestDrivePath;
-import frc.robot.subsystems.drive.autos.TopSideLink;
-import frc.robot.subsystems.drive.autos.TopTwoPieceBlue;
-import frc.robot.subsystems.drive.autos.TopTwoPieceRed;
-import frc.robot.subsystems.drive.autos.TopSimpleScore;
+// import frc.robot.subsystems.drive.autos.MidScoreBalance;
+// import frc.robot.subsystems.drive.autos.TestDrivePath;
+// import frc.robot.subsystems.drive.autos.TopSideLink;
+// import frc.robot.subsystems.drive.autos.TopSideLoadingStation;
+// import frc.robot.subsystems.drive.autos.TopSimpleScore;
 
 public class AutoModeSelector {
     enum DesiredMode {
         DO_NOTHING, 
         TEST_PATH,
-        BOT_SIMPLE_SCORE,
+        BOT_SIMPLE_SCORE_CONE,
         TOP_SIMPLE_SCORE,
         MID_SCORE_BALANCE,
         BOT_LOADING_STATION,
-        TOP_TWO_PIECE_BLUE,
-        TOP_TWO_PIECE_RED,
+        TOP_LOADING_STATION,
         BOT_LINK,
         TOP_LINK
     }
 
-    public static DesiredMode mCachedDesiredMode = DesiredMode.DO_NOTHING;
+    private DesiredMode mCachedDesiredMode = DesiredMode.DO_NOTHING;
 
     private Optional<AutoModeBase> mAutoMode = Optional.empty();
 
@@ -44,13 +41,11 @@ public class AutoModeSelector {
         mModeChooser = new SendableChooser<>();
         mModeChooser.setDefaultOption("Do Nothing", DesiredMode.DO_NOTHING);
         mModeChooser.addOption("Test", DesiredMode.TEST_PATH);
-        mModeChooser.addOption("Bot Simple Score", DesiredMode.BOT_SIMPLE_SCORE);
+        mModeChooser.addOption("Bot Simple Score Cone", DesiredMode.BOT_SIMPLE_SCORE_CONE);
         mModeChooser.addOption("Top Simple Score", DesiredMode.TOP_SIMPLE_SCORE);
         mModeChooser.addOption("Mid Balance", DesiredMode.MID_SCORE_BALANCE);
-        mModeChooser.addOption("Top Two Piece Blue", DesiredMode.TOP_TWO_PIECE_BLUE);
-        mModeChooser.addOption("Top Two Piece Red", DesiredMode.TOP_TWO_PIECE_RED);
-        // mModeChooser.addOption("Bot Loading Station", DesiredMode.BOT_LOADING_STATION);
-        // mModeChooser.addOption("Top Loading Station", DesiredMode.TOP_LOADING_STATION);
+        mModeChooser.addOption("Bot Loading Station", DesiredMode.BOT_LOADING_STATION);
+        mModeChooser.addOption("Top Loading Station", DesiredMode.TOP_LOADING_STATION);
         // mModeChooser.addOption("Bot Link", DesiredMode.BOT_LINK);
         // mModeChooser.addOption("Top Link", DesiredMode.TOP_LINK);
         
@@ -74,32 +69,32 @@ public class AutoModeSelector {
         case DO_NOTHING:
             return Optional.of(new DoNothing());
 
-        case TEST_PATH:
-            return Optional.of(new TestDrivePath());
+        // case TEST_PATH:
+        //     return Optional.of(new TestDrivePath());
 
-        case BOT_SIMPLE_SCORE:
-            return Optional.of(new BotSimpleScore());
+        case BOT_SIMPLE_SCORE_CONE:
+            return Optional.of(new BotSimpleScoreCone());
 
-        case TOP_SIMPLE_SCORE:
-            return Optional.of(new TopSimpleScore());
+        // case TOP_SIMPLE_SCORE:
+        //     return Optional.of(new TopSimpleScore());
 
-        case MID_SCORE_BALANCE:
-            return Optional.of(new MidScoreBalance());
+        // case MID_SCORE_BALANCE:
+        //     return Optional.of(new MidScoreBalance());
 
-        case BOT_LOADING_STATION:
-            return Optional.of(new BotSideLoadingStation());
+        // case BOT_LOADING_STATION:
+        //     return Optional.of(new BotSideLoadingStation());
 
-        case TOP_TWO_PIECE_BLUE:
-            return Optional.of(new TopTwoPieceBlue());
+        // case TOP_TWO_PIECE_BLUE:
+        //     return Optional.of(new TopTwoPieceBlue());
 
-        case TOP_TWO_PIECE_RED:
-            return Optional.of(new TopTwoPieceRed());
+        // case TOP_TWO_PIECE_RED:
+        //     return Optional.of(new TopTwoPieceRed());
 
-        case BOT_LINK:
-            return Optional.of(new BotSideLink());
+        // case BOT_LINK:
+        //     return Optional.of(new BotSideLink());
         
-        case TOP_LINK:
-            return Optional.of(new TopSideLink());
+        // case TOP_LINK:
+        //     return Optional.of(new TopSideLink());
             
         default:
             System.out.println("ERROR: unexpected auto mode: " + mode);
