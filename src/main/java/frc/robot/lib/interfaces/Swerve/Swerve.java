@@ -191,6 +191,8 @@ public class Swerve {
         SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Constants.SWERVE.MAX_SPEED);
         
         for(SwerveModule mod : mSwerveMods){
+            Logger.getInstance().recordOutput("moduleInputSpeedMPS"+ mod.moduleNumber, desiredStates[mod.moduleNumber].speedMetersPerSecond);
+            Logger.getInstance().recordOutput("moduleInputAngleDeg" + mod.moduleNumber, desiredStates[mod.moduleNumber].angle.getDegrees());
             mod.io.setDesiredState(desiredStates[mod.moduleNumber], false, mod.getState());
         }
     }
@@ -298,7 +300,11 @@ public class Swerve {
     }
 
     public Pose2d getPose() {
-        return swerveOdometry.getEstimatedPosition();
+        var pose = swerveOdometry.getEstimatedPosition();
+        Logger.getInstance().recordOutput("botMeasuredAngleDeg", pose.getRotation().getDegrees());
+        Logger.getInstance().recordOutput("botMeasuredX", pose.getX());
+        Logger.getInstance().recordOutput("botMeasuredY", pose.getY());
+        return pose;
     }
 
     public void resetOdometry(Pose2d pose) {

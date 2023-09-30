@@ -15,7 +15,7 @@ public class DrivetrainStateMachine extends StateMachine {
         teleopSwerve.build();
         autoState.build();
 
-        setCurrentState(teleopSwerve);
+        setCurrentState(autoState);
     }
     
 }

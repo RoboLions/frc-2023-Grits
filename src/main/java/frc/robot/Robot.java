@@ -24,6 +24,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.lib.auto.AutoModeBase;
+import frc.robot.lib.auto.AutoModeExecutor;
+import frc.robot.lib.auto.AutoModeSelector;
 import frc.robot.lib.interfaces.LED;
 import frc.robot.lib.interfaces.Swerve.Swerve;
 // import frc.robot.subsystems.arm.ArmStateMachine;
@@ -38,8 +41,8 @@ import frc.robot.subsystems.drive.DrivetrainStateMachine;
 public class Robot extends LoggedRobot{
 
   // auto instances
-	// private AutoModeExecutor autoModeExecutor;
-	// private AutoModeSelector autoModeSelector = new AutoModeSelector();
+	private AutoModeExecutor autoModeExecutor;
+	private AutoModeSelector autoModeSelector = new AutoModeSelector();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -192,12 +195,12 @@ public class Robot extends LoggedRobot{
    */
   @Override
   public void autonomousInit() {
-  //   Optional<AutoModeBase> autoMode = autoModeSelector.getAutoMode();
-  //   if (autoMode.isPresent()) {
-  //     RobotMap.swerve.resetOdometry(autoMode.get().getStartingPose());
-  //   }
+    Optional<AutoModeBase> autoMode = autoModeSelector.getAutoMode();
+    if (autoMode.isPresent()) {
+      RobotMap.swerve.resetOdometry(autoMode.get().getStartingPose());
+    }
 
-	// 	autoModeExecutor.start();
+		autoModeExecutor.start();
   }
 
   /** This function is called periodically during autonomous. */
@@ -216,9 +219,9 @@ public class Robot extends LoggedRobot{
     // RobotMap.leftElbowMotor.setNeutralMode(NeutralMode.Brake);
     // RobotMap.rightElbowMotor.setNeutralMode(NeutralMode.Brake);
 
-    // if (autoModeExecutor != null) {
-    //   autoModeExecutor.stop();
-    // }
+    if (autoModeExecutor != null) {
+      autoModeExecutor.stop();
+    }
 
   }
 
@@ -267,24 +270,24 @@ public class Robot extends LoggedRobot{
     // RobotMap.rightElbowMotor.setNeutralMode(NeutralMode.Coast);
     // RobotMap.intakeMotor.setNeutralMode(NeutralMode.Coast);
     
-  //   if (autoModeExecutor != null) {
-  //     autoModeExecutor.stop();
-  //   }
+    if (autoModeExecutor != null) {
+      autoModeExecutor.stop();
+    }
 
-  //   // Reset all auto mode state.
-  //   autoModeSelector.reset();
-  //   autoModeSelector.updateModeCreator();
-  //   autoModeExecutor = new AutoModeExecutor();
-  // }
+    // Reset all auto mode state.
+    autoModeSelector.reset();
+    autoModeSelector.updateModeCreator();
+    autoModeExecutor = new AutoModeExecutor();
+  }
 
-  // @Override
-  // public void disabledPeriodic() {
-  //   autoModeSelector.updateModeCreator();
-  //   Optional<AutoModeBase> autoMode = autoModeSelector.getAutoMode();
-  //   if (autoMode.isPresent() && autoMode.get() != autoModeExecutor.getAutoMode()) {
-  //     System.out.println("Set auto mode to: " + autoMode.get().getClass().toString());
-  //     autoModeExecutor.setAutoMode(autoMode.get());
-  //   }
+  @Override
+  public void disabledPeriodic() {
+    autoModeSelector.updateModeCreator();
+    Optional<AutoModeBase> autoMode = autoModeSelector.getAutoMode();
+    if (autoMode.isPresent() && autoMode.get() != autoModeExecutor.getAutoMode()) {
+      System.out.println("Set auto mode to: " + autoMode.get().getClass().toString());
+      autoModeExecutor.setAutoMode(autoMode.get());
+    }
   }
 
   @Override
