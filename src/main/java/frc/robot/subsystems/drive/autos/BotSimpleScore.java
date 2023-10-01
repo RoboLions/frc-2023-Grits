@@ -78,7 +78,7 @@ public class BotSimpleScore extends AutoModeBase {
         // }));
 
         // then, score the piece
-        // timer.start();
+    timer.start();
         // runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.outtakingState)));
 
         // wait for the piece to be scored
