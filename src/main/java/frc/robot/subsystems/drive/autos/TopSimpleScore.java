@@ -121,7 +121,7 @@ public class TopSimpleScore extends AutoModeBase {
         runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.idleState)));
     
         // drive out of the community
-        // runAction(driveOut);
+        runAction(driveOut);
 
         System.out.println("Finished auto!");
         SmartDashboard.putBoolean("Auto Finished", true);

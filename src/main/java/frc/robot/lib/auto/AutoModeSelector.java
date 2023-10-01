@@ -22,6 +22,8 @@ import frc.robot.subsystems.drive.autos.MidScoreBalance;
 import frc.robot.subsystems.drive.autos.TestDrivePath;
 import frc.robot.subsystems.drive.autos.TopSideLoadingStation;
 import frc.robot.subsystems.drive.autos.TopSimpleScore;
+import frc.robot.subsystems.drive.autos.TopTwoPieceBlue;
+import frc.robot.subsystems.drive.autos.TopTwoPieceRed;
 
 public class AutoModeSelector {
     enum DesiredMode {
@@ -33,8 +35,10 @@ public class AutoModeSelector {
         BOT_LOADING_STATION,
         TOP_LOADING_STATION,
         BOT_LINK,
-        TOP_LINK
-    }
+        // TOP_LINK
+        TOP_TWO_PIECE_RED,
+        TOP_TWO_PIECE_BLUE
+}
 
     private DesiredMode mCachedDesiredMode = DesiredMode.DO_NOTHING;
 
@@ -51,7 +55,7 @@ public class AutoModeSelector {
         mModeChooser.addOption("Mid Balance", DesiredMode.MID_SCORE_BALANCE);
         mModeChooser.addOption("Bot Loading Station", DesiredMode.BOT_LOADING_STATION);
         mModeChooser.addOption("Top Loading Station", DesiredMode.TOP_LOADING_STATION);
-        // mModeChooser.addOption("Bot Link", DesiredMode.BOT_LINK);
+        mModeChooser.addOption("Bot Link", DesiredMode.BOT_LINK);
         // mModeChooser.addOption("Top Link", DesiredMode.TOP_LINK);
         
         SmartDashboard.putData("Auto Mode", mModeChooser);
@@ -78,25 +82,32 @@ public class AutoModeSelector {
             return Optional.of(new TestDrivePath());
 
         case BOT_SIMPLE_SCORE_CONE:
+        //Score and Leave Community
             return Optional.of(new BotSimpleScoreCone());
 
         case TOP_SIMPLE_SCORE:
+        //Score and Leave Community
             return Optional.of(new TopSimpleScore());
 
         case MID_SCORE_BALANCE:
+        //Score and engage Charging Station
             return Optional.of(new MidScoreBalance());
 
         case BOT_LOADING_STATION:
+        //Score and Prep for loadingStation
             return Optional.of(new BotSideLoadingStation());
 
         case TOP_LOADING_STATION:
+        //Score and Pep for loading Station
             return Optional.of(new TopSideLoadingStation());
 
-        // case TOP_TWO_PIECE_BLUE:
-        //     return Optional.of(new TopTwoPieceBlue());
+        case TOP_TWO_PIECE_BLUE:
+        //Two Piece on Blue Alliance
+            return Optional.of(new TopTwoPieceBlue());
 
-        // case TOP_TWO_PIECE_RED:
-        //     return Optional.of(new TopTwoPieceRed());
+        case TOP_TWO_PIECE_RED:
+        //Two Piece on Red Alliance
+            return Optional.of(new TopTwoPieceRed());
 
         // case BOT_LINK:
         //     return Optional.of(new BotSideLink());
