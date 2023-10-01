@@ -15,6 +15,10 @@ import frc.robot.lib.auto.AutoModeEndedException;
 import frc.robot.lib.auto.actions.ConditionAction;
 import frc.robot.lib.auto.actions.LambdaAction;
 import frc.robot.lib.auto.actions.TrajectoryAction;
+import frc.robot.lib.auto.actions.WaitAction;
+import frc.robot.subsystems.Elevator.ElevatorStateMachine;
+import frc.robot.subsystems.LED.LEDStateMachine;
+import frc.robot.subsystems.Wrist.WristStateMachine;
 import frc.robot.subsystems.drive.DrivetrainStateMachine;
 import frc.robot.subsystems.intake.IntakeStateMachine;
 
@@ -58,28 +62,31 @@ public class MidScoreBalance extends AutoModeBase {
         System.out.println("Running mid score with balance auto!");
         SmartDashboard.putBoolean("Auto Finished", false);
 
-        // // position arm to score high
-        // runAction(new LambdaAction(() -> RobotMap.armStateMachine.setCurrentState(ArmStateMachine.scoreHighState)));
+        runAction(new LambdaAction(() -> RobotMap.ledStateMachine.setCurrentState(LEDStateMachine.coneLEDState)));
+        // close the claw
+        runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.idleState)));
 
-        // // wait for arm to arrive in position
-        // runAction(new ConditionAction(() -> {
-        //     return Arm.getArrived(Constants.HIGH_SCORE_CONE.ALLOWANCE, Constants.HIGH_SCORE_CONE.TIME);
-        // }));
+        // position arm to score high
+        runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)));
+        runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)));
 
-        // // then, score the piece
-        // timer.start();
-        // runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.outtakingState)));
+        // wait for arm to arrive in position
+        runAction(new ConditionAction(() -> {
+            return RobotMap.elevator.getArrived(Constants.Elevator.ScoreHighCone);
+        }));
 
-        // // wait for the piece to be scored
-        // runAction(new ConditionAction(() -> {
-        //     return timer.hasElapsed(Constants.INTAKE.OUTTAKE_TIME);
-        // }));
+        // then, score the piece
+        runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.outtakingState)));
+        // runAction(new LambdaAction(() -> RobotMap.armStateMachine.setCurrentState(ArmStateMachine.scoringState)));
 
-        // runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState)));
 
-        // // put arm to idle
-        // runAction(new LambdaAction(() -> RobotMap.armStateMachine.setCurrentState(ArmStateMachine.elbowIdleState)));
+         // wait for the piece to be scored
+        runAction(new WaitAction(2.0));
 
+        runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.idleState)));
+        runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.idleState)));
+        runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.idleState)));
+    
         // drive onto the charge station
         runAction(driveToChargeStation);
 

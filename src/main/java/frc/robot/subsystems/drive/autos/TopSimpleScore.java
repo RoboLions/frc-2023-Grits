@@ -64,11 +64,11 @@ public class TopSimpleScore extends AutoModeBase {
         SmartDashboard.putBoolean("Auto Finished", false);
 
         // // position arm to score high
-        // runAction(new LambdaAction(() -> RobotMap.armStateMachine.setCurrentState(ArmStateMachine.scoreHighState)));
-
-        // // wait for arm to arrive in position
+        // runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)));
+        // runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)));
+        // // // wait for arm to arrive in position
         // runAction(new ConditionAction(() -> {
-        //     return Arm.getArrived(Constants.HIGH_SCORE_CONE.ALLOWANCE, Constants.HIGH_SCORE_CONE.TIME);
+        //     return RobotMap.elevator.getArrived(Constants.Elevator.ScoreHighCone);
         // }));
 
         // // then, score the piece
@@ -94,7 +94,7 @@ public class TopSimpleScore extends AutoModeBase {
         // runAction(new LambdaAction(() -> RobotMap.armStateMachine.setCurrentState(ArmStateMachine.idleState)));
 
         // drive out of the community to get cube
-        runAction(driveOut);
+        // runAction(driveOut);
         runAction(new LambdaAction(() -> RobotMap.ledStateMachine.setCurrentState(LEDStateMachine.coneLEDState)));
         // close the claw
         runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.idleState)));
@@ -114,7 +114,7 @@ public class TopSimpleScore extends AutoModeBase {
 
 
          // wait for the piece to be scored
-        runAction(new WaitAction(10.0));
+        runAction(new WaitAction(2.0));
 
         runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.idleState)));
         runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.idleState)));

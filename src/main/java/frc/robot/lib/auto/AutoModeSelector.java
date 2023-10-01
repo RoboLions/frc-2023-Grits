@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.drive.autos.BotSideLoadingStation;
 // import frc.robot.subsystems.drive.autos.BotSideLink;
 // import frc.robot.subsystems.drive.autos.BotSideLoadingStation;
 import frc.robot.subsystems.drive.autos.BotSimpleScoreCone;
@@ -17,6 +18,10 @@ import frc.robot.subsystems.drive.autos.DoNothing;
 // import frc.robot.subsystems.drive.autos.TopSideLink;
 // import frc.robot.subsystems.drive.autos.TopSideLoadingStation;
 // import frc.robot.subsystems.drive.autos.TopSimpleScore;
+import frc.robot.subsystems.drive.autos.MidScoreBalance;
+import frc.robot.subsystems.drive.autos.TestDrivePath;
+import frc.robot.subsystems.drive.autos.TopSideLoadingStation;
+import frc.robot.subsystems.drive.autos.TopSimpleScore;
 
 public class AutoModeSelector {
     enum DesiredMode {
@@ -69,20 +74,23 @@ public class AutoModeSelector {
         case DO_NOTHING:
             return Optional.of(new DoNothing());
 
-        // case TEST_PATH:
-        //     return Optional.of(new TestDrivePath());
+        case TEST_PATH:
+            return Optional.of(new TestDrivePath());
 
         case BOT_SIMPLE_SCORE_CONE:
             return Optional.of(new BotSimpleScoreCone());
 
-        // case TOP_SIMPLE_SCORE:
-        //     return Optional.of(new TopSimpleScore());
+        case TOP_SIMPLE_SCORE:
+            return Optional.of(new TopSimpleScore());
 
-        // case MID_SCORE_BALANCE:
-        //     return Optional.of(new MidScoreBalance());
+        case MID_SCORE_BALANCE:
+            return Optional.of(new MidScoreBalance());
 
-        // case BOT_LOADING_STATION:
-        //     return Optional.of(new BotSideLoadingStation());
+        case BOT_LOADING_STATION:
+            return Optional.of(new BotSideLoadingStation());
+
+        case TOP_LOADING_STATION:
+            return Optional.of(new TopSideLoadingStation());
 
         // case TOP_TWO_PIECE_BLUE:
         //     return Optional.of(new TopTwoPieceBlue());
