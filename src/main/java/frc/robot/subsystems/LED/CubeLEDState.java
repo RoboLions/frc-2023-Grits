@@ -7,6 +7,7 @@ import frc.robot.lib.interfaces.LED;
 import frc.robot.lib.statemachine.State;
 import frc.robot.lib.statemachine.Transition;
 import frc.robot.subsystems.intake.IntakeStateMachine;
+import frc.robot.subsystems.intake.OuttakingState;
 
 
 public class CubeLEDState extends State {
@@ -28,7 +29,7 @@ public class CubeLEDState extends State {
     public void execute() {
         LED.m_candle.setLEDs(174, 0, 255);
          
-        if(RobotMap.intakeStateMachine.getCurrentState() == IntakeStateMachine.idleState && green == 0){
+        if(RobotMap.intakeStateMachine.getCurrentState() == IntakeStateMachine.intakingState && green == 0 && RobotMap.intake.inputs.IntakeCurrent >0.5){
             LED.m_candle.setLEDs(0, 255, 0);
             time.start();
             if (time.hasElapsed(2)){
@@ -36,7 +37,7 @@ public class CubeLEDState extends State {
             }
         }
         
-        if(RobotMap.intakeStateMachine.getCurrentState() != IntakeStateMachine.idleState){
+        if(RobotMap.intakeStateMachine.getCurrentState() == IntakeStateMachine.outtakingState ){
             green = 0;
         }
     }
