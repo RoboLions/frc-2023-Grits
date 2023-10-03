@@ -3,6 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 package frc.robot.subsystems.Wrist;
 
+import org.littletonrobotics.junction.Logger;
+
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.lib.statemachine.State;
@@ -16,7 +18,9 @@ public class GroundIntakeState extends State {
     public void build() {
         //Transition
         transitions.add(new Transition(() -> {
-            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON);
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON)
+             || RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) < 0.1
+             ;
         }, WristStateMachine.idleState));
 
         transitions.add(new Transition(() -> {
@@ -43,9 +47,11 @@ public class GroundIntakeState extends State {
     
     @Override
     public void init(State prevState) {
+        Logger.getInstance().recordOutput("IS IN GROUND INTAKE", true);
+        
         if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
             RobotMap.wrist.setPointDrive(Constants.Wrist.GroundIntakeCone);
-            ;
+            
         } else {
             RobotMap.wrist.setPointDrive(Constants.Wrist.GroundIntakeCube);
         }

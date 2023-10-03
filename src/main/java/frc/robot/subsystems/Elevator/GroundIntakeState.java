@@ -16,7 +16,9 @@ public class GroundIntakeState extends State {
     public void build() {
         //Transition
         transitions.add(new Transition(() -> {
-            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON);
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.IDLE_BUTTON) 
+            || RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) < 0.1
+            ;
         }, ElevatorStateMachine.idleState));
 
         transitions.add(new Transition(() -> {
@@ -38,16 +40,13 @@ public class GroundIntakeState extends State {
         transitions.add(new Transition(() -> {
             return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.SUBSTATION_INTAKE_BUTTON);
         }, ElevatorStateMachine.substationIntakeState));
+
     }
     
     @Override
     public void init(State prevState) {
-        if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
             RobotMap.elevator.setPointDrive(Constants.Elevator.GroundIntakeCone);
-            ;
-        } else {
-            RobotMap.elevator.setPointDrive(Constants.Elevator.GroundIntakeCube);
-        }
+
     }
 
     @Override

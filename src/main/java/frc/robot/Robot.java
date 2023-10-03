@@ -31,6 +31,7 @@ import frc.robot.lib.interfaces.LED;
 import frc.robot.lib.interfaces.Swerve.Swerve;
 // import frc.robot.subsystems.arm.ArmStateMachine;
 import frc.robot.subsystems.drive.DrivetrainStateMachine;
+import frc.robot.subsystems.intake.IntakeStateMachine;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -143,6 +144,8 @@ public class Robot extends LoggedRobot{
     }
     LED.periodic();
 
+    SmartDashboard.putString("Current intake state", RobotMap.intakeStateMachine.getCurrentState().toString().replace("frc.robot.subsystems.intake.", ""));
+
     // see robot pose on Glass
     // RobotMap.Field2d.setRobotPose(Swerve.swerveOdometry.getEstimatedPosition());
     FieldObject2d currentPoseDisplay = RobotMap.Field2d.getObject("currentPose");
@@ -228,6 +231,8 @@ public class Robot extends LoggedRobot{
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+
+  // SmartDashboard.putString("Current Intake State", IntakeStateMachine.getCurrentState());
     // System.out.println(
     //   Swerve.mSwerveMods[0].mAngleMotor.getMotorOutputVoltage() + "," +
     //   Swerve.mSwerveMods[1].mAngleMotor.getMotorOutputVoltage() + "," +
