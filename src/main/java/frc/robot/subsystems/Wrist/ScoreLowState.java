@@ -36,7 +36,7 @@ public class ScoreLowState extends State{
         }, WristStateMachine.substationIntakeState));
 
         transitions.add(new Transition(() -> {
-            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.GROUND_INTAKE_FRONT);
+            return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) > 0.1;
         }, WristStateMachine.groundIntakeState));
     }
     

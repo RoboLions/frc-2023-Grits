@@ -36,7 +36,7 @@ public class ManualState extends State{
             }, WristStateMachine.substationIntakeState));
 
             transitions.add(new Transition(() -> {
-                return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.GROUND_INTAKE_FRONT);
+                return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) > 0.1;
             }, WristStateMachine.groundIntakeState));
         }
     
@@ -47,7 +47,7 @@ public class ManualState extends State{
     
         @Override
         public void execute() {
-            double rotationVal = RobotMap.manipulatorController.getRightX();
+            double rotationVal = RobotMap.manipulatorController.getRightY();
             RobotMap.wrist.manualDrive(RobotMap.wrist.applyDeadband(rotationVal) * 0.25);
 
         }

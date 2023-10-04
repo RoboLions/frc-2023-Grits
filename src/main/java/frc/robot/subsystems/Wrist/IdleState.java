@@ -35,7 +35,7 @@ public class IdleState extends State{
         }, WristStateMachine.substationIntakeState));
 
         transitions.add(new Transition(() -> {
-            return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) > 0.25;
+            return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) > 0.1;
         }, WristStateMachine.groundIntakeState));
     }
     
