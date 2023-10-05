@@ -116,11 +116,15 @@ public class BotSideLoadingStation extends AutoModeBase {
         // wait for the piece to be scored which means the arm is in idle
         runAction(new WaitAction(2.0));
 
-        // //Arm and Intake to Idle
-        // runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.idleState)));
-        // runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.idleState)));
-        // runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState)));
+
+
+        //Arm and Intake to Idle
+        runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.idleState)));
+        runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.idleState)));
+        runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState)));
         
+        runAction(driveToLoadingStation);
+
         
         // drive out of the community to get cube
         // runAction(driveToFirstPiece);
@@ -197,7 +201,7 @@ public class BotSideLoadingStation extends AutoModeBase {
 
         
         // //drive outside community to face loading station
-        runAction(driveToLoadingStation);
+  
 
         System.out.println("Finished auto!");
         SmartDashboard.putBoolean("Auto Finished", true);

@@ -85,70 +85,84 @@ public class TopTwoPieceBlue extends AutoModeBase {
         System.out.println("Running Top Side Loading Station auto!");
         SmartDashboard.putBoolean("Auto Finished", false);
 
-       // Hold Cone
-       runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.idleState)));
+      
+// Hold Cone
+runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState)));
 
-       // // position arm to score high
-       runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)));
-       runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)));
-       // // wait for arm to arrive in position
-       runAction(new ConditionAction(() -> {
-           return RobotMap.elevator.getArrived(Constants.Elevator.ScoreHighCone);
-       }));
+// // position arm to score high
+runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)));
+runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)));
+// // wait for arm to arrive in position
+runAction(new ConditionAction(() -> {
+    return RobotMap.elevator.getArrived(Constants.Elevator.ScoreHighCone);
+}));
 
-       // // then, score the piece
-       runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.outtakingState)));
-       
-       
-       // wait for the piece to be scored
-       runAction(new WaitAction(2.0));
+// // then, score the piece
+runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.outtakingState)));
 
 
-        // // put LED to cube (purple)
-        runAction(new LambdaAction(() -> RobotMap.ledStateMachine.setCurrentState(LEDStateMachine.cubeLEDState)));
+// wait for the piece to be scored
+runAction(new WaitAction(2.0));
 
-        //Drive to Cube while prepping to intake
-        runAction(new ParallelAction(List.of(
-            driveToIntake,
-                new SeriesAction(List.of(
-                        new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.groundIntakeState)),
-                        new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.groundIntakeState)),
-                        new ConditionAction(() -> {
-                            return RobotMap.elevator.getArrived(Constants.Elevator.GroundIntakeCube);
-                        }),
-                        new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.intakingState))
-            ))
-        )));
-        
-        runAction(new WaitAction(2.0));
 
-        //Drive to score while raising arm
-        runAction(new ParallelAction(List.of(
-            driveToScore,
-            new SeriesAction(List.of(
-                new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)),
-                new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)),
-                new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.idleState))
-        ))
-    )));
-       
-    //Check if we are in High
-    runAction(new ConditionAction(() -> {
-            return RobotMap.elevator.getArrived(Constants.Elevator.ScoreHighCube);
-        }));
+ // // put LED to cube (purple)
+ runAction(new LambdaAction(() -> RobotMap.ledStateMachine.setCurrentState(LEDStateMachine.cubeLEDState)));
 
-        // // then, score the piece
-        runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.outtakingState)));
+ //Drive to Cube while prepping to intake
+//  runAction(new ParallelAction(List.of(
+//      driveToIntake,
+//          new SeriesAction(List.of(
+//                  new LambdaAction(() -> RobotMap.elevatorStateMachine.maintainState(ElevatorStateMachine.groundIntakeState)),
+//                  new LambdaAction(() -> RobotMap.wristStateMachine.maintainState(WristStateMachine.groundIntakeState)),
+//                  new ConditionAction(() -> {
+//                      return RobotMap.elevator.getArrived(Constants.Elevator.GroundIntakeCube);
+//                  }),
+//                  new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.intakingState))
+//      ))
+//  )));
 
-       
-        // wait for the piece to be scored
-        runAction(new WaitAction(2.0));
-        // stop intake
-        runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState)));
+// runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.maintainState(ElevatorStateMachine.groundIntakeState)));
+// runAction(new LambdaAction(() -> RobotMap.wristStateMachine.maintainState(WristStateMachine.groundIntakeState)));
 
-        // put arm to idle
-        runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.idleState)));
-        runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.idleState)));
+runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.maintainState(ElevatorStateMachine.groundIntakeState)));
+ runAction(new LambdaAction(() -> RobotMap.wristStateMachine.maintainState(WristStateMachine.groundIntakeState)));
+runAction(new ConditionAction(() -> {
+                         return RobotMap.elevator.getArrived(Constants.Elevator.GroundIntakeCube);
+                     }));
+runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.intakingState)));
+ 
+ runAction(new WaitAction(2.0));
+
+ //Drive to score while raising arm
+//  runAction(new ParallelAction(List.of(
+//      driveToScore,
+//      new SeriesAction(List.of(
+//          new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)),
+//          new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)),
+//          new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState))
+//  ))
+// )));
+
+runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)));
+runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)));
+runAction( new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState)));
+//Check if we are in High
+runAction(new ConditionAction(() -> {
+     return RobotMap.elevator.getArrived(Constants.Elevator.ScoreHighCube);
+ }));
+
+ // // then, score the piece
+ runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.outtakingState)));
+
+
+ // wait for the piece to be scored
+ runAction(new WaitAction(2.0));
+ // stop intake
+ runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState)));
+
+ // put arm to idle
+ runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.idleState)));
+ runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.idleState)));
         System.out.println("Finished auto!");
         SmartDashboard.putBoolean("Auto Finished", true);
     }
