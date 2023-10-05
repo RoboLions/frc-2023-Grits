@@ -41,22 +41,24 @@ public abstract class AutoModeBase {
     }
 
     public void done() {
-    //     if (
-    //         // AutoModeSelector.mCachedDesiredMode.name() != "TOP_TWO_PIECE_RED" 
-    //          AutoModeSelector.mCachedDesiredMode.name() != "TEST_PATH") {
-    //         if (DriverStation.getAlliance() == DriverStation.Alliance.Red) {
-    //             Pose2d currentPose = Swerve.swerveOdometry.getEstimatedPosition();
-    //             // System.out.println(currentPose);
-    //             Pose2d newPose = currentPose.transformBy(new Transform2d(new Translation2d(0, 0), Rotation2d.fromDegrees(180.0)));
-    //             RobotMap.swerve.resetOdometry(newPose);
-    //             // Pose2d finalPose = Swerve.swerveOdometry.getEstimatedPosition();
-    //             // System.out.println(finalPose);
-    //             // Pose2d newPose = Swerve.swerveOdometry.getEstimatedPosition();
-    //             // System.out.println(newPose);
-    //         }
-    //     }
-    //     System.out.println("Auto mode done");
-    }
+        // if (
+        //     // AutoModeSelector.mCachedDesiredMode.name() != "TOP_TWO_PIECE_RED" 
+        //      AutoModeSelector.mCachedDesiredMode.name() != "TEST_PATH") {
+            if (DriverStation.getAlliance() == DriverStation.Alliance.Red) {
+                Pose2d currentPose = Swerve.swerveOdometry.getEstimatedPosition();
+                // System.out.println(currentPose);
+                Pose2d newPose = currentPose.transformBy(new Transform2d(new Translation2d(0, 0), Rotation2d.fromDegrees(180.0)));
+                RobotMap.swerve.resetOdometry(newPose);
+                // Pose2d finalPose = Swerve.swerveOdometry.getEstimatedPosition();
+                // System.out.println(finalPose);
+                // Pose2d newPose = Swerve.swerveOdometry.getEstimatedPosition();
+                // System.out.println(newPose);
+                
+            }
+            System.out.println("Auto mode done");
+        }
+     
+    
 
     public void stop() {
         mActive = false;

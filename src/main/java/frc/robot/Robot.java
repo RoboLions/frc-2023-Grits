@@ -145,6 +145,9 @@ public class Robot extends LoggedRobot{
     LED.periodic();
 
     SmartDashboard.putString("Current intake state", RobotMap.intakeStateMachine.getCurrentState().toString().replace("frc.robot.subsystems.intake.", ""));
+    SmartDashboard.putString("Current wirst state", RobotMap.wristStateMachine.getCurrentState().toString().replace("frc.robot.subsystems.Wrist.", ""));
+    SmartDashboard.putString("Current elevator state", RobotMap.elevatorStateMachine.getCurrentState().toString().replace("frc.robot.subsystems.Elevator.", ""));
+
 
     // see robot pose on Glass
     // RobotMap.Field2d.setRobotPose(Swerve.swerveOdometry.getEstimatedPosition());

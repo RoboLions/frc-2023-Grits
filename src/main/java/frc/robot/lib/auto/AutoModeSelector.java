@@ -58,6 +58,7 @@ public class AutoModeSelector {
         mModeChooser.addOption("Bot Link", DesiredMode.BOT_LINK);
 
         mModeChooser.addOption("Two Piece Red", DesiredMode.TOP_TWO_PIECE_RED);
+        mModeChooser.addOption("Two Piece Blue", DesiredMode.TOP_TWO_PIECE_BLUE);
         // mModeChooser.addOption("Top Link", DesiredMode.TOP_LINK);
         
         SmartDashboard.putData("Auto Mode", mModeChooser);

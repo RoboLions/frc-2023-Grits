@@ -287,12 +287,12 @@ public final class Constants {
     }
 
     public static final class INTAKE {
-        public static final double OUTTAKE_POWER = 0.3;
+        public static final double OUTTAKE_POWER = 0.5;
         public static final double INTAKE_POWER = 0.75;
 
         public static final double OUTTAKE_TIME = 0.2;
 
-        public static final int INTAKE_MOTOR = 50;
+        public static final int INTAKE_MOTOR = 57;
         
         public static final Color CUBE_COLOR = new Color(0.21, 0.33, 0.46);
         public static final Color CONE_COLOR = new Color(0.37, 0.57, 0.00); // grayson cone: new Color(141, 93, 20);

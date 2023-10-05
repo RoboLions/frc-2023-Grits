@@ -41,7 +41,7 @@ public class BotSimpleScoreCone extends AutoModeBase {
 
         ArrayList<PathPlannerTrajectory> botSimpleScore = (ArrayList<PathPlannerTrajectory>) PathPlanner.loadPathGroup(
             "Bot Simple Score", 
-            new PathConstraints(1.50, 0.5)
+            new PathConstraints(1.5, 0.5)
         );
 
         for(int i = 0; i < botSimpleScore.size(); i++) {
@@ -76,6 +76,9 @@ public class BotSimpleScoreCone extends AutoModeBase {
 
         // position arm to score high
         runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)));
+
+        runAction(new WaitAction(0.5));
+
         runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)));
 
         // wait for arm to arrive in position
@@ -93,6 +96,7 @@ public class BotSimpleScoreCone extends AutoModeBase {
 
         runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.idleState)));
         runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.idleState)));
+
         runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.idleState)));
     
 

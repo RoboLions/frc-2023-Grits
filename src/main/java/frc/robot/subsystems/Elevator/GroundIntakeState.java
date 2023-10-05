@@ -43,12 +43,13 @@ public class GroundIntakeState extends State {
     
     @Override
     public void init(State prevState) {
-            RobotMap.elevator.setPointDrive(Constants.Elevator.GroundIntakeCone);
+        
 
     }
 
     @Override
     public void execute() {
+        RobotMap.elevator.setPointDrive(Constants.Elevator.GroundIntakeCone);
     }
 
     @Override
