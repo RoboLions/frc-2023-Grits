@@ -77,7 +77,7 @@ public class BotSimpleScoreCone extends AutoModeBase {
         // position arm to score high
         runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)));
 
-        runAction(new WaitAction(0.5));
+        runAction(new WaitAction(0.75));
 
         runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)));
 
@@ -92,7 +92,7 @@ public class BotSimpleScoreCone extends AutoModeBase {
 
 
          // wait for the piece to be scored
-        runAction(new WaitAction(2.0));
+        runAction(new WaitAction(1));
 
         runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.idleState)));
         runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.idleState)));

@@ -33,8 +33,14 @@ public class IdleState extends State{
         }, ElevatorStateMachine.manualState));
 
         transitions.add(new Transition(() -> {
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.SUBSTATION_INTAKE_BUTTON);
+        }, ElevatorStateMachine.substationIntakeState));
+
+        transitions.add(new Transition(() -> {
             return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) > 0.1;
         }, ElevatorStateMachine.groundIntakeState));
+
+
     }
     
     @Override

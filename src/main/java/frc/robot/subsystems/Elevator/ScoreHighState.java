@@ -38,6 +38,10 @@ public class ScoreHighState extends State {
         transitions.add(new Transition(() -> {
             return RobotMap.manipulatorController.getRawAxis(Constants.ManipulatorControls.GROUND_INTAKE_FRONT) > 0.1;
         }, ElevatorStateMachine.groundIntakeState));
+
+        transitions.add(new Transition(() -> {
+            return RobotMap.manipulatorController.getRawButton(Constants.ManipulatorControls.SUBSTATION_INTAKE_BUTTON);
+        }, ElevatorStateMachine.substationIntakeState));
             
     }
     

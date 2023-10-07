@@ -90,7 +90,7 @@ runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(Int
 
 // // position arm to score high
 runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)));
-runAction(new WaitAction(0.5));
+runAction(new WaitAction(0.75));
 runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)));
 // // wait for arm to arrive in position
 runAction(new ConditionAction(() -> {
@@ -102,7 +102,7 @@ runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(Intak
 
 
 // wait for the piece to be scored
-runAction(new WaitAction(2.0));
+runAction(new WaitAction(0.25));
 
 
  // // put LED to cube (purple)
@@ -115,6 +115,8 @@ runAction(new WaitAction(2.0));
      driveToIntake,
          new SeriesAction(List.of(
                  new LambdaAction(() -> RobotMap.elevatorStateMachine.maintainState(ElevatorStateMachine.groundIntakeState)),
+                 new LambdaAction(() -> RobotMap.wristStateMachine.maintainState(WristStateMachine.idleState)),
+                 new WaitAction(1.0),
                  new LambdaAction(() -> RobotMap.wristStateMachine.maintainState(WristStateMachine.groundIntakeState)),
                  new ConditionAction(() -> {
                      return RobotMap.elevator.getArrived(Constants.Elevator.GroundIntakeCube);
@@ -139,6 +141,7 @@ runAction(new WaitAction(2.0));
  runAction(new ParallelAction(List.of(
      driveToScore,
      new SeriesAction(List.of(
+        new WaitAction(1.5),
          new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)),
          new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)),
          new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState))
@@ -160,7 +163,7 @@ runAction(new ConditionAction(() -> {
 //  runAction(d)
 
  // wait for the piece to be scored
- runAction(new WaitAction(2.0));
+ runAction(new WaitAction(0.25));
  // stop intake
  runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState)));
 

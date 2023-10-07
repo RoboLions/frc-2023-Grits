@@ -63,8 +63,8 @@ public final class Constants {
 
         public static final double IdleState = 0.0;
 
-        public static final double SubstationIntakeCone = 0.0;
-        public static final double SubstationIntakeCube = 0.0;
+        public static final double SubstationIntakeCone = (75494 /Encoders_per_Meter) + 0.02;
+        public static final double SubstationIntakeCube = (75494 /Encoders_per_Meter) + 0.02;
 
         public static final double GroundIntakeCone = 0.0;
         public static final double GroundIntakeCube = 0.0;
@@ -88,8 +88,8 @@ public final class Constants {
 
         public static final double IdleState = 0.0;
 
-        public static final double SubstationIntakeCone = 0.0;
-        public static final double SubstationIntakeCube = 0.0;
+        public static final double SubstationIntakeCone = 39356;
+        public static final double SubstationIntakeCube = 39356;
 
         public static final double GroundIntakeCone = 40524;
         public static final double GroundIntakeCube = 40524;

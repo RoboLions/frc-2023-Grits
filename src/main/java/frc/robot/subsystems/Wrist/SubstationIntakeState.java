@@ -42,12 +42,8 @@ public class SubstationIntakeState extends State {
     
     @Override
     public void init(State prevState) {
-        if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
+        
             RobotMap.wrist.setPointDrive(Constants.Wrist.SubstationIntakeCone);
-            ;
-        } else {
-            RobotMap.wrist.setPointDrive(Constants.Wrist.SubstationIntakeCube);
-        }
     }
 
     @Override
