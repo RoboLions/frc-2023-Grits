@@ -40,7 +40,7 @@ public class RobotMap {
     public static WristStateMachine wristStateMachine;
 
     /* Motor instances */
-    public static WPI_Pigeon2 gyro;
+   // public static WPI_Pigeon2 gyro;
     // public static WPI_TalonFX leftElbowMotor;
     // public static WPI_TalonFX rightElbowMotor;
     // public static WPI_TalonFX leftShoulderMotor;
@@ -64,7 +64,7 @@ public class RobotMap {
 
     public static void init() {
         
-        gyro = new WPI_Pigeon2(Constants.CAN_IDS.PIDGEON, "Swerve");
+       // gyro = new WPI_Pigeon2(Constants.CAN_IDS.PIDGEON, "Swerve");
 
         // leftShoulderMotor = new WPI_TalonFX(Constants.CAN_IDS.LEFT_SHOULDER_MOTOR);
         // rightShoulderMotor = new WPI_TalonFX(Constants.CAN_IDS.RIGHT_SHOULDER_MOTOR);
@@ -72,7 +72,7 @@ public class RobotMap {
         // rightElbowMotor = new WPI_TalonFX(Constants.CAN_IDS.RIGHT_ELBOW_MOTOR);
         // intakeMotor = new VictorSPX(Constants.CAN_IDS.INTAKE_MOTOR);
 
-        gyro.configFactoryDefault();
+       // gyro.configFactoryDefault();
         // leftShoulderMotor.configFactoryDefault();
         // rightShoulderMotor.configFactoryDefault();
         // leftElbowMotor.configFactoryDefault();

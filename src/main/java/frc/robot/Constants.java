@@ -63,8 +63,8 @@ public final class Constants {
 
         public static final double IdleState = 0.0;
 
-        public static final double SubstationIntakeCone = 0.0;
-        public static final double SubstationIntakeCube = 0.0;
+        public static final double SubstationIntakeCone = (75494 /Encoders_per_Meter) + 0.02;
+        public static final double SubstationIntakeCube = (75494 /Encoders_per_Meter) + 0.02;
 
         public static final double GroundIntakeCone = 0.0;
         public static final double GroundIntakeCube = 0.0;
@@ -78,18 +78,18 @@ public final class Constants {
         public static final int kI = 0;
         public static final int kD = 0;
 
-        public static final double ScoreHighCone = 40277;
-        public static final double ScoreHighCube = 40277;
+        public static final double ScoreHighCone = 40400;
+        public static final double ScoreHighCube = 40400;
 
-        public static final double ScoreMidCone = 41256;
-        public static final double ScoreMidCube= 41256;
+        public static final double ScoreMidCone = 41500;
+        public static final double ScoreMidCube= 41500;
         
         public static final double ScoreLow = 20354;
 
         public static final double IdleState = 0.0;
 
-        public static final double SubstationIntakeCone = 0.0;
-        public static final double SubstationIntakeCube = 0.0;
+        public static final double SubstationIntakeCone = 39356;
+        public static final double SubstationIntakeCube = 39356;
 
         public static final double GroundIntakeCone = 40524;
         public static final double GroundIntakeCube = 40524;
@@ -287,12 +287,12 @@ public final class Constants {
     }
 
     public static final class INTAKE {
-        public static final double OUTTAKE_POWER = -0.55;
+        public static final double OUTTAKE_POWER = 0.5;
         public static final double INTAKE_POWER = 0.75;
 
         public static final double OUTTAKE_TIME = 0.2;
 
-        public static final int INTAKE_MOTOR = 50;
+        public static final int INTAKE_MOTOR = 57;
         
         public static final Color CUBE_COLOR = new Color(0.21, 0.33, 0.46);
         public static final Color CONE_COLOR = new Color(0.37, 0.57, 0.00); // grayson cone: new Color(141, 93, 20);

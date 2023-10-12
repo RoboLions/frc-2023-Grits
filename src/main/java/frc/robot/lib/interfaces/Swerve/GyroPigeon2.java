@@ -15,7 +15,7 @@ public class GyroPigeon2 implements GyroIO{
 
     
     public GyroPigeon2(int id){
-        gyro = new WPI_Pigeon2(id);
+        gyro = new WPI_Pigeon2(id, "Swerve");
         gyro.configFactoryDefault();
     }
     
