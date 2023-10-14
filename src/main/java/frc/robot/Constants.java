@@ -79,10 +79,10 @@ public final class Constants {
         public static final int kD = 0;
 
         public static final double ScoreHighCone = 40400;
-        public static final double ScoreHighCube = 40400;
+        public static final double ScoreHighCube = 20000;
 
         public static final double ScoreMidCone = 41500;
-        public static final double ScoreMidCube= 41500;
+        public static final double ScoreMidCube= 20000;
         
         public static final double ScoreLow = 20354;
 

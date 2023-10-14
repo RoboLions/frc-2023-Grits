@@ -24,6 +24,7 @@ import frc.robot.subsystems.drive.autos.TopSideLoadingStation;
 import frc.robot.subsystems.drive.autos.TopSimpleScore;
 import frc.robot.subsystems.drive.autos.TopTwoPieceBlue;
 import frc.robot.subsystems.drive.autos.TopTwoPieceRed;
+import frc.robot.subsystems.drive.autos.TwoPieceEngage;
 
 public class AutoModeSelector {
     enum DesiredMode {
@@ -35,6 +36,7 @@ public class AutoModeSelector {
         BOT_LOADING_STATION,
         TOP_LOADING_STATION,
         BOT_LINK,
+        TWO_PIECE_ENGAGE,
         // TOP_LINK
         TOP_TWO_PIECE_RED,
         TOP_TWO_PIECE_BLUE
@@ -56,7 +58,7 @@ public class AutoModeSelector {
         mModeChooser.addOption("Bot Loading Station", DesiredMode.BOT_LOADING_STATION);
         mModeChooser.addOption("Top Loading Station", DesiredMode.TOP_LOADING_STATION);
         mModeChooser.addOption("Bot Link", DesiredMode.BOT_LINK);
-
+        mModeChooser.addOption("Two Piece Engage", DesiredMode.TWO_PIECE_ENGAGE);
         mModeChooser.addOption("Two Piece Red", DesiredMode.TOP_TWO_PIECE_RED);
         mModeChooser.addOption("Two Piece Blue", DesiredMode.TOP_TWO_PIECE_BLUE);
         // mModeChooser.addOption("Top Link", DesiredMode.TOP_LINK);
@@ -112,6 +114,9 @@ public class AutoModeSelector {
         //Two Piece on Red Alliance
             return Optional.of(new TopTwoPieceRed());
 
+        case TWO_PIECE_ENGAGE:
+        //Two Piece on Red Alliance
+            return Optional.of(new TwoPieceEngage());
         // case BOT_LINK:
         //     return Optional.of(new BotSideLink());
         

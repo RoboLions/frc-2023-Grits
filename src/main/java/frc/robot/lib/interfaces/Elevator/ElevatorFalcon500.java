@@ -5,6 +5,8 @@
 package frc.robot.lib.interfaces.Elevator;
 
 
+import org.littletonrobotics.junction.Logger;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
@@ -37,6 +39,7 @@ public class ElevatorFalcon500 implements ElevatorIO {
         elevatorMotor.set(TalonFXControlMode.PercentOutput, output);
     }
     public void setMotorPositionOutput(double position){
+        Logger.getInstance().recordOutput("Elevator Motor Command", position);
         elevatorMotor.set(TalonFXControlMode.Position, position);
     }
 

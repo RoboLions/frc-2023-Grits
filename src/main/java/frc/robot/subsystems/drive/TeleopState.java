@@ -109,6 +109,7 @@ public class TeleopState extends State {
             else {
                 RobotMap.swerve.resetOdometry(new Pose2d(current_coords, Rotation2d.fromDegrees(0.0)));
             }
+            RobotMap.swerve.gyro.zeroGyro();
         }
 
         // if (RobotMap.armStateMachine.getCurrentState() == ArmStateMachine.groundPickupState) {
@@ -140,7 +141,7 @@ public class TeleopState extends State {
 
 
         RobotMap.swerve.drive(
-            new Translation2d(translationVal, strafeVal).times(Constants.SWERVE.MAX_SPEED), 
+            new Translation2d(translationVal, strafeVal).times(3.5), 
             rotationVal * Constants.SWERVE.MAX_ANGULAR_VELOCITY, 
             true,
             true
