@@ -39,9 +39,9 @@ public class IdleState extends State {
     @Override
     public void execute() {
         if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
-            RobotMap.intake.io.setPercentOutput(-0.04);
+            RobotMap.intake.io.setPercentOutput(-0.07);
         } else {
-            RobotMap.intake.io.setPercentOutput(0.04);
+            RobotMap.intake.io.setPercentOutput(0.07);
         }
     }
 

@@ -63,13 +63,13 @@ public class TeleopState extends State {
         //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
         // }
         
-        translationVal = -1.0 * MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.TRANSLATION_VAL), Constants.STICK_DEADBAND);
-        strafeVal = -1.0 * MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.STRAFE_VAL), Constants.STICK_DEADBAND);
+        translationVal =  MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.TRANSLATION_VAL), Constants.STICK_DEADBAND);
+        strafeVal = MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.STRAFE_VAL), Constants.STICK_DEADBAND);
         rotationVal = MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.ROTATION_VAL), Constants.STICK_DEADBAND);
 
-        Logger.getInstance().recordOutput("translavtional", translationVal);
-        Logger.getInstance().recordOutput("strafe", strafeVal);
-        Logger.getInstance().recordOutput("rotate", rotationVal);
+        // Logger.getInstance().recordOutput("translavtional", translationVal);
+        // Logger.getInstance().recordOutput("strafe", strafeVal);
+        // Logger.getInstance().recordOutput("rotate", rotationVal);
 
 
         // if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
@@ -141,7 +141,7 @@ public class TeleopState extends State {
 
 
         RobotMap.swerve.drive(
-            new Translation2d(translationVal, strafeVal).times(3.5), 
+            new Translation2d(translationVal, strafeVal).times(Constants.SWERVE.MAX_SPEED), 
             rotationVal * Constants.SWERVE.MAX_ANGULAR_VELOCITY, 
             true,
             true
