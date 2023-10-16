@@ -46,7 +46,6 @@ public class IdleState extends State{
     @Override
     public void init(State prevState) {
         
-    
     }
 
     @Override
@@ -56,6 +55,6 @@ public class IdleState extends State{
 
     @Override
     public void exit(State nextState) {
-    RobotMap.elevator.resetEncoder();
+
     }
 }

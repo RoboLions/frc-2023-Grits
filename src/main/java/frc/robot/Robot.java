@@ -138,10 +138,6 @@ public class Robot extends LoggedRobot{
     RobotMap.swerve.periodic();
     RobotMap.elevator.periodic();
     RobotMap.wrist.periodic();
-    if(RobotMap.driverController.getAButton()){
-      RobotMap.elevator.resetEncoder();
-      RobotMap.wrist.resetEncoder();
-    }
     LED.periodic();
 
     SmartDashboard.putString("Current intake state", RobotMap.intakeStateMachine.getCurrentState().toString().replace("frc.robot.subsystems.intake.", ""));

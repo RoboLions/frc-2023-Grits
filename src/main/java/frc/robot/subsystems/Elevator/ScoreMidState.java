@@ -50,7 +50,6 @@ public class ScoreMidState extends State {
     public void execute() {
         if (RobotMap.ledStateMachine.getCurrentState() == LEDStateMachine.coneLEDState) {
             RobotMap.elevator.setPointDrive(Constants.Elevator.ScoreMidCone);
-            ;
         } else {
             RobotMap.elevator.setPointDrive(Constants.Elevator.ScoreMidCube);
         }
