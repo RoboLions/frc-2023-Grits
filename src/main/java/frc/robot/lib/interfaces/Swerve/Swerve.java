@@ -1,17 +1,23 @@
+package frc.robot.lib.interfaces.Swerve;
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.lib.interfaces.Swerve;
 
 import java.util.ArrayList;
+import java.util.Optional;
+
 import org.littletonrobotics.junction.Logger;
+import org.photonvision.PhotonCamera;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -19,21 +25,19 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import frc.robot.RobotMap;
 import frc.robot.LimelightHelpers.LimelightResults;
-import frc.robot.lib.math.Conversions;
 
 /** Class with methods that get used in states of DrivetrainStateMachine */
 public class Swerve {
 
     public static SwerveDrivePoseEstimator swerveOdometry;
-    
     public static SwerveModule[] mSwerveMods;
 
-    public GyroIO gyro;
-    private final static GyroIOInputsAutoLogged GyroInputs = new GyroIOInputsAutoLogged();
     //public static PhotonCamera camera;
 
     private double previousPipelineTimestamp = 0;
@@ -57,11 +61,7 @@ public class Swerve {
     public static boolean rightShift = false;
     public static boolean bButton = false;
 
-    public Swerve(GyroIO gyro,
-    SwerveModuleIO flModuleIO,
-    SwerveModuleIO frModuleIO,
-    SwerveModuleIO blModuleIO,
-    SwerveModuleIO brModuleIO) {
+    public Swerve() {
         
         try {
             aprilTagFieldLayout = AprilTagFieldLayout.loadFromResource(AprilTagFields.k2023ChargedUp.m_resourceFile);
@@ -70,17 +70,16 @@ public class Swerve {
             aprilTagFieldLayout = null;
         }
 
-        this.gyro = gyro;
-        mSwerveMods = new SwerveModule[]{
-            new SwerveModule(flModuleIO, 0),
-            new SwerveModule(frModuleIO, 1),
-            new SwerveModule(blModuleIO, 2),
-            new SwerveModule(brModuleIO, 3),
+        mSwerveMods = new SwerveModule[] {
+            new SwerveModule(0, Constants.SWERVE.Mod0.constants),
+            new SwerveModule(1, Constants.SWERVE.Mod1.constants),
+            new SwerveModule(2, Constants.SWERVE.Mod2.constants),
+            new SwerveModule(3, Constants.SWERVE.Mod3.constants)
         };
 
         swerveOdometry = new SwerveDrivePoseEstimator(
             Constants.SWERVE.SWERVE_KINEMATICS, 
-            Rotation2d.fromDegrees(GyroInputs.yaw), 
+            RobotMap.gyro.getRotation2d(), 
             getModulePositions(), 
             new Pose2d()
         );
@@ -88,13 +87,7 @@ public class Swerve {
         // camera = new PhotonCamera("Arducam_OV9281_USB_Camera"); //HD_USB_Camera
     }
 
-    public void periodic() {
-        for(SwerveModule mod : mSwerveMods){
-            mod.period();
-        }
-        gyro.updateInputs(GyroInputs);
-        Logger.getInstance().processInputs("GYRO", GyroInputs);
-
+    public static void periodic() {
         boolean leftShiftCurr = RobotMap.driverController.getRawButton(Constants.DriverControls.SHIFT_LEFT_BUTTON);
         leftShift = !leftShiftPrev && leftShiftCurr;
         leftShiftPrev = leftShiftCurr;
@@ -166,18 +159,13 @@ public class Swerve {
     }
     
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
-        Rotation2d robotAngle = getYaw();
-        Logger.getInstance().recordOutput("vxMetersPerSecond", translation.getX());
-        Logger.getInstance().recordOutput("vyMetersPerSecond", translation.getY());
-        Logger.getInstance().recordOutput("omegaRadiansPerSecond", rotation);
-        Logger.getInstance().recordOutput("robotAngle", robotAngle.getDegrees());
         SwerveModuleState[] swerveModuleStates =
             Constants.SWERVE.SWERVE_KINEMATICS.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
                                     translation.getX(), 
                                     translation.getY(), 
                                     rotation, 
-                                    robotAngle
+                                    getYaw()
                                 )
                                 : new ChassisSpeeds(
                                     translation.getX(), 
@@ -187,7 +175,7 @@ public class Swerve {
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.SWERVE.MAX_SPEED);
 
         for(SwerveModule mod : mSwerveMods){
-            mod.io.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop, mod.getState());
+            mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
         }
     }    
 
@@ -196,9 +184,7 @@ public class Swerve {
         SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Constants.SWERVE.MAX_SPEED);
         
         for(SwerveModule mod : mSwerveMods){
-            Logger.getInstance().recordOutput("moduleInputSpeedMPS"+ mod.moduleNumber, desiredStates[mod.moduleNumber].speedMetersPerSecond);
-            Logger.getInstance().recordOutput("moduleInputAngleDeg" + mod.moduleNumber, desiredStates[mod.moduleNumber].angle.getDegrees());
-            mod.io.setDesiredState(desiredStates[mod.moduleNumber], false, mod.getState());
+            mod.setDesiredState(desiredStates[mod.moduleNumber], false);
         }
     }
     
@@ -261,16 +247,25 @@ public class Swerve {
         // double tc = LimelightHelpers.getLatency_Capture(Constants.LIMELIGHT.NAME);
         LimelightResults results = LimelightHelpers.getLatestResults(Constants.LIMELIGHT.NAME);
         var num_targets = results.targetingResults.targets_Fiducials.length;
-        Pose2d botPose2d = LimelightHelpers.toPose2D(results.targetingResults.botpose_wpiblue);
+        double[] botpose;
+        Pose2d botPose2d;
+        if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
+            botpose = results.targetingResults.botpose_wpiblue;
+            botPose2d = LimelightHelpers.toPose2D(botpose);
+        }
+        else {
+            botpose = results.targetingResults.botpose_wpired;
+            botPose2d = LimelightHelpers.toPose2D(botpose);
+        }
         double tl = results.targetingResults.latency_pipeline;
         double tc = results.targetingResults.latency_capture;
 
-        if (Math.abs(results.targetingResults.botpose_wpiblue[0]) < 1.0E-10 && 
-            Math.abs(results.targetingResults.botpose_wpiblue[1]) < 1.0E-10 && 
-            Math.abs(results.targetingResults.botpose_wpiblue[2]) < 1.0E-10 && 
-            Math.abs(results.targetingResults.botpose_wpiblue[3]) < 1.0E-10 && 
-            Math.abs(results.targetingResults.botpose_wpiblue[4]) < 1.0E-10 && 
-            Math.abs(results.targetingResults.botpose_wpiblue[5]) < 1.0E-10) {
+        if (Math.abs(botpose[0]) < 1.0E-10 && 
+            Math.abs(botpose[1]) < 1.0E-10 && 
+            Math.abs(botpose[2]) < 1.0E-10 && 
+            Math.abs(botpose[3]) < 1.0E-10 && 
+            Math.abs(botpose[4]) < 1.0E-10 && 
+            Math.abs(botpose[5]) < 1.0E-10) {
             return;
         }
 
@@ -296,6 +291,7 @@ public class Swerve {
         // SmartDashboard.putNumber("LL pose data Y", botPose2d.getTranslation().getY());
         // SmartDashboard.putNumber("LL pose data rotation", botPose2d.getRotation().getDegrees());
         // SmartDashboard.putNumber("LL delay", timer.get() / 1000.0);
+        Logger.getInstance().recordOutput("LLPoose" , botPose2d);
 
         swerveOdometry.addVisionMeasurement(botPose2d, 
         Timer.getFPGATimestamp() - 
@@ -305,11 +301,7 @@ public class Swerve {
     }
 
     public Pose2d getPose() {
-        var pose = swerveOdometry.getEstimatedPosition();
-        Logger.getInstance().recordOutput("botMeasuredAngleDeg", pose.getRotation().getDegrees());
-        Logger.getInstance().recordOutput("botMeasuredX", pose.getX());
-        Logger.getInstance().recordOutput("botMeasuredY", pose.getY());
-        return pose;
+        return swerveOdometry.getEstimatedPosition();
     }
 
     public void resetOdometry(Pose2d pose) {
@@ -342,8 +334,7 @@ public class Swerve {
 
     public void resetModulesToAbsolute(){
         for(SwerveModule mod : mSwerveMods){
-            double absolutePosition = Conversions.degreesToFalcon(mod.getCanCoder().getDegrees() - mod.angleOffset.getDegrees(), Constants.SWERVE.ANGLE_GEAR_RATIO);
-            mod.io.resetToAbsolute(absolutePosition);
+            mod.resetToAbsolute();
         }
     }
     
@@ -357,7 +348,7 @@ public class Swerve {
     public void updatePoses() {
         updateSwervePoseKinematics();
         if (!DriverStation.isAutonomous()) {
-            // updateSwervePoseLimelight();
+            updateSwervePoseLimelight();
             //updateSwervePoseAprilTags();
         }
     }

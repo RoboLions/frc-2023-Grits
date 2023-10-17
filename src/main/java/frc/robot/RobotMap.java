@@ -72,6 +72,7 @@ public class RobotMap {
         // rightElbowMotor = new WPI_TalonFX(Constants.CAN_IDS.RIGHT_ELBOW_MOTOR);
         // intakeMotor = new VictorSPX(Constants.CAN_IDS.INTAKE_MOTOR);
 
+        swerve = new Swerve(); 
         gyro.configFactoryDefault();
         // leftShoulderMotor.configFactoryDefault();
         // rightShoulderMotor.configFactoryDefault();
@@ -79,16 +80,11 @@ public class RobotMap {
         // rightElbowMotor.configFactoryDefault();
         // intakeMotor.configFactoryDefault();
         
+        
         switch(Constants.currentMode){
             case REAL:
                 intake = new Intake(new IntakeFalcon500(Constants.INTAKE.INTAKE_MOTOR));
-                swerve = new Swerve(
-                    new GyroPigeon2(Constants.CAN_IDS.PIDGEON),
-                    new SwerveModuleFalcon500(Constants.SWERVE.Mod0.constants),
-                    new SwerveModuleFalcon500(Constants.SWERVE.Mod1.constants),
-                    new SwerveModuleFalcon500(Constants.SWERVE.Mod2.constants),
-                    new SwerveModuleFalcon500(Constants.SWERVE.Mod3.constants));
-
+                
                 elevator = new Elevator(
                     new ElevatorFalcon500(Constants.Elevator.elevatorFirstStageMotorID),
                     new ElevatorFalcon500(Constants.Elevator.elevatorSecondStageMotorID)
@@ -104,12 +100,7 @@ public class RobotMap {
                     new ElevatorIO(){}, 
                     new ElevatorIO(){});
                     
-                swerve = new Swerve(
-                    new GyroIO(){},
-                    new SwerveModuleIO(){},
-                    new SwerveModuleIO(){},
-                    new SwerveModuleIO(){},
-                    new SwerveModuleIO(){});
+               
                     break;
             default:
                 break;

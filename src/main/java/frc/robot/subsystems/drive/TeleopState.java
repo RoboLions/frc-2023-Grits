@@ -1,15 +1,10 @@
 package frc.robot.subsystems.drive;
 
-import org.littletonrobotics.junction.Logger;
-
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.lib.interfaces.Swerve.Swerve;
@@ -57,11 +52,7 @@ public class TeleopState extends State {
 
     @Override
     public void execute() {
-        // for(SwerveModule mod : Swerve.mSwerveMods) {
-        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
-        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
-        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
-        // }
+        
         
         translationVal =  MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.TRANSLATION_VAL), Constants.STICK_DEADBAND);
         strafeVal = MathUtil.applyDeadband(-RobotMap.driverController.getRawAxis(Constants.DriverControls.STRAFE_VAL), Constants.STICK_DEADBAND);
@@ -103,13 +94,8 @@ public class TeleopState extends State {
 
         if (RobotMap.driverController.getRawButton(Constants.DriverControls.ZERO_GYRO)) {
             Translation2d current_coords = Swerve.swerveOdometry.getEstimatedPosition().getTranslation();
-            if (DriverStation.getAlliance() == DriverStation.Alliance.Red) {
-                RobotMap.swerve.resetOdometry(new Pose2d(current_coords, Rotation2d.fromDegrees(180.0)));
-            }
-            else {
-                RobotMap.swerve.resetOdometry(new Pose2d(current_coords, Rotation2d.fromDegrees(0.0)));
-            }
-            RobotMap.swerve.gyro.zeroGyro();
+            RobotMap.gyro.setYaw(0);
+            RobotMap.swerve.resetOdometry(new Pose2d(current_coords, Rotation2d.fromDegrees(0.0)));
         }
 
         // if (RobotMap.armStateMachine.getCurrentState() == ArmStateMachine.groundPickupState) {

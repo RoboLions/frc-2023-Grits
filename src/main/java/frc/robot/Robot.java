@@ -14,16 +14,9 @@ import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.lib.auto.AutoModeBase;
 import frc.robot.lib.auto.AutoModeExecutor;
 import frc.robot.lib.auto.AutoModeSelector;
@@ -31,7 +24,6 @@ import frc.robot.lib.interfaces.LED;
 import frc.robot.lib.interfaces.Swerve.Swerve;
 // import frc.robot.subsystems.arm.ArmStateMachine;
 import frc.robot.subsystems.drive.DrivetrainStateMachine;
-import frc.robot.subsystems.intake.IntakeStateMachine;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -126,6 +118,9 @@ public class Robot extends LoggedRobot{
    */
   @Override
   public void robotPeriodic() {
+    Logger.getInstance().recordOutput("PoseEstimate" , RobotMap.swerve.getPose());
+   
+  
     /* state machines always execute current state and check for next state */
     RobotMap.drivetrainStateMachine.setNextState();
     RobotMap.intakeStateMachine.setNextState();
@@ -199,6 +194,7 @@ public class Robot extends LoggedRobot{
   public void autonomousInit() {
     Optional<AutoModeBase> autoMode = autoModeSelector.getAutoMode();
     if (autoMode.isPresent()) {
+      RobotMap.gyro.setYaw(180.0);
       RobotMap.swerve.resetOdometry(autoMode.get().getStartingPose());
     }
 
