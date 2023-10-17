@@ -166,13 +166,18 @@ public class Swerve {
     }
     
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
+        Rotation2d robotAngle = getYaw();
+        Logger.getInstance().recordOutput("vxMetersPerSecond", translation.getX());
+        Logger.getInstance().recordOutput("vyMetersPerSecond", translation.getY());
+        Logger.getInstance().recordOutput("omegaRadiansPerSecond", rotation);
+        Logger.getInstance().recordOutput("robotAngle", robotAngle.getDegrees());
         SwerveModuleState[] swerveModuleStates =
             Constants.SWERVE.SWERVE_KINEMATICS.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
                                     translation.getX(), 
                                     translation.getY(), 
                                     rotation, 
-                                    getYaw()
+                                    robotAngle
                                 )
                                 : new ChassisSpeeds(
                                     translation.getX(), 
@@ -352,7 +357,7 @@ public class Swerve {
     public void updatePoses() {
         updateSwervePoseKinematics();
         if (!DriverStation.isAutonomous()) {
-            updateSwervePoseLimelight();
+            // updateSwervePoseLimelight();
             //updateSwervePoseAprilTags();
         }
     }
