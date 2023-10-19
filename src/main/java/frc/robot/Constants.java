@@ -229,7 +229,7 @@ public final class Constants {
                 new TrapezoidProfile.Constraints(0.5, 0.5)
             );
             public static final PIDController THETA_CONTROLLER = new PIDController(
-                0.21, 0, 0
+                0.41, 0, 0
             );
         }
 

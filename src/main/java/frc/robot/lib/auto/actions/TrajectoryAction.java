@@ -22,6 +22,8 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import org.littletonrobotics.junction.Logger;
+
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.PathPlannerTrajectory.PathPlannerState;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
@@ -111,18 +113,22 @@ public class TrajectoryAction implements Action {
     public void update() {
         double curTime = m_timer.get();
         var desiredState = (PathPlannerState) m_trajectory.sample(curTime);
+        Pose2d targetPose = new Pose2d(desiredState.poseMeters.getTranslation(), desiredState.holonomicRotation);
 
-        var rotation_feedback = m_pose.get().getRotation().getDegrees();
-        var rotation_command = desiredState.holonomicRotation.getDegrees();
+        Logger.getInstance().recordOutput("PathPlanner Pose", targetPose);
 
-        //System.out.println(rotation_command + ", " + rotation_feedback + ", " + desiredState.poseMeters.getX() + ", " + m_pose.get().getX() + ", " + desiredState.poseMeters.getY() + ", " + m_pose.get().getY());
+        Pose2d currentPose = m_pose.get();
 
-        //System.out.println(rotation_command + ", " + rotation_feedback);
+        Logger.getInstance().recordOutput("Auto Pose", currentPose);
 
-        var targetChassisSpeeds = m_controller.calculate(m_pose.get(), desiredState);
+        double pathError = currentPose.getRotation().getDegrees() - desiredState.holonomicRotation.getDegrees();
+
+        var targetChassisSpeeds = m_controller.calculate(currentPose, desiredState);
+
+        Logger.getInstance().recordOutput("Path Error", pathError);
         // var targetChassisSpeeds =
         //     m_controller.calculate(m_pose.get(), desiredState, desiredState.holonomicRotation);
-        // System.out.println(desiredState.holonomicRotation.getDegrees() + ", " + m_pose.get().getRotation().getDegrees());
+
         var targetModuleStates = m_kinematics.toSwerveModuleStates(targetChassisSpeeds);
         
         m_outputModuleStates.accept(targetModuleStates);

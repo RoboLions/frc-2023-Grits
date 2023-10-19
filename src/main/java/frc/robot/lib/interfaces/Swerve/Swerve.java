@@ -353,13 +353,6 @@ public class Swerve {
         }
     }
 
-    /** Updates the field relative position of the robot. */
-    public void updateSwervePoseEstimator() {
-        swerveOdometry.update(
-            RobotMap.gyro.getRotation2d(),
-            getModulePositions());
-    }
-
     public double getPoseDistance(Pose2d currentPose, Pose2d targetPose) {
         return currentPose.getTranslation().getDistance(targetPose.getTranslation());
     }

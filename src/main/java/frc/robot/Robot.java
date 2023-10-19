@@ -194,8 +194,7 @@ public class Robot extends LoggedRobot{
   public void autonomousInit() {
     Optional<AutoModeBase> autoMode = autoModeSelector.getAutoMode();
     if (autoMode.isPresent()) {
-      RobotMap.gyro.setYaw(180.0);
-      RobotMap.swerve.resetOdometry(autoMode.get().getStartingPose());
+      
     }
 
 		autoModeExecutor.start();

@@ -91,7 +91,7 @@ runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(Int
 
 // // position arm to score high
 runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)));
-runAction(new WaitAction(0.5));
+runAction(new WaitAction(0.75));
 runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)));
 // // wait for arm to arrive in position
 runAction(new ConditionAction(() -> {
@@ -110,6 +110,9 @@ runAction(new WaitAction(2.0));
  runAction(new LambdaAction(() -> RobotMap.ledStateMachine.setCurrentState(LEDStateMachine.cubeLEDState)));
 
 //  runAction(driveToIntake);
+
+RobotMap.gyro.setYaw(180.0);
+RobotMap.swerve.resetOdometry(driveToIntake.getInitialPose());
 
  //Drive to Cube while prepping to intake
  runAction(new ParallelAction(List.of(

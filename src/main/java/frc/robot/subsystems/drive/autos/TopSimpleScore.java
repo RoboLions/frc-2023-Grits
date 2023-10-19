@@ -42,8 +42,6 @@ public class TopSimpleScore extends AutoModeBase {
         // transform trajectory depending on alliance we are on
         PathPlannerTrajectory topSimpleScore = PathPlanner.loadPath("Top Simple Score", new PathConstraints(1.5, 0.5));
         topSimpleScore = PathPlannerTrajectory.transformTrajectoryForAlliance(topSimpleScore, DriverStation.getAlliance());
-        
-        initialHolonomicPose = topSimpleScore.getInitialHolonomicPose();
 
         driveOut = new TrajectoryAction(
             topSimpleScore, 
@@ -101,6 +99,7 @@ public class TopSimpleScore extends AutoModeBase {
 
         // position arm to score high
         runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)));
+        runAction(new WaitAction(0.75));
         runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)));
 
         // wait for arm to arrive in position
@@ -119,7 +118,10 @@ public class TopSimpleScore extends AutoModeBase {
         runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.idleState)));
         runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.idleState)));
         runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.idleState)));
-    
+        
+        RobotMap.gyro.setYaw(180.0);
+        RobotMap.swerve.resetOdometry(driveOut.getInitialPose());
+
         // drive out of the community
         runAction(driveOut);
 

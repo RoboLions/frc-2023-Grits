@@ -109,6 +109,9 @@ runAction(new WaitAction(0.25));
  runAction(new LambdaAction(() -> RobotMap.ledStateMachine.setCurrentState(LEDStateMachine.cubeLEDState)));
 
 //  runAction(driveToIntake);
+RobotMap.gyro.setYaw(180.0);
+RobotMap.swerve.resetOdometry(driveToIntake.getInitialPose());
+
 
  //Drive to Cube while prepping to intake
  runAction(new ParallelAction(List.of(

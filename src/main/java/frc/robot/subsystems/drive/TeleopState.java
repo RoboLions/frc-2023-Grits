@@ -94,7 +94,7 @@ public class TeleopState extends State {
 
         if (RobotMap.driverController.getRawButton(Constants.DriverControls.ZERO_GYRO)) {
             Translation2d current_coords = Swerve.swerveOdometry.getEstimatedPosition().getTranslation();
-            RobotMap.gyro.setYaw(0);
+            RobotMap.gyro.setYaw(0.0);
             RobotMap.swerve.resetOdometry(new Pose2d(current_coords, Rotation2d.fromDegrees(0.0)));
         }
 
