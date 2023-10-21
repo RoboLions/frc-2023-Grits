@@ -109,7 +109,7 @@ runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(Intak
 
 
 // wait for the piece to be scored
-runAction(new WaitAction(2.0));
+runAction(new WaitAction(0.25));
 
 
  // // put LED to cube (purple)
@@ -143,15 +143,17 @@ RobotMap.swerve.resetOdometry(driveToIntake.getInitialPose());
 //                      }));
 // runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.maintainState(IntakeStateMachine.intakingState)));
  
- runAction(new WaitAction(2.0));
+ 
 
  //Drive to score while raising arm
  runAction(new ParallelAction(List.of(
      driveToScore,
      new SeriesAction(List.of(
+        new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState)),
+        new WaitAction(2.5),
          new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.scoreHighState)),
-         new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState)),
-         new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState))
+         new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.scoreHighState))
+         
  ))
 ))); 
 // runAction(driveToScore);
