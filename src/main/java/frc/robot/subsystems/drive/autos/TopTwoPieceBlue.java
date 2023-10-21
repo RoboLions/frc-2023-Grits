@@ -55,6 +55,12 @@ public class TopTwoPieceBlue extends AutoModeBase {
             "Top Side Two Piece Blue", 
             new PathConstraints(3.0, 2.0)
         );
+        for(int i = 0; i < topTwoPiece.size(); i++) {
+            topTwoPiece.set(
+                i, 
+                PathPlannerTrajectory.transformTrajectoryForAlliance(topTwoPiece.get(i), DriverStation.getAlliance())
+            );
+        }
 
         initialHolonomicPose = topTwoPiece.get(0).getInitialHolonomicPose();
 
