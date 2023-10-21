@@ -88,6 +88,8 @@ public class MidScoreBalance extends AutoModeBase {
         runAction(new LambdaAction(() -> RobotMap.elevatorStateMachine.setCurrentState(ElevatorStateMachine.idleState)));
         runAction(new LambdaAction(() -> RobotMap.wristStateMachine.setCurrentState(WristStateMachine.idleState)));
     
+        RobotMap.gyro.setYaw(180.0);
+        RobotMap.swerve.resetOdometry(driveToChargeStation.getInitialPose());
         // drive onto the charge station
         runAction(driveToChargeStation);
 
