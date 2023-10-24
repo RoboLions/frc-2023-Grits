@@ -66,6 +66,7 @@ public class FollowTag extends State {
         }
 
         Pose2d targetPose = RobotMap.swerve.getClosestPose();
+        
         FieldObject2d targetPoseDisplay = RobotMap.Field2d.getObject("targetPose");
         targetPoseDisplay.setPose(targetPose);
         double targetPoseX = targetPose.getX();
@@ -104,9 +105,6 @@ public class FollowTag extends State {
         translationVal = Math.min(Math.max(translationVal, -0.5), 0.5);
         strafeVal = Math.min(Math.max(strafeVal, -0.7), 0.7);
         rotationVal = Math.min(Math.max(rotationVal, -2.0), 2.0);
-
-        translationVal *= DriverStation.getAlliance() == DriverStation.Alliance.Blue ? -1.0 : 1.0;
-        strafeVal *= DriverStation.getAlliance() == DriverStation.Alliance.Blue ? -1.0 : 1.0;
 
         RobotMap.swerve.drive(
             new Translation2d(translationVal, strafeVal), // Constants.SWERVE.MAX_SPEED), 

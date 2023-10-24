@@ -17,6 +17,7 @@ import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -44,7 +45,7 @@ public class Swerve {
     
     private static ArrayList<Pose2d> scoringPoses = new ArrayList<Pose2d>();
     private static ArrayList<Pose2d> loadingStationPoses = new ArrayList<Pose2d>();
-    private Pose2d closestPose;
+    private Pose2d closestPose = new Pose2d();
     public static int poseNumber;
     public static AprilTagFieldLayout aprilTagFieldLayout;
 
@@ -98,45 +99,43 @@ public class Swerve {
         boolean bButtonCurr = RobotMap.driverController.getRawButton(Constants.DriverControls.TOGGLE_ACCEL_BUTTON);
         bButton = !bButtonPrev && bButtonCurr;
         bButtonPrev = bButtonCurr;
-
+        
         double starting_x = 0.0;
         Rotation2d rotation = Rotation2d.fromDegrees(0.0);
         Pose2d starting_loading_station = new Pose2d();
         Rotation2d loading_station_rotation = Rotation2d.fromDegrees(0.0);
 
-        if (DriverStation.getAlliance() == DriverStation.Alliance.Red) {
-            starting_x = Constants.TargetPoses.RED_TRANSPOSE_DISTANCE - Constants.TargetPoses.BLUE_SCORING_X;
-            rotation = Rotation2d.fromDegrees(0.0);
-            starting_loading_station = new Pose2d(
-                Constants.TargetPoses.RED_TRANSPOSE_DISTANCE - Constants.TargetPoses.BLUE_SUBSTATION_X, 
-                Constants.TargetPoses.BLUE_SUBSTATION_Y, 
-                loading_station_rotation = Rotation2d.fromDegrees(180.0)
-            );
-        } else if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
-            starting_x = Constants.TargetPoses.BLUE_SCORING_X;
-            rotation = Rotation2d.fromDegrees(180.0);
-            starting_loading_station = new Pose2d(
-                Constants.TargetPoses.BLUE_SUBSTATION_X,
-                Constants.TargetPoses.BLUE_SUBSTATION_Y,
-                loading_station_rotation = Rotation2d.fromDegrees(0.0)
-            );
-        }
+        starting_x = Constants.TargetPoses.BLUE_SCORING_X;
+        rotation = Rotation2d.fromDegrees(180.0);
+        starting_loading_station = new Pose2d(
+            Constants.TargetPoses.BLUE_SUBSTATION_X,
+            Constants.TargetPoses.BLUE_SUBSTATION_Y,
+            loading_station_rotation = Rotation2d.fromDegrees(0.0)
+        );
 
         scoringPoses.clear();
         loadingStationPoses.clear();
 
         for (int i = 0; i < 9; i++) {
+            var pose_y = Constants.TargetPoses.BLUE_SCORING_Y + i * Constants.TargetPoses.SCORING_SPACING;
+            if (DriverStation.getAlliance() == DriverStation.Alliance.Red) {
+                pose_y = (Constants.TargetPoses.FIELD_WIDTH_METERS / 2.0) - pose_y + (Constants.TargetPoses.FIELD_WIDTH_METERS / 2.0);
+            }
             scoringPoses.add(new Pose2d(
                 starting_x,
-                Constants.TargetPoses.BLUE_SCORING_Y + i * Constants.TargetPoses.SCORING_SPACING,
+                pose_y,
                 rotation
             ));
         }
 
         for (int i = 0; i < 2; i++) {
+            var pose_y = Constants.TargetPoses.BLUE_SUBSTATION_Y - i * Constants.TargetPoses.SUBSTATION_SPACING;
+            if (DriverStation.getAlliance() == DriverStation.Alliance.Red) {
+                pose_y = (Constants.TargetPoses.FIELD_WIDTH_METERS / 2.0) - pose_y + (Constants.TargetPoses.FIELD_WIDTH_METERS / 2.0);
+            }
             loadingStationPoses.add(new Pose2d(
                 starting_loading_station.getX(),
-                Constants.TargetPoses.BLUE_SUBSTATION_Y - i * Constants.TargetPoses.SUBSTATION_SPACING,
+                pose_y,
                 loading_station_rotation
             ));
         }
@@ -249,7 +248,7 @@ public class Swerve {
         var num_targets = results.targetingResults.targets_Fiducials.length;
         double[] botpose;
         Pose2d botPose2d;
-        if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
+        if (DriverStation.getAlliance() == DriverStation.Alliance.Blue ) {
             botpose = results.targetingResults.botpose_wpiblue;
             botPose2d = LimelightHelpers.toPose2D(botpose);
         }
@@ -367,12 +366,12 @@ public class Swerve {
 
         // compare the distance between our current pose and loading station poses
         for (int i = 0; i < loadingStationPoses.size(); i++) {
-            System.out.println("Loading station pose " + i + ": " + loadingStationPoses.get(i));
+            // System.out.println("Loading station pose " + i + ": " + loadingStationPoses.get(i));
             double temp_distance = currentPose.getTranslation().getDistance(loadingStationPoses.get(i).getTranslation());
             if (temp_distance < shortestDistance) {
                 shortestDistance = temp_distance;
                 closestPose = loadingStationPoses.get(i);
-                System.out.println("Setting closest pose to: " + closestPose);
+                // System.out.println("Setting closest pose to: " + closestPose);
                 // pose number = -1 still, no pose shifting at the substation
             }
         }
@@ -380,25 +379,27 @@ public class Swerve {
         // compare the distance between current pose and scoring poses
         for (int i = 0; i < scoringPoses.size(); i++) {
             double temp_distance = currentPose.getTranslation().getDistance(scoringPoses.get(i).getTranslation());
-            System.out.println("Scoring pose " + i + ": " + scoringPoses.get(i));
+            // System.out.println("Scoring pose " + i + ": " + scoringPoses.get(i));
             /* the shortest distance is currently the distance to loading station pose 0 or 1
             if the distance from current pose to the scoring pose is smaller than 
             distance to closest loading station pose, make this our closest pose */
             if (temp_distance < shortestDistance) {
                 shortestDistance = temp_distance;
                 closestPose = scoringPoses.get(i);
-                System.out.println("Setting closest pose to: " + closestPose);
+                // System.out.println("Setting closest pose to: " + closestPose);
                 poseNumber = i;
             }
         }
 
-        System.out.println("Shortest distance: " + shortestDistance);
-        System.out.println("Closest pose: " + closestPose);
-        System.out.println("Pose #: " + poseNumber);
+        // System.out.println("Shortest distance: " + shortestDistance);
+        // System.out.println("Closest pose: " + closestPose);
+        // System.out.println("Pose #: " + poseNumber);
 
         return shortestDistance;
+
     }
 
+    
     public void shiftPose(boolean increase) {
         if (poseNumber == -1) {
             return;

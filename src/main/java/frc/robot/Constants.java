@@ -265,6 +265,8 @@ public final class Constants {
         public static double BLUE_SUBSTATION_Y = 7.41;
 
         public static double RED_TRANSPOSE_DISTANCE = 16.54175;
+
+        public static double FIELD_WIDTH_METERS = 8.02;
     }
 
     // TODO: tune all and find positions of all below

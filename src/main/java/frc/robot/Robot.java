@@ -119,7 +119,7 @@ public class Robot extends LoggedRobot{
   @Override
   public void robotPeriodic() {
     Logger.getInstance().recordOutput("PoseEstimate" , RobotMap.swerve.getPose());
-   
+    Logger.getInstance().recordOutput("Closest Pose", RobotMap.swerve.getClosestPose());
   
     /* state machines always execute current state and check for next state */
     RobotMap.drivetrainStateMachine.setNextState();
@@ -135,6 +135,7 @@ public class Robot extends LoggedRobot{
     RobotMap.wrist.periodic();
     LED.periodic();
 
+    
     SmartDashboard.putString("Current intake state", RobotMap.intakeStateMachine.getCurrentState().toString().replace("frc.robot.subsystems.intake.", ""));
     SmartDashboard.putString("Current wirst state", RobotMap.wristStateMachine.getCurrentState().toString().replace("frc.robot.subsystems.Wrist.", ""));
     SmartDashboard.putString("Current elevator state", RobotMap.elevatorStateMachine.getCurrentState().toString().replace("frc.robot.subsystems.Elevator.", ""));
