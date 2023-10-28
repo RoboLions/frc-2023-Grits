@@ -50,17 +50,17 @@ public class AutoModeSelector {
 
     public AutoModeSelector() {
         mModeChooser = new SendableChooser<>();
-        mModeChooser.setDefaultOption("Do Nothing", DesiredMode.DO_NOTHING);
+        mModeChooser.setDefaultOption("Mid Balance", DesiredMode.MID_SCORE_BALANCE);
         mModeChooser.addOption("Test", DesiredMode.TEST_PATH);
         mModeChooser.addOption("Bot Simple Score Cone", DesiredMode.BOT_SIMPLE_SCORE_CONE);
         mModeChooser.addOption("Top Simple Score", DesiredMode.TOP_SIMPLE_SCORE);
-        mModeChooser.addOption("Mid Balance", DesiredMode.MID_SCORE_BALANCE);
-        mModeChooser.addOption("Bot Loading Station", DesiredMode.BOT_LOADING_STATION);
-        mModeChooser.addOption("Top Loading Station", DesiredMode.TOP_LOADING_STATION);
-        mModeChooser.addOption("Bot Link", DesiredMode.BOT_LINK);
-        mModeChooser.addOption("Two Piece Engage", DesiredMode.TWO_PIECE_ENGAGE);
-        mModeChooser.addOption("Two Piece Red", DesiredMode.TOP_TWO_PIECE_RED);
         mModeChooser.addOption("Two Piece Blue", DesiredMode.TOP_TWO_PIECE_BLUE);
+        // mModeChooser.addOption("Bot Loading Station", DesiredMode.BOT_LOADING_STATION);
+        // mModeChooser.addOption("Top Loading Station", DesiredMode.TOP_LOADING_STATION);
+        // mModeChooser.addOption("Bot Link", DesiredMode.BOT_LINK);
+        // mModeChooser.addOption("Two Piece Engage", DesiredMode.TWO_PIECE_ENGAGE);
+        // mModeChooser.addOption("Two Piece Red", DesiredMode.TOP_TWO_PIECE_RED);
+        mModeChooser.addOption("Do Nothing", DesiredMode.DO_NOTHING);
         // mModeChooser.addOption("Top Link", DesiredMode.TOP_LINK);
         
         SmartDashboard.putData("Auto Mode", mModeChooser);

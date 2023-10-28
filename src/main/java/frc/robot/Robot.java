@@ -138,7 +138,14 @@ public class Robot extends LoggedRobot{
     
     SmartDashboard.putString("Current intake state", RobotMap.intakeStateMachine.getCurrentState().toString().replace("frc.robot.subsystems.intake.", ""));
     SmartDashboard.putString("Current wirst state", RobotMap.wristStateMachine.getCurrentState().toString().replace("frc.robot.subsystems.Wrist.", ""));
+    boolean ledState = true;
     SmartDashboard.putString("Current elevator state", RobotMap.elevatorStateMachine.getCurrentState().toString().replace("frc.robot.subsystems.Elevator.", ""));
+    if (RobotMap.ledStateMachine.getCurrentState() == RobotMap.ledStateMachine.cubeLEDState) {
+      ledState = false;
+    } else {
+      ledState = true;
+    }
+    SmartDashboard.putBoolean("Current LED state", ledState);
 
 
     // see robot pose on Glass

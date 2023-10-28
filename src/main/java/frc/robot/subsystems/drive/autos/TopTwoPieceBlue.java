@@ -172,7 +172,7 @@ runAction(new ConditionAction(() -> {
 //  runAction(d)
 
  // wait for the piece to be scored
- runAction(new WaitAction(2.0));
+ runAction(new WaitAction(0.25));
  // stop intake
  runAction(new LambdaAction(() -> RobotMap.intakeStateMachine.setCurrentState(IntakeStateMachine.idleState)));
 
