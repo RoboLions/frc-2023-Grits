@@ -50,6 +50,7 @@ public class SwerveModuleFalcon500 implements SwerveModuleIO{
         lastAngle = Rotation2d.fromDegrees(Conversions.falconToDegrees(mAngleMotor.getSelectedSensorPosition(), Constants.SWERVE.ANGLE_GEAR_RATIO));
     }
 
+
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop, SwerveModuleState state){
         /* This is a custom optimize function, since default WPILib optimize assumes continuous controller which CTRE and Rev onboard is not */
         desiredState = CTREModuleState.optimize(desiredState, state.angle);
@@ -71,7 +72,7 @@ public class SwerveModuleFalcon500 implements SwerveModuleIO{
     public void setAngle(SwerveModuleState desiredState){
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.SWERVE.MAX_SPEED * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
         
-        mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.SWERVE.ANGLE_GEAR_RATIO));
+        mAngleMotor.set(ControlMode.MotionMagic, Conversions.degreesToFalcon(angle.getDegrees(), Constants.SWERVE.ANGLE_GEAR_RATIO));
         lastAngle = angle;
     }
 
