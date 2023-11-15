@@ -40,8 +40,8 @@ public class COTSFalconSwerveConstants {
         double angleKP = 0.2;
         double angleKI = 0.0;
         double angleKD = 0.0;
-        double angleKF = 0.0;
- 
+        double angleKF = 21.3;
+        //CHANGED ANGLE PID FOR MOTION MAGIC
         boolean driveMotorInvert = true;
         boolean angleMotorInvert = false;
         boolean canCoderInvert = false;
