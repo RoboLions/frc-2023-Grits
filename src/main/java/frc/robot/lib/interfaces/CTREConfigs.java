@@ -28,6 +28,9 @@ public final class CTREConfigs {
             Constants.SWERVE.ANGLE_PEAK_CURRENT_LIMIT, 
             Constants.SWERVE.ANGLE_PEAK_CURRENT_DURATION);
 
+        swerveAngleFXConfig.motionAcceleration = 119200;
+        swerveAngleFXConfig.motionCruiseVelocity = 16000;
+        swerveAngleFXConfig.slot0.integralZone = 60;
         swerveAngleFXConfig.slot0.kP = Constants.SWERVE.ANGLE_KP;
         swerveAngleFXConfig.slot0.kI = Constants.SWERVE.ANGLE_KI;
         swerveAngleFXConfig.slot0.kD = Constants.SWERVE.ANGLE_KD;
